@@ -18,7 +18,7 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
-main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
+main{max-width:980px;margin:0 auto;padding:20px 16px 120px}
 h1{font-size:clamp(1.6rem,4vw,2.3rem);margin:0 0 4px;font-weight:700}
 .sub{color:var(--mute);margin:0 0 22px}
 .sw{display:flex;justify-content:flex-end;margin-bottom:6px}
@@ -81,8 +81,7 @@ button.chip .fl svg{width:24px;height:16px}
 .ev .star{color:#fff}
 #q{font:inherit;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 16px;min-width:220px}
 .src a{color:#5d8bff}
-#tape{min-height:46px;border-bottom:1px solid var(--line)}
-.tvc{font-size:.65rem;text-align:end;padding:0 12px 2px;color:var(--mute)}.tvc a{color:var(--mute)}
+#tape{position:fixed;left:0;right:0;bottom:0;z-index:60;height:calc(46px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);overflow:hidden;background:var(--surface);border-top:1px solid var(--line)}
 .vd{display:inline-block;margin-top:5px;padding:1px 10px;border-radius:999px;font-size:.78rem;font-weight:700}
 .vp{background:#089981;color:#fff}.vn{background:#f23645;color:#fff}.vm,.vz{background:var(--line);color:var(--ink)}
 .vw,.vu{color:var(--mute);font-weight:400;padding-inline-start:0}
@@ -208,7 +207,7 @@ h+=bar(t.fi,"f",[0,3,2,1],t.im,F);
 h+=dbar(t);
 h+=bar(t.fc,"c",K,K.map(function(k){return (FG[k]?'<span class="fl">'+FG[k]+'</span>':"")+t.ct[k]}),C);
 h+=bar(t.fm,"m",IK,IK.map(function(k){return t.ins[k]}),M);
-h+='<div id="cal">'+cal(t)+'</div><div class="note"><p>'+t.n1+'</p><p>'+t.n2+'</p><p>'+t.n3+'</p><p class="src">'+t.upd+' <a href="https://www.litefinance.org/blog/analysts-opinions/weekly-economic-calendar-for-16112026-22112026/" target="_blank" rel="noopener">LiteFinance</a> · <a href="https://roboforex.com/beginners/analytics/forex-forecast/forex-technical-analysis/technical-forecast-weekly-2026-11-16" target="_blank" rel="noopener">RoboForex</a> · <a href="https://crypto.news/bitcoin-fed-nvidia-anthropic-ipo-crypto-week-ahead/" target="_blank" rel="noopener">crypto.news</a> · <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261116/dq261116a-eng.htm" target="_blank" rel="noopener">Statistics Canada</a> · <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/november2026" target="_blank" rel="noopener">ONS</a> · <a href="https://www.newyorkfed.org/survey/empire/empiresurvey_overview" target="_blank" rel="noopener">NY Fed</a> · <a href="https://finwire.io/news/economy-news/chinas-factory-output-retail-sales-growth-slow-in-october" target="_blank" rel="noopener">Reuters</a> · <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">ForexFactory</a></p></div>';
+h+='<div id="cal">'+cal(t)+'</div><div class="note"><p>'+t.n1+'</p><p>'+t.n2+'</p><p>'+t.n3+'</p><p class="src">'+t.upd+' <a href="https://www.litefinance.org/blog/analysts-opinions/weekly-economic-calendar-for-16112026-22112026/" target="_blank" rel="noopener">LiteFinance</a> · <a href="https://roboforex.com/beginners/analytics/forex-forecast/forex-technical-analysis/technical-forecast-weekly-2026-11-16" target="_blank" rel="noopener">RoboForex</a> · <a href="https://crypto.news/bitcoin-fed-nvidia-anthropic-ipo-crypto-week-ahead/" target="_blank" rel="noopener">crypto.news</a> · <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261116/dq261116a-eng.htm" target="_blank" rel="noopener">Statistics Canada</a> · <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/november2026" target="_blank" rel="noopener">ONS</a> · <a href="https://www.newyorkfed.org/survey/empire/empiresurvey_overview" target="_blank" rel="noopener">NY Fed</a> · <a href="https://finwire.io/news/economy-news/chinas-factory-output-retail-sales-growth-slow-in-october" target="_blank" rel="noopener">Reuters</a> · <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">ForexFactory</a> · <a href="https://www.tradingview.com/markets/" target="_blank" rel="noopener nofollow">TradingView</a></p></div>';
 app.innerHTML=h;paintBtc();
 }
 var ZN=[["Asia/Gaza","فلسطين","Palestine"],["Asia/Riyadh","السعودية","Saudi Arabia"],["Africa/Cairo","مصر","Egypt"],["Asia/Amman","الأردن","Jordan"],["Asia/Beirut","لبنان","Lebanon"],["Asia/Dubai","الإمارات","UAE"],["Europe/Istanbul","تركيا","Türkiye"],["Europe/London","لندن","London"],["Europe/Paris","باريس / برلين","Paris / Berlin"],["America/New_York","نيويورك","New York"],["America/Chicago","شيكاغو","Chicago"],["America/Los_Angeles","لوس أنجلوس","Los Angeles"],["Asia/Tokyo","طوكيو","Tokyo"],["Australia/Sydney","سيدني","Sydney"],["UTC","UTC","UTC"]];
@@ -264,9 +263,9 @@ if(hasA&&cm.every(function(c){return !isNaN(num(c.forecast))&&!isNaN(num(c.actua
 function loadFF(){fetch("ff.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(!Array.isArray(j))throw 0;FFD=j;mergeFF();var c=document.getElementById("cal");if(c)c.innerHTML=cal(T[L])}).catch(function(){})}
 setInterval(loadFF,60000);loadFF();
 var TS=[["FX:EURUSD","EUR/USD"],["FX:GBPUSD","GBP/USD"],["FX:USDJPY","USD/JPY"],["FX:AUDUSD","AUD/USD"],["FX:USDCAD","USD/CAD"],["FX:USDCHF","USD/CHF"],["FX:NZDUSD","NZD/USD"],["TVC:DXY","DXY","مؤشر الدولار"],["OANDA:XAUUSD","Gold","الذهب"],["TVC:USOIL","US Oil","النفط الأمريكي"],["FOREXCOM:SPXUSD","S&P 500"],["FOREXCOM:NSXUSD","Nasdaq 100","ناسداك 100"],["FOREXCOM:DJI","Dow Jones","داو جونز"],["FOREXCOM:GRXEUR","DAX","داكس"],["FOREXCOM:UKXGBP","FTSE 100","فوتسي 100"],["FOREXCOM:JPN225","Nikkei 225","نيكاي 225"],["BITSTAMP:BTCUSD","Bitcoin","بيتكوين"],["BITSTAMP:ETHUSD","Ethereum","إيثريوم"]];
-function buildTape(){var t=document.getElementById("tape");if(!t){t=document.createElement("div");t.id="tape";t.dir="ltr";app.parentNode.insertBefore(t,app)}
+function buildTape(){var t=document.getElementById("tape");if(!t){t=document.createElement("div");t.id="tape";t.dir="ltr";document.body.appendChild(t)}
 var ar=L==="ar",th=document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
-t.innerHTML='<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div><div class="tvc"><a href="https://www.tradingview.com/markets/" rel="noopener nofollow" target="_blank">Ticker tape</a> by TradingView</div>';
+t.innerHTML='<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div>';
 var s=document.createElement("script");s.src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";s.async=true;
 s.text=JSON.stringify({symbols:TS.map(function(x){return {description:ar&&x[2]?x[2]:x[1],proName:x[0]}}),showSymbolLogo:false,colorTheme:th==="dark"?"dark":"light",isTransparent:true,displayMode:"adaptive",locale:ar?"ar_AE":"en"});
 t.firstChild.appendChild(s)}
