@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>الأجندة الاقتصادية 16–20 نوفمبر 2026</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#131722">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="أجندة التداول">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f0f3fa;--surface:#fff;--ink:#131722;--mute:#787b86;--line:#e0e3eb;--hi:#f23645;--hi-t:#fdecee;--md:#ff9800;--md-t:#fff3e0;--lo:#2962ff;--lo-t:#e8eeff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -80,7 +86,7 @@ button.chip .fl svg{width:24px;height:16px}
 </style>
 </head>
 <body>
-<main id="app"></main>
+<main id="app"><p style="padding:32px 16px;text-align:center;line-height:1.9">يلزم تشغيل الجافاسكريبت لعرض الأجندة. افتح الملف بمتصفح Chrome أو Safari (وليس من معاينة واتساب أو تلجرام أو تطبيق الملفات)، أو استخدم الرابط المنشور.<br><br>This page needs JavaScript. Open the file in Chrome or Safari, not in a chat or Files preview, or use the published link.</p></main>
 <script>
 var L="ar",F=0,DY=-1,C="all",M="all",Q="",N=0,TZ="Asia/Gaza";
 try{L=localStorage.getItem("lg")||"ar";TZ=localStorage.getItem("tz")||TZ}catch(e){}
@@ -100,7 +106,7 @@ ar:{t:"الأجندة الاقتصادية 16–20 نوفمبر 2026",h:"الأ�
 top:[["الاثنين","19:00","كلمة رئيس الفيدرالي وورش"],["الثلاثاء","15:30","مبيعات التجزئة الأمريكية"],["الأربعاء","21:00","محضر اجتماع الفيدرالي"]],
 fi:"حجم التأثير:",im:["الكل","عالٍ","متوسط","منخفض"],fd:"اليوم:",dy:["كل الأسبوع","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة"],
 fc:"الدولة:",ct:{all:"كل الدول",us:"أمريكا",gb:"بريطانيا",ca:"كندا",au:"أستراليا",nz:"نيوزلندا",cn:"الصين"},
-past:"مضى",star:"حدث الأسبوع",empty:"لا أحداث بهذا الاختيار. جرّب تغيير اليوم أو الدولة أو حجم التأثير.",sw:"English",th:"داكن/فاتح",tzl:"المنطقة الزمنية:",auto:"حسب جهازي",snap:[["فائدة الفيدرالي","3.75–4.00%"],["احتمال رفع ديسمبر","75–100%"],["فائدة أستراليا","4.85%"],["البيتكوين (16 نوفمبر)","~65,200$"]],sq:"ابحث في الأحداث",fm:"الأداة:",ins:{all:"الكل",usd:"الدولار",gold:"الذهب",idx:"المؤشرات",btc:"البيتكوين",oil:"النفط"},upd:"آخر تحديث: 16 نوفمبر 2026. المصادر:",nn:"لا أحداث عالية التأثير قادمة",nx:"الحدث عالي التأثير القادم",u:["ي","س","د","ث"],pf:["السابق","المتوقع","الفعلي"],tl:"جلسات السوق،",ses:["سيدني","طوكيو","لندن","نيويورك"],
+past:"مضى",star:"حدث الأسبوع",empty:"لا أحداث بهذا الاختيار. جرّب تغيير اليوم أو الدولة أو حجم التأثير.",sw:"English",th:"داكن/فاتح",tzl:"المنطقة الزمنية:",auto:"حسب جهازي",snap:[["فائدة الفيدرالي","3.75–4.00%"],["احتمال رفع ديسمبر","75–100%"],["فائدة أستراليا","4.85%"],["البيتكوين (16 نوفمبر)","~65,200$"]],sq:"ابحث في الأحداث",fm:"الأداة:",ins:{all:"الكل",usd:"الدولار",gold:"الذهب",idx:"المؤشرات",btc:"البيتكوين",oil:"النفط"},upd:"آخر تحديث للأرقام الفعلية: 17 نوفمبر 2026. المصادر:",nn:"لا أحداث عالية التأثير قادمة",nx:"الحدث عالي التأثير القادم",u:["ي","س","د","ث"],pf:["السابق","المتوقع","الفعلي"],tl:"جلسات السوق،",ses:["سيدني","طوكيو","لندن","نيويورك"],
 n1:"درجة التأثير تقييم تقديري وليست من المصادر. المواعيد والتوقعات قد تتغير، فتأكد من تقويم مباشر قبل كل تقرير.",
 n2:"معلومات عامة وليست نصيحة استثمارية، والتداول حول البيانات عالي المخاطرة.",
 days:["الاثنين 16 نوفمبر","الثلاثاء 17 نوفمبر","الأربعاء 18 نوفمبر","الخميس 19 نوفمبر","الجمعة 20 نوفمبر","الأحد 22 نوفمبر"]},
@@ -108,7 +114,7 @@ en:{t:"Economic Calendar, Nov 16–20, 2026",h:"Economic Calendar This Week",sub
 top:[["Monday","19:00","Fed Chair Warsh speaks"],["Tuesday","15:30","US retail sales"],["Wednesday","21:00","Fed meeting minutes"]],
 fi:"Impact:",im:["All","High","Medium","Low"],fd:"Day:",dy:["Whole week","Mon","Tue","Wed","Thu","Fri"],
 fc:"Country:",ct:{all:"All countries",us:"USA",gb:"UK",ca:"Canada",au:"Australia",nz:"New Zealand",cn:"China"},
-past:"Done",star:"Event of the week",empty:"No events match this selection. Try changing the day, country or impact.",sw:"العربية",th:"Dark/Light",tzl:"Time zone:",auto:"My device",snap:[["Fed funds rate","3.75–4.00%"],["Dec hike odds","75–100%"],["RBA cash rate","4.85%"],["Bitcoin (Nov 16)","~$65,200"]],sq:"Search events",fm:"Instrument:",ins:{all:"All",usd:"USD",gold:"Gold",idx:"Indices",btc:"Bitcoin",oil:"Oil"},upd:"Last updated: Nov 16, 2026. Sources:",nn:"No upcoming high-impact events",nx:"Next high-impact event",u:["d","h","m","s"],pf:["Prior","Forecast","Actual"],tl:"Market sessions,",ses:["Sydney","Tokyo","London","New York"],
+past:"Done",star:"Event of the week",empty:"No events match this selection. Try changing the day, country or impact.",sw:"العربية",th:"Dark/Light",tzl:"Time zone:",auto:"My device",snap:[["Fed funds rate","3.75–4.00%"],["Dec hike odds","75–100%"],["RBA cash rate","4.85%"],["Bitcoin (Nov 16)","~$65,200"]],sq:"Search events",fm:"Instrument:",ins:{all:"All",usd:"USD",gold:"Gold",idx:"Indices",btc:"Bitcoin",oil:"Oil"},upd:"Actuals last updated: Nov 17, 2026. Sources:",nn:"No upcoming high-impact events",nx:"Next high-impact event",u:["d","h","m","s"],pf:["Prior","Forecast","Actual"],tl:"Market sessions,",ses:["Sydney","Tokyo","London","New York"],
 n1:"The impact level is my own estimate, not from the sources. Dates and forecasts may change, so check a live calendar before each release.",
 n2:"General information, not investment advice. Trading around data releases is high risk.",
 days:["Monday, Nov 16","Tuesday, Nov 17","Wednesday, Nov 18","Thursday, Nov 19","Friday, Nov 20","Sunday, Nov 22"]}
@@ -135,7 +141,8 @@ var D=[[
 ["09:00",2,"gb","مبيعات التجزئة","الجنيه","Retail sales","GBP"],
 ["~17:00",2,"us","القراءة النهائية لثقة المستهلك","الدولار، الأسهم","Final consumer sentiment","USD, stocks"]],[
 ["23:45",1,"nz","مبيعات التجزئة للربع الثالث","الدولار النيوزلندي","Q3 retail sales","NZD"]]];
-var PF={"0.1":["3.1%","3.2%"],"0.2":["25.5","10"],"1.2":["2.34%","—"],"1.3":["4.9%","4.7%"],"1.4":["+0.8%","—"],"2.0":["3.5%","—"],"3.0":["4.7%","4.7%"],"3.1":["200K","196K"],"5.0":["-0.5%","—"]};
+var PF={"0.0":["5.5% / 1.1%","5.3% / 0.8%","4.8% / 0.4%"],"0.1":["3.1%","3.2%","3.1%"],"0.2":["25.5","17.6","7.8"],"0.3":["—","—",["لم يتناول السياسة النقدية","No monetary policy remarks"]],"0.4":["—","—",["تحدث عن الذكاء الاصطناعي دون تعليق على السياسة النقدية","Spoke on AI, no monetary policy comments"]],"1.2":["2.34%","—"],"1.3":["3.7% / 4.7%","— / 4.7%","3.5% / 4.6%"],"1.4":["+0.8%","—"],"2.0":["3.5%","—"],"3.0":["4.7%","4.7%"],"3.1":["200K","196K"],"5.0":["-0.5%","—"]};
+function actv(a,ar){return Array.isArray(a)?a[ar?0:1]:(a||"—")}
 var IK=["all","usd","gold","idx","btc","oil"],IR={usd:/USD/,gold:/gold/i,idx:/indices|stocks|Nasdaq|FTSE/i,btc:/Bitcoin/,oil:/oil/i};
 var DT=[16,17,18,19,20,22];
 function tsf(di,r){var m=r[0].replace("~","").split(":");return Date.UTC(2026,10,DT[di],+m[0]-2,+m[1])}
@@ -187,7 +194,7 @@ h+=bar(t.fi,"f",[0,3,2,1],t.im,F);
 h+=dbar(t);
 h+=bar(t.fc,"c",K,K.map(function(k){return (FG[k]?'<span class="fl">'+FG[k]+'</span>':"")+t.ct[k]}),C);
 h+=bar(t.fm,"m",IK,IK.map(function(k){return t.ins[k]}),M);
-h+='<div id="cal">'+cal(t)+'</div><div class="note"><p>'+t.n1+'</p><p>'+t.n2+'</p><p class="src">'+t.upd+' <a href="https://www.litefinance.org/blog/analysts-opinions/weekly-economic-calendar-for-16112026-22112026/" target="_blank" rel="noopener">LiteFinance</a> · <a href="https://roboforex.com/beginners/analytics/forex-forecast/forex-technical-analysis/technical-forecast-weekly-2026-11-16" target="_blank" rel="noopener">RoboForex</a> · <a href="https://crypto.news/bitcoin-fed-nvidia-anthropic-ipo-crypto-week-ahead/" target="_blank" rel="noopener">crypto.news</a></p></div>';
+h+='<div id="cal">'+cal(t)+'</div><div class="note"><p>'+t.n1+'</p><p>'+t.n2+'</p><p class="src">'+t.upd+' <a href="https://www.litefinance.org/blog/analysts-opinions/weekly-economic-calendar-for-16112026-22112026/" target="_blank" rel="noopener">LiteFinance</a> · <a href="https://roboforex.com/beginners/analytics/forex-forecast/forex-technical-analysis/technical-forecast-weekly-2026-11-16" target="_blank" rel="noopener">RoboForex</a> · <a href="https://crypto.news/bitcoin-fed-nvidia-anthropic-ipo-crypto-week-ahead/" target="_blank" rel="noopener">crypto.news</a> · <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261116/dq261116a-eng.htm" target="_blank" rel="noopener">Statistics Canada</a> · <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/november2026" target="_blank" rel="noopener">ONS</a> · <a href="https://www.newyorkfed.org/survey/empire/empiresurvey_overview" target="_blank" rel="noopener">NY Fed</a> · <a href="https://finwire.io/news/economy-news/chinas-factory-output-retail-sales-growth-slow-in-october" target="_blank" rel="noopener">Reuters</a></p></div>';
 app.innerHTML=h;
 }
 var ZN=[["Asia/Gaza","فلسطين","Palestine"],["Asia/Riyadh","السعودية","Saudi Arabia"],["Africa/Cairo","مصر","Egypt"],["Asia/Amman","الأردن","Jordan"],["Asia/Beirut","لبنان","Lebanon"],["Asia/Dubai","الإمارات","UAE"],["Europe/Istanbul","تركيا","Türkiye"],["Europe/London","لندن","London"],["Europe/Paris","باريس / برلين","Paris / Berlin"],["America/New_York","نيويورك","New York"],["America/Chicago","شيكاغو","Chicago"],["America/Los_Angeles","لوس أنجلوس","Los Angeles"],["Asia/Tokyo","طوكيو","Tokyo"],["Australia/Sydney","سيدني","Sydney"],["UTC","UTC","UTC"]];
@@ -209,7 +216,7 @@ var rs=g.evs.filter(function(e){var r=e.r;return (!F||r[1]===F)&&(C==="all"||r[2
 if(!rs.length)return;
 h+='<section class="day"><h2>'+dayName(g)+'</h2>';
 rs.forEach(function(e){var r=e.r,p=e.ts<n,pf=PF[e.key]||["—","—"],m="";for(var i=1;i<=3;i++)m+='<i'+(i<=r[1]?' class="on"':'')+'></i>';
-h+='<div class="row l'+r[1]+(p?' past':'')+'"><div class="time">'+e.hm+(p?'<small>'+t.past+'</small>':'')+'</div><div class="ev"><b>'+(ar?r[3]:r[5])+(r[7]?'<span class="star">'+t.star+'</span>':'')+'</b><span>'+(ar?r[4]:r[6])+'</span><div class="pf"><span>'+t.pf[0]+' <b>'+pf[0]+'</b></span><span>'+t.pf[1]+' <b>'+pf[1]+'</b></span><span>'+t.pf[2]+' <b>—</b></span></div></div><div class="imp"><div class="m" aria-hidden="true">'+m+'</div><span class="lab">'+t.im[4-r[1]]+'</span></div><div class="ct"><span class="fl">'+FG[r[2]]+'</span>'+t.ct[r[2]]+'</div></div>'});
+h+='<div class="row l'+r[1]+(p?' past':'')+'"><div class="time">'+e.hm+(p?'<small>'+t.past+'</small>':'')+'</div><div class="ev"><b>'+(ar?r[3]:r[5])+(r[7]?'<span class="star">'+t.star+'</span>':'')+'</b><span>'+(ar?r[4]:r[6])+'</span><div class="pf"><span>'+t.pf[0]+' <b>'+pf[0]+'</b></span><span>'+t.pf[1]+' <b>'+pf[1]+'</b></span><span>'+t.pf[2]+' <b>'+actv(pf[2],ar)+'</b></span></div></div><div class="imp"><div class="m" aria-hidden="true">'+m+'</div><span class="lab">'+t.im[4-r[1]]+'</span></div><div class="ct"><span class="fl">'+FG[r[2]]+'</span>'+t.ct[r[2]]+'</div></div>'});
 h+='</section>'});
 return h||'<p>'+t.empty+'</p>'}
 function nextEv(){var n=Date.now(),b=null;EVS().forEach(function(e){if(e.r[1]===3&&e.ts>n&&!b)b=e});return b}
@@ -234,6 +241,7 @@ if(n)n.focus();
 });
 app.addEventListener("input",function(e){if(e.target.id==="q"){Q=e.target.value.toLowerCase().trim();document.getElementById("cal").innerHTML=cal(T[L])}});
 draw();
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigator.serviceWorker.register("sw.js").catch(function(){})}
 </script>
 </body>
 </html>
