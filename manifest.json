@@ -1,1 +1,49 @@
-{"id":"./","name":"ICT بالعربي","short_name":"ICT بالعربي","description":"الأخبار والتوصيات والأجندة الاقتصادية","lang":"ar","dir":"rtl","start_url":"./","scope":"./","display":"standalone","background_color":"#f8f8f5","theme_color":"#1d453b","icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}]}
+{
+  "id": "./",
+  "name": "ICT بالعربي — مساحة المتداول",
+  "short_name": "ICT بالعربي",
+  "description": "الأخبار والأسواق والتوصيات والأجندة وأدوات ICT",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f5",
+  "theme_color": "#14251f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "categories": [
+    "finance",
+    "news"
+  ],
+  "shortcuts": [
+    {
+      "name": "الأجندة الاقتصادية",
+      "url": "./index.html#agenda"
+    },
+    {
+      "name": "الأسواق",
+      "url": "./index.html#markets"
+    },
+    {
+      "name": "أدوات ICT",
+      "url": "./index.html#ict"
+    }
+  ]
+}
