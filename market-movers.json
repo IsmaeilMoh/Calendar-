@@ -1,6 +1,142 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-11-18T12:51:59.059239Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
-  "changeBasis": "previous close",
-  "items": []
+  "changeBasis": "Yahoo chart previous close; not uniform 24h",
+  "items": [
+    {
+      "symbol": "EURUSD",
+      "label": "يورو / دولار",
+      "category": "forex",
+      "change": -1.2168,
+      "quotedAt": "2026-11-18T12:51:46Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/EURUSD/"
+    },
+    {
+      "symbol": "GBPUSD",
+      "label": "جنيه / دولار",
+      "category": "forex",
+      "change": -0.9189,
+      "quotedAt": "2026-11-18T12:51:46Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/GBPUSD/"
+    },
+    {
+      "symbol": "USDJPY",
+      "label": "دولار / ين",
+      "category": "forex",
+      "change": -0.1747,
+      "quotedAt": "2026-11-18T12:51:57Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDJPY/"
+    },
+    {
+      "symbol": "USDCHF",
+      "label": "دولار / فرنك",
+      "category": "forex",
+      "change": 1.3096,
+      "quotedAt": "2026-11-18T12:51:57Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDCHF/"
+    },
+    {
+      "symbol": "USDCAD",
+      "label": "دولار / كندي",
+      "category": "forex",
+      "change": 0.4071,
+      "quotedAt": "2026-11-18T12:51:58Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDCAD/"
+    },
+    {
+      "symbol": "AUDUSD",
+      "label": "أسترالي / دولار",
+      "category": "forex",
+      "change": -1.6952,
+      "quotedAt": "2026-11-18T12:51:46Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/AUDUSD/"
+    },
+    {
+      "symbol": "NZDUSD",
+      "label": "نيوزيلندي / دولار",
+      "category": "forex",
+      "change": -1.294,
+      "quotedAt": "2026-11-18T12:51:46Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/NZDUSD/"
+    },
+    {
+      "symbol": "XAUUSD",
+      "label": "الذهب — عقود COMEX الآجلة",
+      "category": "metals",
+      "change": -3.3734,
+      "quotedAt": "2026-11-18T12:41:55Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/XAUUSD/"
+    },
+    {
+      "symbol": "XAGUSD",
+      "label": "الفضة — عقود COMEX الآجلة",
+      "category": "metals",
+      "change": -7.6401,
+      "quotedAt": "2026-11-18T12:41:46Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/XAGUSD/"
+    },
+    {
+      "symbol": "NAS100",
+      "label": "NASDAQ 100",
+      "category": "index",
+      "change": -2.664,
+      "quotedAt": "2026-11-17T22:15:59Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/NDX/"
+    },
+    {
+      "symbol": "SP500",
+      "label": "S&P 500",
+      "category": "index",
+      "change": -2.3986,
+      "quotedAt": "2026-11-17T21:42:12Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/SPX/"
+    },
+    {
+      "symbol": "DJ30",
+      "label": "Dow Jones",
+      "category": "index",
+      "change": -2.8191,
+      "quotedAt": "2026-11-17T21:42:18Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/DJI/"
+    },
+    {
+      "symbol": "WTI",
+      "label": "خام WTI — عقد آجل",
+      "category": "energy",
+      "change": -5.07,
+      "quotedAt": "2026-11-18T12:41:49Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/USOIL/"
+    },
+    {
+      "symbol": "BTCUSD",
+      "label": "Bitcoin",
+      "category": "crypto",
+      "change": -0.1639,
+      "quotedAt": "2026-11-18T12:51:56Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/BTCUSD/"
+    },
+    {
+      "symbol": "ETHUSD",
+      "label": "Ethereum",
+      "category": "crypto",
+      "change": 1.3543,
+      "quotedAt": "2026-11-18T12:51:53Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/ETHUSD/"
+    }
+  ]
 }
