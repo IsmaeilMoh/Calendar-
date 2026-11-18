@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T12:51:36Z",
+  "updated_at": "2026-11-18T12:52:12Z",
   "mode": "rss-attributed",
   "items": [
     {
@@ -9,16 +9,6 @@
       "src": "العين الإخبارية",
       "date": "2026-11-18T12:16:03Z",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1sWUFqcHBmNzFSTU51aEw5bFU2V3BTVWRqalBfUXp5bVphbUNkcFlYZmJwQmJDQWlDejNGQW9peGYyZGdtejctUDZzaVhEQ29SNGd3VHdCZlB2eXAwSnF4bkhuQmFGRy1wYWhwc19QQQ?oc=5",
-      "priority": 2,
-      "language": "ar"
-    },
-    {
-      "id": "a8db9d17eea75576b2d2",
-      "title": "عقود ناسداك ترتفع 250 نقطة: خمسة أمور قبل افتتاح وول ستريت",
-      "tag": "أسواق",
-      "src": "Invezz",
-      "date": "2026-11-18T12:07:29Z",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQODBoM0ktN1J4aVhSeUl5WWFPS1U4X1RhcUs0U3ktQ0dNUVJPZ2FuSFlEcDVtSjUxUWdSRGhGRHpJOWFxZEt1ZmhHc0EtRDVHMExFcFVCVDNwZXdKMlJXQTA5VFVrMjNjeTFOUXpyY0I2ZnRsVjJsN1hORVFKbEZYS3dsZm1GdHRZOW5qclhEZDdYeG9SU0UzV3l6U2xlYmpvY3k0dWNQTTVpZl9vTVE?oc=5",
       "priority": 2,
       "language": "ar"
     },
@@ -293,6 +283,16 @@
       "language": "ar"
     },
     {
+      "id": "5c0afb04cdb0a32ac5a0",
+      "title": "فيد ووتش: الأسواق ترجح رفع الفائدة الأميركية 25 نقطة في كانون الأول بنسبة 95.7%",
+      "tag": "اقتصاد",
+      "src": "قناة المملكة",
+      "date": "2026-11-18T02:24:51Z",
+      "url": "https://news.google.com/rss/articles/CBMirwRBVV95cUxNYTBtX0JRd2NGWk8yZmV3b2RjRjNjSmgzazZNVGxhaThzVWRITlVtOHBCYThJZ2xZalJ6dS1OdDd1TmNzQklXelFmck05MjNiUkFWMDdxc2RtT3k3dW5tOHg4Ukx4cUFJQ1FlZnNkQUxPZzJoWXFZM3hXRTRIWjlKbWJQSFp3MTNZcDVWQkVjWml4U00zaWpmWHNzbURnZjZXRjF2Qzk3RDdKQUJwXzhLeDA1QWQyRVJseEt0TWx0WkY4Nk1JdEpzazdmV1NJWm1QbGIwUkhrYjliSzBaaHNQOFZORXRGZWxlX1dlQUFXdVo3cEdXQnptMUdDbmFaMmxkWk5aU1hEcmJqVEZtZnE0U1EwencyVXJiUWRia1RHdEljV3JPZU5nSzJQbjd5aW5CNVQ5Q0FWWTNWUVdJYkhjRzNpakFLSFNTb1RIclEtZGxGRTRscW10UUJiV01kLTRYQ29HQm9hTmN4V2l2N3BUS29rX1dLVi05d0ZITlA3azJEQk56TEowUl92OFZNN1Ztbk4tcW1kakFFMmg3dHFlY2hjTG10OTRQTm02anozdTlpdTV6ZGllRms3U1NfdnMtQzNBQi1aOTl3X2lyM05RbUpMbl9MZzhvZzRlNXNxeTdQTEZMNEpydkxvemJqdU8ycUllMnl6ZUdGM2hjaEM5LWQxM2RUcC02NTQybm5XWGhTbVRyNjdVR2JZMlN4X2FvUmFEQS1CZVhfTUNOcGJn?oc=5",
+      "priority": 2,
+      "language": "ar"
+    },
+    {
       "id": "512512d55936db95c682",
       "title": "الذهب دون 3810 دولارات مع زيادة توقعات رفع الفائدة الأميركية",
       "tag": "معادن",
@@ -349,6 +349,16 @@
       "src": "IDNFinancials",
       "date": "2026-11-17T22:50:00Z",
       "url": "https://news.google.com/rss/articles/CBMi8gNBVV95cUxPcXVobzNwNFBUdFZ4R1ZQalQwdWJkWktTMkhHSXVDbkhwdlgtV1Q1VWJtcmlIYlRZWWtGWXRzRDVNUHI4SkpWZnVzMF92YThUQUFVZ2dIOFRmUDhOWkNFemxhNUN0V2hUd3ppa0ZpaTVxd3o2ZkNIQUw0cjBfZ1o5b0FHd2NudXFoZmhKOHlBQ253NC1Qbmg4M09vbHVIaHB5WV9QSllpLVlwLWdIMGQxMUlLM2cycGxVbnBVOVB0cFY5cTlrTXJ3NG5pMUJ4d215OExBOVd2ajRfOFhFeTBwVWpuUWt5bEozZE1KTDFicVZFUGd3VGlZN0dYWkszOWhla1hKMFA3c256bEs1WlJGZ2pKYkNZaC1mYll1dFJ3dHFwaEliUl9sYlNnRmt5aVBnMEJFUXp0X21GZmFKcl8wYWpQdGg2QlVxa3prakhrT0Npb1liWmRtVVJCZGpvdDhQRnlKMXA0TURZeW5CNnlhS0d1SDlCOFZ5N01LdDFJWXpLeVczT0FNYzEzd3lJU2xLMWxRWmpZZExFYk5RVjVqd0JjVmpfMVB5TWw1amR3SjM4WjlwRzVaWm91U3Q3RkxFVVRSLURhMTY5MGtlTkZLU0FmbVZLY19wcGw2SGZLUk1ZellfeDkzU3ZhOTdIMTlGbkE?oc=5",
+      "priority": 2,
+      "language": "ar"
+    },
+    {
+      "id": "6b7ca74394fa1f140f76",
+      "title": "الجنيه الإسترليني يكسر تراجعه المستمر منذ خمس جلسات بفعل بيانات الوظائف البريطانية وضعف الدولار",
+      "tag": "اقتصاد",
+      "src": "شبكة تواصل الإخبارية",
+      "date": "2026-11-17T22:00:45Z",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1haHB0Smp5ZFBpLVZ4bnJKQzFpNFA3a0Q3clZMcHFEdi1tZXA1MXN2WHNVNmpmMkZHM3JHb0tIYmhOTWtrc2RkMy1nZURrdF9jMEVn?oc=5",
       "priority": 2,
       "language": "ar"
     },
@@ -583,6 +593,16 @@
       "language": "ar"
     },
     {
+      "id": "79a4a3742a4da31c8bc0",
+      "title": "أجندة الأسواق حتى 17 نوفمبر: أسعار المنتجين ومبيعات التجزئة على مسار الفيدرالي",
+      "tag": "اقتصاد",
+      "src": "www.tmgm.com",
+      "date": "2026-11-17T10:04:08Z",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOaWt4ODEwQlFoLVlJbFd1dnpXQ2szenIyc2RpbDhUMWgyUWN3RzBSM3lDT29sOUtDTnowdjl2eWZ1cDh3MzNkd0dFQUhsMDF2WXlxbG81MDV6Z0g4X3RJUjlTQS1XLTg2UXdXYTFISm9mS2Fvd0ZBdGtPdWpDRkNhSks0ZXVrbmtWNXdlNi1HVkxOZUdmMEU3UW5rZw?oc=5",
+      "priority": 2,
+      "language": "ar"
+    },
+    {
       "id": "657c3ea84b1bc5889013",
       "title": "النفط يفقد أكثر من دولار.. ما الذي يحدث في سوق الطاقة العالمية؟ - أنا الخبر",
       "tag": "طاقة",
@@ -781,28 +801,8 @@
       "url": "https://news.google.com/rss/articles/CBMi2wNBVV95cUxQTm9KbmVuTnAtWmJGREQ5UGQ4MERHUzFBcVpEU0VqN2VYRTg2VlhmdEp2MEJLM0hEaTdHWnQxQ0VMZGVrSXdrRlpjcWhDZ1FTR19tSk5QVVk5dDRmdHhOWlJGVGhWeWZuSlJZTS04UGRSX1Jjc3BRRFJFNk9ZcEprUW9rWHZGQVg5UWI5Q1ZwcFpGN0lmUDZyajhpVXZJajU0cHBLZHpVNUp0TW9UQVktZHBwUFpGQjBDLXM1SmpRdjhkOFc1OTJLRWUxWTA5eUEwd18zQzBvV0czODlpMGQ2dUJPdjFMd3pEVWJ6aXFLYVlkcDVRY3Z5SmpZSW02T3A4d3UxNlhQX1c5d2pvQUpHa25YaVIwZ3hsQm5Qd0lndkNPS0NjMEZ0eGxTQV94T1V6NzVpYzM0ZkxCeDNVVjhYMDJqSFBzN1FsMmEzTGI2Q1pLMlMwWTFCUzFjQUc5Rl9xa3NfQU5tVUI3S2N5a0wxLXBvWnhSNUdDQlN1LVB3OEpSYkxBY0hJVHh6c1FsNlFvZGpSQzBaLWdUc0hZTktXcU81STUtOVQya1JnbHVEbDBfQll1WWlvdzRCRTBrQ2VZbXBtZHJUQWs3UWlUZjlONi1tNGxmMFAtSkJN?oc=5",
       "priority": 2,
       "language": "ar"
-    },
-    {
-      "id": "d8fb406e6548b19a55a3",
-      "title": "أسعار الذهب اليوم، 17 نوفمبر: يستمر انخفاض أسعار الذهب والفضة، لتصل إلى أدنى مستوياتها منذ أكثر من عام.",
-      "tag": "معادن",
-      "src": "Vietnam.vn",
-      "date": "2026-11-17T02:04:58Z",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOdDJfWFZQel9Ua0NaR0o3bkl1UlRaeEFWZ1U1amZfWk1tbWsteGc4YWVUeXJ0eENBTlJ1OGtPTy0zLXJYaUlUMHJhM043YTJhMmRoQTNSVHNwc1BlUXJSaTk5T0hCSkZaMGJzak80aWo3ejRuRHcybHVhQmxHNXAtM0FjU2hQakdZam9MS3dLdjlQUk9qemc4OUN4MGJ2dw?oc=5",
-      "priority": 2,
-      "language": "ar"
-    },
-    {
-      "id": "f65de196f7b5c452f739",
-      "title": "أسعار الذهب تستقر عند 3,860 دولارًا أمريكيًا بعد ملامسة أدنى مستوى لها",
-      "tag": "معادن",
-      "src": "IDNFinancials",
-      "date": "2026-11-17T01:20:00Z",
-      "url": "https://news.google.com/rss/articles/CBMinARBVV95cUxOcVFYNU5uTW9VYmFIV2lJVUkyalkyZHE4RkpQOU9oVzV3VXA4ZzNQSUp5ekFnZGU3cEc5ejdkSFhTOG9KSU5SODd4QWF0SGh6U21PRm42WTlyNzFId3RkY0ExS3Y4ZHpLUmVKNjVJYWVlem5USks0eWNRNUJJRHZ6OE5QUkJqOXpGaTZlZVJRTUN5OXRuQjI2Z2JuVGZRWkx4WmU3ZGtmcnVvOE9WX0EzaE81TzlBZUlkRi1rVkxLZ29aaTR3VFNOMGk4Qy1maUdCM0ZwSHB1NGFxRVlFckhWaTcxS1hMenFFWmJYLVJaM2NXcnJpUmJ0cG1RX2xCcFhVLXh5ZW1hb09vWkJxZWFjUzBybVRRdjY0N1p5Rk0tWXhIaWl4dEpRTmQ0NENkSXRsTVlBOGF2SnlYUmlSX3NRRmJ3cXNOUXkxVC11LU15TnNjSnYxWDBMSDRqUU5pVWt2UFRmRFN5c0F2U2szdG1VLTdSUUR0NFQydjJHclF6alZPdkJCYlFjQlNielJWV0dKYjNUUzl4QlhVLXppaWNndnVkVUNweE5iSXhKS1dxQ2ZiOVZNSUxva09QV29ROHRnLXp4SDRqZzNMVS16Y1NFbDl3cUJfeTBXSDNqY0F4b1ZXR0trME5lS2pSS1dSMFRfZDNyazhpSFl3T1B4cWM2dTJHbnppQVJqV3lubU5mWjdDY0w1MmxzU0tJTHk?oc=5",
-      "priority": 2,
-      "language": "ar"
     }
   ],
-  "source_count": 8,
-  "fetch_errors": 2
+  "source_count": 9,
+  "fetch_errors": 1
 }
