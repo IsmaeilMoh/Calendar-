@@ -269,3 +269,13 @@ footer{padding-bottom:105px}
  .bottom-ticker-window .pulse-ticker-group[aria-hidden=true]{display:none}
  .bottom-ticker-window::before,.bottom-ticker-window::after{display:none}
 }
+
+/* ICT 2.9 — auto-updating economic news */
+.news-feed-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 17px;background:var(--surface);border:1px solid var(--line);border-radius:13px;margin:18px 0;color:var(--muted);font-size:13px}
+.news-feed-top>span:nth-child(2){flex:1;min-width:180px}
+.news-feed-status{font-size:12px;line-height:1.8;color:var(--muted);margin-bottom:10px}
+.news-live-chip{display:inline-flex;align-items:center;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;background:var(--accent-soft);color:var(--accent);white-space:nowrap;border:1px solid var(--line)}
+.news-live-chip.is-fresh{color:var(--green);border-color:color-mix(in srgb,var(--green) 25%,transparent);background:color-mix(in srgb,var(--green) 8%,var(--surface))}
+.news-live-chip.is-stale{color:var(--amber);background:color-mix(in srgb,var(--amber) 8%,var(--surface))}
+.news-stack .small-meta,.card-meta{overflow-wrap:anywhere}
+@media(max-width:600px){.news-feed-top{font-size:12px}.news-live-chip{font-size:11px}.news-feed-top button{width:100%}}
