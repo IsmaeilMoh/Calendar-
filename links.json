@@ -1,0 +1,10 @@
+[
+{"name":"قناة تلجرام","icon":"telegram","desc":"التوصيات والأخبار أولاً بأول","url":"https://t.me/IsmaeilTradingICT"},
+{"name":"حساب X","icon":"x","desc":"ملخصات وأخبار سريعة","url":""},
+{"name":"يوتيوب","icon":"youtube","desc":"شروحات وتحليلات","url":""},
+{"name":"إنستغرام","icon":"instagram","desc":"محتوى مرئي وقصص","url":""},
+{"name":"تيك توك","icon":"tiktok","desc":"فيديوهات قصيرة","url":""},
+{"name":"فيسبوك","icon":"facebook","desc":"صفحتنا ومجتمع المتابعين","url":""},
+{"name":"قناة واتساب","icon":"whatsapp","desc":"تنبيهات مباشرة","url":""},
+{"name":"البريد الإلكتروني","icon":"email","desc":"للتواصل والاستفسارات","url":""}
+]
