@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:19:34.343426Z",
+  "updatedAt": "2026-11-18T19:16:28.994471Z",
   "source": "Forex Factory weekly public JSON feed (unofficial)",
   "events": [
     {
@@ -893,16 +893,6 @@
       "actual": "—"
     },
     {
-      "id": "2026-11-19T02:02:00-05:00-CNY-Foreign Direct Investment ytd/y",
-      "title": "Foreign Direct Investment ytd/y",
-      "date": "2026-11-19T07:02:00Z",
-      "country": "CNY",
-      "impact": "Low",
-      "forecast": "—",
-      "previous": "-4.3%",
-      "actual": "—"
-    },
-    {
       "id": "2026-11-19T04:00:00-05:00-EUR-Current Account",
       "title": "Current Account",
       "date": "2026-11-19T09:00:00Z",
@@ -1160,6 +1150,16 @@
       "impact": "Low",
       "forecast": "18.0B",
       "previous": "24.5B",
+      "actual": "—"
+    },
+    {
+      "id": "2026-11-20T02:02:00-05:00-CNY-Foreign Direct Investment ytd/y",
+      "title": "Foreign Direct Investment ytd/y",
+      "date": "2026-11-20T07:02:00Z",
+      "country": "CNY",
+      "impact": "Low",
+      "forecast": "—",
+      "previous": "-4.3%",
       "actual": "—"
     },
     {
