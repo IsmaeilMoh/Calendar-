@@ -1,6 +1,142 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-11-18T14:57:20.744212Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
-  "changeBasis": "previous close",
-  "items": []
+  "changeBasis": "Yahoo chart previous close; not uniform 24h",
+  "items": [
+    {
+      "symbol": "EURUSD",
+      "label": "يورو / دولار",
+      "category": "forex",
+      "change": -1.0455,
+      "quotedAt": "2026-11-18T14:56:44Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/EURUSD/"
+    },
+    {
+      "symbol": "GBPUSD",
+      "label": "جنيه / دولار",
+      "category": "forex",
+      "change": -0.8436,
+      "quotedAt": "2026-11-18T14:56:44Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/GBPUSD/"
+    },
+    {
+      "symbol": "USDJPY",
+      "label": "دولار / ين",
+      "category": "forex",
+      "change": -0.313,
+      "quotedAt": "2026-11-18T14:57:19Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDJPY/"
+    },
+    {
+      "symbol": "USDCHF",
+      "label": "دولار / فرنك",
+      "category": "forex",
+      "change": 1.2135,
+      "quotedAt": "2026-11-18T14:57:19Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDCHF/"
+    },
+    {
+      "symbol": "USDCAD",
+      "label": "دولار / كندي",
+      "category": "forex",
+      "change": 0.4843,
+      "quotedAt": "2026-11-18T14:57:19Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/USDCAD/"
+    },
+    {
+      "symbol": "AUDUSD",
+      "label": "أسترالي / دولار",
+      "category": "forex",
+      "change": -1.6659,
+      "quotedAt": "2026-11-18T14:55:44Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/AUDUSD/"
+    },
+    {
+      "symbol": "NZDUSD",
+      "label": "نيوزيلندي / دولار",
+      "category": "forex",
+      "change": -1.2042,
+      "quotedAt": "2026-11-18T14:55:44Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/NZDUSD/"
+    },
+    {
+      "symbol": "XAUUSD",
+      "label": "الذهب — عقود COMEX الآجلة",
+      "category": "metals",
+      "change": -2.8871,
+      "quotedAt": "2026-11-18T14:47:20Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/XAUUSD/"
+    },
+    {
+      "symbol": "XAGUSD",
+      "label": "الفضة — عقود COMEX الآجلة",
+      "category": "metals",
+      "change": -7.9562,
+      "quotedAt": "2026-11-18T14:47:20Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/XAGUSD/"
+    },
+    {
+      "symbol": "NAS100",
+      "label": "NASDAQ 100",
+      "category": "index",
+      "change": -4.6624,
+      "quotedAt": "2026-11-18T14:57:18Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/NDX/"
+    },
+    {
+      "symbol": "SP500",
+      "label": "S&P 500",
+      "category": "index",
+      "change": -3.7372,
+      "quotedAt": "2026-11-18T14:57:18Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/SPX/"
+    },
+    {
+      "symbol": "DJ30",
+      "label": "Dow Jones",
+      "category": "index",
+      "change": -4.035,
+      "quotedAt": "2026-11-18T14:57:20Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/DJI/"
+    },
+    {
+      "symbol": "WTI",
+      "label": "خام WTI — عقد آجل",
+      "category": "energy",
+      "change": -6.2895,
+      "quotedAt": "2026-11-18T14:47:19Z",
+      "proxy": true,
+      "url": "https://www.tradingview.com/symbols/USOIL/"
+    },
+    {
+      "symbol": "BTCUSD",
+      "label": "Bitcoin",
+      "category": "crypto",
+      "change": -1.1142,
+      "quotedAt": "2026-11-18T14:57:16Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/BTCUSD/"
+    },
+    {
+      "symbol": "ETHUSD",
+      "label": "Ethereum",
+      "category": "crypto",
+      "change": -0.065,
+      "quotedAt": "2026-11-18T14:57:19Z",
+      "proxy": false,
+      "url": "https://www.tradingview.com/symbols/ETHUSD/"
+    }
+  ]
 }
