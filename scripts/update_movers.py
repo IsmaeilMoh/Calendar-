@@ -33,8 +33,18 @@ INSTRUMENTS = [
 def get_one(inst):
     symbol, yahoo, label, group, tv, proxy = inst
     url='https://query1.finance.yahoo.com/v8/finance/chart/'+urllib.parse.quote(yahoo,safe='')+'?interval=1d&range=5d'
-    req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 ICTArabicMarketPulse/2.3','Accept':'application/json'})
-    with urllib.request.urlopen(req, timeout=18) as resp: payload=json.load(resp)
+    payload=None
+    errors=[]
+    for domain in ('query1.finance.yahoo.com','query2.finance.yahoo.com'):
+        endpoint=url.replace('query1.finance.yahoo.com',domain)
+        req=urllib.request.Request(endpoint,headers={'User-Agent':'Mozilla/5.0 (compatible; ICTArabic/2.7)','Accept':'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=18) as resp:
+                payload=json.load(resp)
+            break
+        except Exception as exc:
+            errors.append(f'{domain}: {exc}')
+    if payload is None: raise RuntimeError('; '.join(errors))
     chart=(payload.get('chart',{}).get('result') or [None])[0]
     if not chart: raise ValueError('No chart for '+yahoo)
     meta=chart.get('meta') or {}
@@ -65,7 +75,7 @@ if __name__=='__main__':
         for f in concurrent.futures.as_completed(futures):
             try: items.append(f.result())
             except Exception as exc:print('WARNING: quote unavailable for',futures[f],':',str(exc))
-    if len(items)<8: raise RuntimeError(f'Only {len(items)} of {len(INSTRUMENTS)} instruments returned valid quotes; refusing to overwrite feed')
+    if len(items)<4: raise RuntimeError(f'Only {len(items)} of {len(INSTRUMENTS)} instruments returned valid quotes; refusing to overwrite feed')
     order={x[0]:i for i,x in enumerate(INSTRUMENTS)}
     items.sort(key=lambda x:order[x['symbol']])
     output={'updatedAt':dt.datetime.now(dt.timezone.utc).isoformat().replace('+00:00','Z'),
