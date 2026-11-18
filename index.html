@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>الأجندة الاقتصادية 16–20 نوفمبر 2026</title>
+<meta name="description" content="أهم الأخبار الاقتصادية المؤثرة على التداول بتوقيتك، مع النتائج وتأثيرها على العملات.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="أجندة التداول | الأجندة الاقتصادية الأسبوعية">
+<meta property="og:description" content="أهم الأخبار الاقتصادية بتوقيتك، مع النتائج وتأثيرها على العملات.">
+<meta property="og:url" content="https://ismaeilmoh.github.io/Calendar-/">
+<meta property="og:image" content="https://ismaeilmoh.github.io/Calendar-/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="أجندة التداول | الأجندة الاقتصادية الأسبوعية">
+<meta name="twitter:description" content="أهم الأخبار الاقتصادية بتوقيتك، مع النتائج وتأثيرها على العملات.">
+<meta name="twitter:image" content="https://ismaeilmoh.github.io/Calendar-/preview.jpg">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#131722">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -59,7 +72,7 @@ button.chip .fl svg{width:24px;height:16px}
 .ct{display:flex;align-items:center;gap:8px;font-size:.95rem;font-weight:500}
 .note{color:var(--mute);font-size:.85rem;border-top:1px solid var(--line);padding-top:14px;margin-top:26px}
 .note p{margin:4px 0}
-.sw{gap:8px}
+.sw{gap:8px;flex-wrap:wrap}.sw .chip{white-space:nowrap}
 .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
 .snap div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
 .snap small{display:block;color:var(--mute);font-size:.75rem}
@@ -81,6 +94,14 @@ button.chip .fl svg{width:24px;height:16px}
 .ev .star{color:#fff}
 #q{font:inherit;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 16px;min-width:220px}
 .src a{color:#5d8bff}
+.nx{position:sticky;top:8px;z-index:40}
+.nowl{display:flex;align-items:center;gap:10px;color:#2962ff;font-weight:700;font-size:.85rem;margin:10px 0}.nowl:before,.nowl:after{content:"";flex:1;height:2px;background:#2962ff}
+.wb{font:inherit;font-size:.78rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:2px 12px;margin-top:6px;margin-inline-end:6px;cursor:pointer}
+.why{margin-top:6px;font-size:.82rem;color:var(--mute);line-height:1.7}
+.ev .fr{background:#2962ff;color:#fff;border-radius:6px;padding:0 8px;font-size:.75rem;margin-inline-start:6px;animation:pl 1.4s infinite}
+.ev .soonb{background:var(--md);color:#131722;border-radius:6px;padding:0 8px;font-size:.75rem;margin-inline-start:6px}
+@keyframes pl{50%{opacity:.45}}
+.cs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}.cs span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-weight:700;font-size:.85rem}
 #tape{position:fixed;left:0;right:0;bottom:0;z-index:60;height:calc(46px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);overflow:hidden;background:var(--surface);border-top:1px solid var(--line)}
 .vd{display:inline-block;margin-top:5px;padding:1px 10px;border-radius:999px;font-size:.78rem;font-weight:700}
 .vp{background:#089981;color:#fff}.vn{background:#f23645;color:#fff}.vm,.vz{background:var(--line);color:var(--ink)}
@@ -110,7 +131,7 @@ ar:{t:"الأجندة الاقتصادية 16–20 نوفمبر 2026",h:"الأ�
 top:[["الاثنين","19:00","كلمة رئيس الفيدرالي وورش"],["الثلاثاء","15:30","مبيعات التجزئة الأمريكية"],["الأربعاء","21:00","محضر اجتماع الفيدرالي"]],
 fi:"حجم التأثير:",im:["الكل","عالٍ","متوسط","منخفض"],fd:"اليوم:",dy:["كل الأسبوع","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة"],
 fc:"الدولة:",ct:{all:"كل الدول",us:"أمريكا",gb:"بريطانيا",ca:"كندا",au:"أستراليا",nz:"نيوزلندا",cn:"الصين"},
-past:"مضى",star:"حدث الأسبوع",empty:"لا أحداث بهذا الاختيار. جرّب تغيير اليوم أو الدولة أو حجم التأثير.",sw:"English",th:"داكن/فاتح",tzl:"المنطقة الزمنية:",auto:"حسب جهازي",vp:"إيجابي على",vn:"سلبي على",vm:"نتيجة مختلطة على",vz:"متوافقة مع التوقعات",v0:"لا إشارة واضحة (تصريحات)",vw:"بانتظار الصدور",vu:"النتيجة غير مسجّلة بعد",n3:"الإيجابي والسلبي تقييم عام مبني على مقارنة الفعلي بالمتوقع (ارتفاع التضخم أو النمو إيجابي للعملة، وارتفاع البطالة سلبي)، وقد يختلف رد فعل السوق الفعلي.",snap:[["فائدة الفيدرالي","3.75–4.00%"],["احتمال رفع ديسمبر (16 نوفمبر)","75–100%"],["البيتكوين","~$65,200 (16 نوفمبر)","btc"]],sq:"ابحث في الأحداث",fm:"الأداة:",ins:{all:"الكل",usd:"الدولار",gold:"الذهب",idx:"المؤشرات",btc:"البيتكوين",oil:"النفط"},upd:"آخر تحديث للأرقام الفعلية: 17 نوفمبر 2026. المصادر:",nn:"لا أحداث عالية التأثير قادمة",nx:"الحدث عالي التأثير القادم",u:["ي","س","د","ث"],pf:["السابق","المتوقع","الفعلي"],tl:"جلسات السوق،",ses:["سيدني","طوكيو","لندن","نيويورك"],
+past:"مضى",star:"حدث الأسبوع",empty:"لا أحداث بهذا الاختيار. جرّب تغيير اليوم أو الدولة أو حجم التأثير.",sw:"English",th:"داكن/فاتح",tzl:"المنطقة الزمنية:",auto:"حسب جهازي",vp:"إيجابي على",vn:"سلبي على",vm:"نتيجة مختلطة على",vz:"متوافقة مع التوقعات",v0:"لا إشارة واضحة (تصريحات)",vw:"بانتظار الصدور",vu:"النتيجة غير مسجّلة بعد",fresh:"صدر الآن",soon:"بعد",min:"د",now:"الآن",why:"لماذا يهم؟",hide:"إخفاء",rem:"🔔 تذكير",cs:"قوة العملات من النتائج الصادرة:",cp:"انسخ ملخص اليوم",cpd:"تم النسخ",sh:"مشاركة",ins:"ثبّت التطبيق",n3:"الإيجابي والسلبي تقييم عام مبني على مقارنة الفعلي بالمتوقع (ارتفاع التضخم أو النمو إيجابي للعملة، وارتفاع البطالة سلبي)، وقد يختلف رد فعل السوق الفعلي.",snap:[["فائدة الفيدرالي","3.75–4.00%"],["احتمال رفع ديسمبر (16 نوفمبر)","75–100%"],["البيتكوين","~$65,200 (16 نوفمبر)","btc"]],sq:"ابحث في الأحداث",fm:"الأداة:",ins:{all:"الكل",usd:"الدولار",gold:"الذهب",idx:"المؤشرات",btc:"البيتكوين",oil:"النفط"},upd:"آخر تحديث للأرقام الفعلية: 17 نوفمبر 2026. المصادر:",nn:"لا أحداث عالية التأثير قادمة",nx:"الحدث عالي التأثير القادم",u:["ي","س","د","ث"],pf:["السابق","المتوقع","الفعلي"],tl:"جلسات السوق،",ses:["سيدني","طوكيو","لندن","نيويورك"],
 n1:"درجة التأثير تقييم تقديري وليست من المصادر. المواعيد والتوقعات قد تتغير، فتأكد من تقويم مباشر قبل كل تقرير.",
 n2:"معلومات عامة وليست نصيحة استثمارية، والتداول حول البيانات عالي المخاطرة.",
 days:["الاثنين 16 نوفمبر","الثلاثاء 17 نوفمبر","الأربعاء 18 نوفمبر","الخميس 19 نوفمبر","الجمعة 20 نوفمبر","الأحد 22 نوفمبر"]},
@@ -118,7 +139,7 @@ en:{t:"Economic Calendar, Nov 16–20, 2026",h:"Economic Calendar This Week",sub
 top:[["Monday","19:00","Fed Chair Warsh speaks"],["Tuesday","15:30","US retail sales"],["Wednesday","21:00","Fed meeting minutes"]],
 fi:"Impact:",im:["All","High","Medium","Low"],fd:"Day:",dy:["Whole week","Mon","Tue","Wed","Thu","Fri"],
 fc:"Country:",ct:{all:"All countries",us:"USA",gb:"UK",ca:"Canada",au:"Australia",nz:"New Zealand",cn:"China"},
-past:"Done",star:"Event of the week",empty:"No events match this selection. Try changing the day, country or impact.",sw:"العربية",th:"Dark/Light",tzl:"Time zone:",auto:"My device",vp:"Positive for",vn:"Negative for",vm:"Mixed for",vz:"In line with forecast",v0:"No clear signal (speech)",vw:"Awaiting release",vu:"Result not recorded yet",n3:"Positive/negative is a general read from actual vs. forecast (higher inflation or growth is positive for a currency; higher unemployment is negative). Actual market reaction may differ.",snap:[["Fed funds rate","3.75–4.00%"],["Dec hike odds (Nov 16)","75–100%"],["Bitcoin","~$65,200 (Nov 16)","btc"]],sq:"Search events",fm:"Instrument:",ins:{all:"All",usd:"USD",gold:"Gold",idx:"Indices",btc:"Bitcoin",oil:"Oil"},upd:"Actuals last updated: Nov 17, 2026. Sources:",nn:"No upcoming high-impact events",nx:"Next high-impact event",u:["d","h","m","s"],pf:["Prior","Forecast","Actual"],tl:"Market sessions,",ses:["Sydney","Tokyo","London","New York"],
+past:"Done",star:"Event of the week",empty:"No events match this selection. Try changing the day, country or impact.",sw:"العربية",th:"Dark/Light",tzl:"Time zone:",auto:"My device",vp:"Positive for",vn:"Negative for",vm:"Mixed for",vz:"In line with forecast",v0:"No clear signal (speech)",vw:"Awaiting release",vu:"Result not recorded yet",fresh:"Just released",soon:"in",min:"min",now:"Now",why:"Why it matters",hide:"Hide",rem:"🔔 Remind me",cs:"Currency strength from released results:",cp:"Copy today’s summary",cpd:"Copied",sh:"Share",ins:"Install app",n3:"Positive/negative is a general read from actual vs. forecast (higher inflation or growth is positive for a currency; higher unemployment is negative). Actual market reaction may differ.",snap:[["Fed funds rate","3.75–4.00%"],["Dec hike odds (Nov 16)","75–100%"],["Bitcoin","~$65,200 (Nov 16)","btc"]],sq:"Search events",fm:"Instrument:",ins:{all:"All",usd:"USD",gold:"Gold",idx:"Indices",btc:"Bitcoin",oil:"Oil"},upd:"Actuals last updated: Nov 17, 2026. Sources:",nn:"No upcoming high-impact events",nx:"Next high-impact event",u:["d","h","m","s"],pf:["Prior","Forecast","Actual"],tl:"Market sessions,",ses:["Sydney","Tokyo","London","New York"],
 n1:"The impact level is my own estimate, not from the sources. Dates and forecasts may change, so check a live calendar before each release.",
 n2:"General information, not investment advice. Trading around data releases is high risk.",
 days:["Monday, Nov 16","Tuesday, Nov 17","Wednesday, Nov 18","Thursday, Nov 19","Friday, Nov 20","Sunday, Nov 22"]}
@@ -198,11 +219,11 @@ var t=T[L],h="";
 document.documentElement.lang=L;
 document.documentElement.dir=L==="ar"?"rtl":"ltr";
 document.title=t.t;
-h+='<div class="sw"><button class="chip" data-k="l" data-v="'+(L==="ar"?"en":"ar")+'" aria-label="Language / اللغة">'+t.sw+'</button><button class="chip" data-k="th" data-v="x">'+t.th+'</button></div>';
+h+='<div class="sw"><button class="chip" data-k="l" data-v="'+(L==="ar"?"en":"ar")+'" aria-label="Language / اللغة">'+t.sw+'</button><button class="chip" data-k="th" data-v="x">'+t.th+'</button><button class="chip" data-k="cp" data-v="x">'+t.cp+'</button><button class="chip" data-k="sh" data-v="x">'+t.sh+'</button>'+(IP?'<button class="chip" data-k="ins" data-v="x">'+t.ins+'</button>':'')+'</div>';
 h+=tzbar(t);
 h+='<h1>'+t.h+'</h1><p class="sub">'+t.sub+'</p>';
 h+='<section class="top">'+topc(t).map(function(x){return '<div class="tc"><small>'+x[0]+'</small><div class="t">'+x[1]+'</div><b>'+x[2]+'</b></div>'}).join("")+'</section>';
-h+='<section class="snap">'+t.snap.map(function(x){return '<div><small>'+x[0]+'</small><b'+(x[2]?' id="'+x[2]+'"':'')+'>'+x[1]+'</b></div>'}).join("")+'</section><div class="nx" id="nx"></div>'+tline(t)+'<div class="bar"><input id="q" type="search" placeholder="'+t.sq+'" aria-label="'+t.sq+'" value="'+Q.replace(/"/g,"&quot;")+'"></div>';
+h+='<section class="snap">'+t.snap.map(function(x){return '<div><small>'+x[0]+'</small><b'+(x[2]?' id="'+x[2]+'"':'')+'>'+x[1]+'</b></div>'}).join("")+'</section><div class="nx" id="nx"></div>'+cs(t)+tline(t)+'<div class="bar"><input id="q" type="search" placeholder="'+t.sq+'" aria-label="'+t.sq+'" value="'+Q.replace(/"/g,"&quot;")+'"></div>';
 h+=bar(t.fi,"f",[0,3,2,1],t.im,F);
 h+=dbar(t);
 h+=bar(t.fc,"c",K,K.map(function(k){return (FG[k]?'<span class="fl">'+FG[k]+'</span>':"")+t.ct[k]}),C);
@@ -269,17 +290,66 @@ t.innerHTML='<div class="tradingview-widget-container"><div class="tradingview-w
 var s=document.createElement("script");s.src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";s.async=true;
 s.text=JSON.stringify({symbols:TS.map(function(x){return {description:ar&&x[2]?x[2]:x[1],proName:x[0]}}),showSymbolLogo:false,colorTheme:th==="dark"?"dark":"light",isTransparent:true,displayMode:"adaptive",locale:ar?"ar_AE":"en"});
 t.firstChild.appendChild(s)}
+var WY={},IP=null;
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();IP=e;draw()});
+var WH={"0.0":["الصناعة والتجزئة في الصين تقيسان نمو ثاني أكبر اقتصاد، وتحركان اليوان والنفط والنحاس والدولار الأسترالي.","Industrial output and retail sales gauge China’s growth; they move CNY, oil, copper and AUD."],
+"0.1":["التضخم يحدد مسار فائدة بنك كندا. الأعلى من المتوقع يدعم الدولار الكندي.","Inflation guides Bank of Canada rate policy. Hotter than forecast supports CAD."],
+"0.2":["أول مسح تصنيع أمريكي في الشهر، ويعطي إشارة مبكرة لنشاط الصناعة.","The first US manufacturing survey of the month, an early read on factory activity."],
+"0.3":["تصريحات ويليامز تعكس توجه الفيدرالي نحو الفائدة، وتحرك الدولار والذهب.","Williams’ remarks hint at Fed rate thinking and can move USD and gold."],
+"0.4":["كلمة رئيس الفيدرالي الأهم لتوقع الفائدة. أي تلميح يحرك الدولار والذهب والمؤشرات.","The Fed Chair’s words matter most for rate expectations; any hint moves USD, gold and indices."],
+"1.0":["كلمة محافظ بنك أستراليا تلمّح لمسار الفائدة وتحرك الدولار الأسترالي.","The RBA Governor can signal the rate path and move AUD."],
+"1.1":["المحضر يكشف نقاشات أعضاء بنك أستراليا حول الفائدة.","The minutes reveal how RBA members debated rates."],
+"1.2":["توقعات التضخم تؤثر في قرار بنك نيوزلندا وفي الدولار النيوزلندي.","Inflation expectations influence RBNZ decisions and NZD."],
+"1.3":["الأجور والبطالة تحددان ضغط التضخم وقرار بنك إنجلترا، وتحركان الجنيه.","Wages and unemployment drive inflation pressure and BoE decisions; they move GBP."],
+"1.4":["مبيعات التجزئة تقيس إنفاق المستهلك، وهو نحو ثلثي الاقتصاد الأمريكي. تحرك الدولار والسندات والمؤشرات.","Retail sales track consumer spending, about two-thirds of the US economy. They move USD, bonds and indices."],
+"1.5":["الإنتاج الصناعي يقيس نشاط المصانع والمناجم والمرافق في أمريكا.","Industrial production measures US factory, mining and utility output."],
+"1.6":["نتائج إنفيديا مقياس لطلب الذكاء الاصطناعي، وتحرك أسهم التقنية وناسداك وأحياناً الكريبتو.","Nvidia’s results gauge AI demand and move tech stocks, Nasdaq and sometimes crypto."],
+"2.0":["التضخم في بريطانيا يحدد مسار فائدة بنك إنجلترا. الأعلى من المتوقع يدعم الجنيه.","UK inflation guides BoE rate policy. Hotter than forecast supports GBP."],
+"2.1":["المحضر يبيّن نقاشات أعضاء الفيدرالي حول الفائدة. النبرة الأشد تدعم الدولار.","The minutes show how Fed members debated rates; a tougher tone supports USD."],
+"3.0":["التوظيف يوجّه فائدة بنك أستراليا. البطالة الأقل تدعم الدولار الأسترالي.","Jobs data steers RBA policy; lower unemployment supports AUD."],
+"3.1":["طلبات الإعانة مؤشر أسبوعي لسوق العمل الأمريكي. ارتفاعها يدل على ضعف التوظيف.","Jobless claims are a weekly read on the US labor market; a rise signals weaker hiring."],
+"3.2":["مسح تصنيع إقليمي يعطي إشارة على اتجاه الصناعة الأمريكية.","A regional factory survey that signals the direction of US manufacturing."],
+"4.0":["مبيعات التجزئة تقيس إنفاق البريطانيين وتؤثر على الجنيه.","UK retail sales track household spending and affect GBP."],
+"4.1":["ثقة المستهلك تتنبأ بالإنفاق، وتتضمن توقعات التضخم التي يراقبها الفيدرالي.","Consumer sentiment foreshadows spending and includes inflation expectations the Fed watches."],
+"5.0":["مبيعات التجزئة ربع السنوية تقيس إنفاق النيوزلنديين وتؤثر على الدولار النيوزلندي.","Quarterly retail sales track New Zealand spending and affect NZD."]};
+function hmNow(){return new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:zone()})}
+function cal(t){var ar=L==="ar",h="",n=Date.now(),nd=0;
+groups().forEach(function(g,gi){if(DY>=0&&gi!==DY)return;
+var rs=g.evs.filter(function(e){var r=e.r;return (!F||r[1]===F)&&(C==="all"||r[2]===C)&&(M==="all"||IR[M].test(r[6]))&&(!Q||(r[3]+r[4]+r[5]+r[6]).toLowerCase().indexOf(Q)>-1)});
+if(!rs.length)return;
+h+='<section class="day"><h2>'+dayName(g)+'</h2>';
+rs.forEach(function(e){var r=e.r,p=e.ts<n,pf=PFX[e.key]||PF[e.key]||["—","—"],m="";for(var i=1;i<=3;i++)m+='<i'+(i<=r[1]?' class="on"':'')+'></i>';
+if(!nd&&!p){nd=1;h+='<div class="nowl" id="nowl">'+t.now+' · '+hmNow()+'</div>'}
+var fr=p&&n-e.ts<1800000,so=!p&&r[1]===3&&e.ts-n<900000,w=WY[e.key];
+h+='<div class="row l'+r[1]+(p?' past':'')+'"><div class="time">'+e.hm+(p?'<small>'+t.past+'</small>':'')+'</div><div class="ev"><b>'+(ar?r[3]:r[5])+(r[7]?'<span class="star">'+t.star+'</span>':'')+(fr?'<span class="fr">'+t.fresh+'</span>':'')+(so?'<span class="soonb">'+t.soon+' '+Math.ceil((e.ts-n)/60000)+' '+t.min+'</span>':'')+'</b><span>'+(ar?r[4]:r[6])+'</span><div class="pf"><span>'+t.pf[0]+' <b>'+pf[0]+'</b></span><span>'+t.pf[1]+' <b>'+pf[1]+'</b></span><span>'+t.pf[2]+' <b>'+actv(pf[2],ar)+'</b></span></div>'+vd(e,p,t)+'<div><button class="wb" data-k="w" data-v="'+e.key+'">'+(w?t.hide:t.why)+'</button>'+(p?'':'<button class="wb" data-k="ics" data-v="'+e.key+'">'+t.rem+'</button>')+'</div>'+(w&&WH[e.key]?'<div class="why">'+WH[e.key][ar?0:1]+'</div>':'')+'</div><div class="imp"><div class="m" aria-hidden="true">'+m+'</div><span class="lab">'+t.im[4-r[1]]+'</span></div><div class="ct"><span class="fl">'+FG[r[2]]+'</span>'+t.ct[r[2]]+'</div></div>'});
+h+='</section>'});
+return h||'<p>'+t.empty+'</p>'}
+function cs(t){var sc={};EVS().forEach(function(e){var s=RSX[e.key]||RS[e.key];if(!s||!s.length)return;var c=CU[e.r[2]][0];sc[c]=sc[c]||[0,0];s.forEach(function(x){if(x>0)sc[c][0]++;else if(x<0)sc[c][1]++})});
+var k=Object.keys(sc).filter(function(c){return sc[c][0]+sc[c][1]});if(!k.length)return "";
+return '<div class="cs"><b>'+t.cs+'</b>'+k.map(function(c){var a=sc[c][0],b=sc[c][1];return '<span style="color:'+(a>b?"#089981":b>a?"#f23645":"inherit")+'">'+c+' ▲'+a+' ▼'+b+'</span>'}).join("")+'</div>'}
+function sumText(){var t=T[L],G=groups(),b=nextEv(),i=DY>=0?DY:Math.max(0,G.map(function(g){return g.k}).indexOf(b?b.k:"")),g=G[i]||G[0],n=Date.now(),ar=L==="ar",ic={3:"🔴",2:"🟠",1:"🔵"},l=["📅 "+dayName(g),"⏰ "+offLabel()];
+g.evs.forEach(function(e){var pf=PFX[e.key]||PF[e.key],s=ic[e.r[1]]+" "+e.hm+" — "+(ar?e.r[3]:e.r[5])+" ("+t.ct[e.r[2]]+")";
+if(pf&&pf[2])s+=" | "+t.pf[2]+": "+actv(pf[2],ar);
+if(RSX[e.key]||RS[e.key])s+=" → "+vd(e,e.ts<n,t).replace(/<[^>]+>/g,"");l.push(s)});
+l.push("⚠️ "+t.n2);return l.join("\n")}
+function icsDl(k){var e=EVS().filter(function(x){return x.key===k})[0];if(!e)return;var f=function(ts){return new Date(ts).toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"")},nm=(L==="ar"?e.r[3]:e.r[5]).replace(/[,;]/g," ");
+var s=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Agenda//EN","BEGIN:VEVENT","UID:"+k+"-"+e.ts+"@agenda","DTSTAMP:"+f(Date.now()),"DTSTART:"+f(e.ts),"DTEND:"+f(e.ts+1800000),"SUMMARY:"+nm,"BEGIN:VALARM","TRIGGER:-PT15M","ACTION:DISPLAY","DESCRIPTION:"+nm,"END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([s],{type:"text/calendar"}));a.download="event.ics";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
 app.addEventListener("change",function(e){if(e.target.id==="tz"){TZ=e.target.value;DY=-1;try{localStorage.setItem("tz",TZ)}catch(x){}draw();var s=document.getElementById("tz");if(s)s.focus()}});
 app.addEventListener("click",function(e){
-var b=e.target.closest(".chip");if(!b)return;
+var b=e.target.closest(".chip,.wb");if(!b)return;
 var k=b.dataset.k,v=b.dataset.v;
-if(k==="f")F=+v;else if(k==="d")DY=+v;else if(k==="c")C=v;else if(k==="m")M=v;else if(k==="th"){var hh=document.documentElement,cur=hh.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");hh.dataset.theme=cur==="dark"?"light":"dark"}else{L=v;try{localStorage.setItem("lg",L)}catch(x){}}
+if(k==="ics"){icsDl(v);return}
+if(k==="cp"){var tx=sumText();(navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).catch(function(){var ta=document.createElement("textarea");ta.value=tx;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(x){}ta.remove()});var ot=b.textContent;b.textContent=T[L].cpd;setTimeout(function(){b.textContent=ot},1500);return}
+if(k==="sh"){if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(location.href)}return}
+if(k==="ins"){if(IP){IP.prompt();IP=null;draw()}return}
+if(k==="f")F=+v;else if(k==="d")DY=+v;else if(k==="c")C=v;else if(k==="m")M=v;else if(k==="w")WY[v]=!WY[v];else if(k==="th"){var hh=document.documentElement,cur=hh.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");hh.dataset.theme=cur==="dark"?"light":"dark"}else{L=v;try{localStorage.setItem("lg",L)}catch(x){}}
 draw();if(k==="l"||k==="th")buildTape();
 var n=app.querySelector(k==="l"||k==="th"?'[data-k="'+k+'"]':'[data-k="'+k+'"][data-v="'+v+'"]');
 if(n)n.focus();
 });
 app.addEventListener("input",function(e){if(e.target.id==="q"){Q=e.target.value.toLowerCase().trim();document.getElementById("cal").innerHTML=cal(T[L])}});
-draw();buildTape();
+draw();buildTape();setTimeout(function(){var x=document.getElementById("nowl");if(x)x.scrollIntoView({block:"center"})},400);
 if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigator.serviceWorker.register("sw.js").catch(function(){})}
 </script>
 </body>
