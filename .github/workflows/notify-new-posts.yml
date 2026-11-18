@@ -1,0 +1,26 @@
+name: Notify followers of new trade ideas
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'recs.json'
+      - 'analyses.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Send push for newly published posts
+        env:
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
+          ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+          BEFORE_REV: ${{ github.event.before }}
+        run: python scripts/notify_push.py posts
