@@ -2,11 +2,13 @@
 const $=x=>document.getElementById(x),S={news:[],newsArchive:[],newsUpdated:null,newsStatus:'loading',recs:[],links:[],agenda:{days:[]},liveEvents:[],liveUpdated:null,liveStatus:'loading',movers:[],moversUpdated:null,moversStatus:'loading'},state={page:'home',nf:'الكل',rf:'all',country:'ALL',impact:'all',day:'all',search:''};
 const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=u=>/^https:\/\/[^\s\"'<>]+$/i.test(u||'')?u:'#';
+const newsImageURL=u=>{const raw=String(u||'');try{const p=new URL(raw);return p.protocol==='https:'&&!/\.(svg|gif|pdf)$/i.test(p.pathname)&&!/[<>\s]/.test(raw)?raw:''}catch(e){return ''}};
+const newsImage=n=>newsImageURL(n?.image||n?.image_url||n?.thumbnail);
 const dateFormat=d=>{if(!d)return '';const obj=new Date(/^\d{4}-\d{2}-\d{2}$/.test(String(d))?d+'T12:00:00':d);return Number.isFinite(obj.getTime())?obj.toLocaleString('ar-u-nu-latn',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:typeof currentZone==='function'?currentZone():undefined}):''};
 const section=(title,content,link='',more='عرض الكل')=>`<section class="section"><div class="section-heading"><h2>${title}</h2>${link?`<a href="${link}">${more} ←</a>`:''}</div>${content}</section>`;
 const empty=m=>`<div class="empty">${m}</div>`;
 async function load(file){try{const r=await fetch(file,{cache:'no-store'});if(!r.ok)throw Error(r.status);return await r.json()}catch(e){console.warn('تعذر تحميل',file,e);return null}}
-function cardNews(n){return `<article class="card"><span class="tag">${escapeHTML(n.tag||'اقتصاد')}</span><h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.sum||'')}</p><div class="card-meta"><span>${escapeHTML(n.src||'')} · ${dateFormat(n.date)}</span>${safeUrl(n.url)!=='#'?`<a href="${escapeHTML(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">قراءة الخبر ↗</a>`:''}</div></article>`}
+function cardNews(n){const photo=newsImage(n);const artwork=photo?`<div class="news-photo"><img src="${escapeHTML(photo)}" alt="صورة مرفقة من المصدر: ${escapeHTML(n.src||'المصدر')}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.news-photo').classList.add('image-error')"><span class="news-photo-fallback" aria-hidden="true">${escapeHTML(n.tag||'اقتصاد')}</span></div>`:`<div class="news-photo news-photo-placeholder" aria-hidden="true"><span>${escapeHTML(n.tag||'اقتصاد')}</span></div>`;return `<article class="card news-card">${artwork}<span class="tag">${escapeHTML(n.tag||'اقتصاد')}</span><h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.sum||'')}</p><div class="card-meta"><span>${escapeHTML(n.src||'')} · ${dateFormat(n.date)}</span>${safeUrl(n.url)!=='#'?`<a href="${escapeHTML(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">قراءة الخبر ↗</a>`:''}</div></article>`}
 function newsStatusLine(){const date=S.newsUpdated?dateFormat(S.newsUpdated):'';if(S.newsStatus==='fresh')return `آخر مزامنة: ${escapeHTML(date)} • عناوين من مصادرها الأصلية • تحديث تقريبي كل 30 دقيقة`;
 if(S.newsStatus==='stale')return `آخر مزامنة: ${escapeHTML(date)} • تنبيه: قد تكون الأخبار قديمة، تحقق من تاريخ كل خبر`;
 if(S.newsStatus==='archive')return 'أرشيف الأخبار اليدوي — تعذّر تحميل موجز الأخبار المحدثة حاليًا';
@@ -16,7 +18,7 @@ async function fetchLiveNews(){
  let payload=null;try{const r=await fetch('news-live.json?t='+Date.now(),{cache:'no-store'});if(r.ok)payload=await r.json()}catch(e){console.info('News feed unavailable',e.message)}
  const time=payload?.updated_at?new Date(payload.updated_at):null;
  const records=Array.isArray(payload?.items)?payload.items:[];
- const normalized=records.filter(n=>n&&typeof n.title==='string'&&n.title.trim()&&/^https:\/\/[^\s]+$/i.test(n.url||'')&&Number.isFinite(new Date(n.date).getTime())&&Date.now()-new Date(n.date).getTime()<7*86400000).map(n=>({title:n.title,src:String(n.src||'المصدر'),tag:String(n.tag||'اقتصاد'),date:n.date,url:n.url,sum:'',language:n.language||'ar'})).slice(0,80);
+ const normalized=records.filter(n=>n&&typeof n.title==='string'&&n.title.trim()&&/^https:\/\/[^\s]+$/i.test(n.url||'')&&Number.isFinite(new Date(n.date).getTime())&&Date.now()-new Date(n.date).getTime()<7*86400000).map(n=>({title:n.title,src:String(n.src||'المصدر'),tag:String(n.tag||'اقتصاد'),date:n.date,url:n.url,sum:'',image:newsImage(n),language:n.language||'ar'})).slice(0,80);
  if(normalized.length){S.news=normalized;S.newsUpdated=time;S.newsStatus=(time&&Number.isFinite(time.getTime())&&Date.now()-time.getTime()<4*3600000)?'fresh':'stale';}
  else {S.news=S.newsArchive;S.newsUpdated=null;S.newsStatus='archive';}
  if(['news','home'].includes(state.page))render();
@@ -31,13 +33,15 @@ const navTitle={home:'الرئيسية',markets:'الأسواق',news:'الأخ�
 function title(eng,arabic,lead){return `<div class="eyebrow">${eng}</div><h1 class="page-title">${arabic}</h1><p class="lead">${lead}</p>`}
 // Featured editorial headlines — same verified feed as the news section, no duplicate source.
 let heroSlideIndex=0,heroSlideTimer=null;
-function heroNews(){return Array.isArray(S.news)?S.news.filter(n=>n&&n.title).slice(0,5):[]}
+function heroNews(){if(!Array.isArray(S.news))return [];const recent=S.news.filter(n=>n&&n.title).slice(0,35);const pictured=recent.filter(n=>newsImage(n)).slice(0,3);const remaining=recent.filter(n=>!pictured.includes(n)).slice(0,5-pictured.length);return [...pictured,...remaining].sort((a,b)=>new Date(b.date)-new Date(a.date));}
 function heroSlideMarkup(n,i,total){
  const src=escapeHTML(n.src||'المصدر غير محدد'),tag=escapeHTML(n.tag||'اقتصاد');
  const meta=escapeHTML(dateFormat(n.date));
  const sum=n.sum?`<p class="hero-news-summary">${escapeHTML(n.sum)}</p>`:'';
  const url=safeUrl(n.url);
- return `<div class="hero-news-body" aria-live="off"><div class="hero-news-label"><span class="hero-news-indicator" aria-hidden="true"></span><span>${S.newsStatus==='archive'?'من أرشيف الأخبار':S.newsStatus==='stale'?'أخبار من آخر مزامنة':'أبرز الأخبار الاقتصادية'}</span><span class="hero-news-counter en" dir="ltr">${i+1} / ${total}</span></div><div class="hero-news-tag">${tag}</div><h2 class="hero-news-title">${escapeHTML(n.title)}</h2>${sum}<div class="hero-news-meta"><span>${src}</span><span aria-hidden="true">•</span><span>${meta}</span></div><div class="hero-news-action">${url!=='#'?`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" class="hero-news-link">اقرأ الخبر من المصدر <span aria-hidden="true">↗</span></a>`:`<a href="#news" class="hero-news-link">استعرض الأخبار <span aria-hidden="true">←</span></a>`}</div></div>`;
+ const image=newsImage(n);
+ const heroPhoto=image?`<div class="hero-news-photo" aria-hidden="true"><img src="${escapeHTML(image)}" alt="" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('image-error')"></div>`:'';
+ return `${heroPhoto}<div class="hero-news-body" aria-live="off"><div class="hero-news-label"><span class="hero-news-indicator" aria-hidden="true"></span><span>${S.newsStatus==='archive'?'من أرشيف الأخبار':S.newsStatus==='stale'?'أخبار من آخر مزامنة':'أبرز الأخبار الاقتصادية'}</span><span class="hero-news-counter en" dir="ltr">${i+1} / ${total}</span></div><div class="hero-news-tag">${tag}</div><h2 class="hero-news-title">${escapeHTML(n.title)}</h2>${sum}<div class="hero-news-meta"><span>${src}</span><span aria-hidden="true">•</span><span>${meta}</span></div><div class="hero-news-action">${url!=='#'?`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" class="hero-news-link">اقرأ الخبر من المصدر <span aria-hidden="true">↗</span></a>`:`<a href="#news" class="hero-news-link">استعرض الأخبار <span aria-hidden="true">←</span></a>`}</div></div>`;
 }
 function heroSlider(){
  const items=heroNews();

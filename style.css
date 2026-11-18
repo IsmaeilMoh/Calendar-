@@ -308,3 +308,23 @@ footer{padding-bottom:105px}
 @media(max-width:1020px){.welcome.welcome-news-layout{grid-template-columns:1fr}.hero-news-slider{min-height:400px}}
 @media(max-width:600px){.welcome.welcome-news-layout{padding:0;gap:13px}.hero-news-slider{min-height:355px;padding:24px 20px;border-radius:16px}.hero-news-title{font-size:clamp(23px,6.1vw,30px);line-height:1.65;margin:12px 0}.hero-news-tag{margin-top:18px}.hero-news-summary{font-size:13px}.hero-news-controls{margin-top:18px}.hero-news-label{font-size:11px}.hero-news-arrows button{width:32px;height:32px}}
 @media(prefers-reduced-motion:reduce){.hero-news-dot{transition:none}}
+
+
+/* ICT 3.1 — source-attributed RSS editorial photography */
+.news-card{overflow:hidden;display:flex;flex-direction:column}
+.news-card .news-photo{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;margin:-22px -22px 18px;overflow:hidden;background:linear-gradient(130deg,#26332f,#425b51);color:#e6f1eb}
+.news-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.news-photo-fallback,.news-photo-placeholder span{display:none}
+.news-photo.image-error img{display:none}
+.news-photo.image-error .news-photo-fallback,.news-photo-placeholder span{display:block;font-weight:800;font-size:17px;letter-spacing:.01em}
+.news-photo-placeholder{background:radial-gradient(circle at 18% 15%,rgba(102,205,157,.25),transparent 40%),linear-gradient(120deg,#293934,#172423)!important}
+.news-card .card-meta{margin-top:auto}
+.hero-news-slider:has(.hero-news-photo){background:#13201b}
+.hero-news-photo{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-news-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.86) brightness(.72);opacity:.75}
+.hero-news-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(10,18,19,.96) 0%,rgba(10,18,19,.79) 45%,rgba(10,18,19,.48) 100%)}
+.hero-news-photo.image-error{display:none}
+.hero-news-slider:has(.hero-news-photo:not(.image-error))::before{background:radial-gradient(circle at 75% 30%,rgba(12,36,28,.06),transparent 65%)}
+.hero-news-slider .hero-news-body,.hero-news-slider .hero-news-controls{position:relative;z-index:1}
+@media(max-width:600px){.news-card .news-photo{margin:-22px -22px 15px}.hero-news-photo::after{background:linear-gradient(0deg,rgba(10,18,19,.97) 3%,rgba(10,18,19,.78) 67%,rgba(10,18,19,.58) 100%)}}
+@media(prefers-reduced-motion:reduce){.hero-news-photo{transition:none}}
