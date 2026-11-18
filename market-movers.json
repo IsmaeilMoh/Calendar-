@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T12:09:38.497391Z",
+  "updatedAt": "2026-11-18T12:10:06.658679Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
   "changeBasis": "Yahoo chart previous close; not uniform 24h",
   "items": [
@@ -7,8 +7,8 @@
       "symbol": "EURUSD",
       "label": "يورو / دولار",
       "category": "forex",
-      "change": -1.1537,
-      "quotedAt": "2026-11-18T12:08:45Z",
+      "change": -1.1356,
+      "quotedAt": "2026-11-18T12:09:45Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/EURUSD/"
     },
@@ -17,7 +17,7 @@
       "label": "جنيه / دولار",
       "category": "forex",
       "change": -0.8436,
-      "quotedAt": "2026-11-18T12:08:45Z",
+      "quotedAt": "2026-11-18T12:09:45Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/GBPUSD/"
     },
@@ -25,8 +25,8 @@
       "symbol": "USDJPY",
       "label": "دولار / ين",
       "category": "forex",
-      "change": -0.2391,
-      "quotedAt": "2026-11-18T12:09:36Z",
+      "change": -0.2448,
+      "quotedAt": "2026-11-18T12:10:04Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDJPY/"
     },
@@ -35,7 +35,7 @@
       "label": "دولار / فرنك",
       "category": "forex",
       "change": 1.2495,
-      "quotedAt": "2026-11-18T12:09:35Z",
+      "quotedAt": "2026-11-18T12:10:03Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCHF/"
     },
@@ -43,8 +43,8 @@
       "symbol": "USDCAD",
       "label": "دولار / كندي",
       "category": "forex",
-      "change": 0.4001,
-      "quotedAt": "2026-11-18T12:09:37Z",
+      "change": 0.379,
+      "quotedAt": "2026-11-18T12:10:05Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCAD/"
     },
@@ -52,8 +52,8 @@
       "symbol": "AUDUSD",
       "label": "أسترالي / دولار",
       "category": "forex",
-      "change": -1.5929,
-      "quotedAt": "2026-11-18T12:07:45Z",
+      "change": -1.5783,
+      "quotedAt": "2026-11-18T12:09:45Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/AUDUSD/"
     },
@@ -62,7 +62,7 @@
       "label": "نيوزيلندي / دولار",
       "category": "forex",
       "change": -1.1862,
-      "quotedAt": "2026-11-18T12:07:45Z",
+      "quotedAt": "2026-11-18T12:09:45Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/NZDUSD/"
     },
@@ -70,8 +70,8 @@
       "symbol": "XAUUSD",
       "label": "الذهب — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -3.0903,
-      "quotedAt": "2026-11-18T11:59:28Z",
+      "change": -3.0826,
+      "quotedAt": "2026-11-18T12:00:04Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAUUSD/"
     },
@@ -79,8 +79,8 @@
       "symbol": "XAGUSD",
       "label": "الفضة — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -6.967,
-      "quotedAt": "2026-11-18T11:59:32Z",
+      "change": -7.0078,
+      "quotedAt": "2026-11-18T12:00:02Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAGUSD/"
     },
@@ -115,8 +115,8 @@
       "symbol": "WTI",
       "label": "خام WTI — عقد آجل",
       "category": "energy",
-      "change": -5.1603,
-      "quotedAt": "2026-11-18T11:59:36Z",
+      "change": -5.2733,
+      "quotedAt": "2026-11-18T12:00:05Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/USOIL/"
     },
@@ -124,8 +124,8 @@
       "symbol": "BTCUSD",
       "label": "Bitcoin",
       "category": "crypto",
-      "change": 0.038,
-      "quotedAt": "2026-11-18T12:09:33Z",
+      "change": 0.0137,
+      "quotedAt": "2026-11-18T12:10:04Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/BTCUSD/"
     },
@@ -133,8 +133,8 @@
       "symbol": "ETHUSD",
       "label": "Ethereum",
       "category": "crypto",
-      "change": 1.6839,
-      "quotedAt": "2026-11-18T12:09:32Z",
+      "change": 1.6437,
+      "quotedAt": "2026-11-18T12:10:03Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/ETHUSD/"
     }
