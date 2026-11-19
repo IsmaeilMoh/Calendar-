@@ -1,7 +1,7 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const OWNER='IsmaeilMoh',REPO='ictbelaraby',BRANCH='main';
-let token='',posts={analysis:[],signal:[]},editing=null,chosenImage=null,storedImage='';
+let token='',posts={analysis:[],signal:[]},editing=null,chosenImage=null,storedImage='',deleting=false;
 const $status=(id,message,kind='')=>{const element=$(id);element.className=kind?'admin-'+kind:'';element.textContent=message;};
 const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const filePath=type=>type==='analysis'?'analyses.json':'recs.json';
@@ -12,7 +12,41 @@ async function fetchFile(path){try{const r=await request(path+'?ref='+BRANCH);co
 async function writeFile(path,content,message,oldSha){const payload={message,branch:BRANCH,content};if(oldSha)payload.sha=oldSha;return request(path,'PUT',payload);}
 async function connect(){const entered=$('github-token').value.trim();if(!entered)return $status('auth-status','أدخل رمز GitHub أولًا.','error');token=entered;$('github-token').value='';try{await refreshPosts();$('admin-workspace').hidden=false;$status('auth-status','تم الاتصال بالمستودع. الرمز يبقى في ذاكرة هذه الصفحة فقط.','ok');}catch(e){token='';$status('auth-status','فشل الاتصال: '+e.message,'error');}}
 async function refreshPosts(){const [a,s]=await Promise.all([fetchFile('analyses.json'),fetchFile('recs.json')]);posts.analysis=Array.isArray(a.items)?a.items:[];posts.signal=Array.isArray(s.items)?s.items:[];renderExisting();}
-function renderExisting(){const all=[...posts.analysis.map((x,i)=>({...x,kind:'analysis',index:i})),...posts.signal.map((x,i)=>({...x,kind:'signal',index:i}))].sort((a,b)=>Date.parse(b.published_at||b.date||0)-Date.parse(a.published_at||a.date||0));$('existing-posts').innerHTML=all.map(p=>`<div class="admin-post"><div><b>${escape(p.title||p.pair||p.asset||'منشور')}</b><small>${p.kind==='analysis'?'تحليل':'توصية'} • ${escape((p.published_at||p.date||'').slice(0,16))}${p.sample?' • نموذج':''}</small></div><button type="button" class="secondary" data-edit="${p.kind}:${p.index}">تحرير</button></div>`).join('')||'<p class="admin-help">لا توجد منشورات بعد.</p>';}
+function renderExisting(){
+ const query=($('post-search')?.value||'').trim().toLocaleLowerCase();
+ const filter=$('post-filter')?.value||'all';
+ const all=[...posts.analysis.map((x,i)=>({...x,kind:'analysis',index:i})),...posts.signal.map((x,i)=>({...x,kind:'signal',index:i}))]
+   .sort((a,b)=>(Date.parse(b.published_at||b.date||0)||0)-(Date.parse(a.published_at||a.date||0)||0))
+   .filter(p=>(filter==='all'||p.kind===filter)&&(!query||[p.title,p.asset,p.pair,p.entry,p.summary].some(v=>String(v||'').toLocaleLowerCase().includes(query))));
+ $('existing-posts').innerHTML=all.map(p=>`<div class="admin-post"><div class="admin-post-main"><b>${escape(p.title||p.pair||p.asset||'منشور')}</b><small>${p.kind==='analysis'?'تحليل':'توصية'} • ${escape((p.published_at||p.date||'').slice(0,16))}${p.sample?' • نموذج':''}</small></div><div class="admin-post-buttons"><button type="button" class="secondary" data-edit="${p.kind}:${p.index}" ${deleting?'disabled':''}>تحرير</button><button type="button" class="admin-danger" data-delete="${p.kind}:${p.index}" ${deleting?'disabled':''} aria-label="حذف ${p.kind==='analysis'?'تحليل':'توصية'} ${escape(p.title||p.pair||p.asset||'')}">حذف</button></div></div>`).join('')||'<p class="admin-help">لا توجد منشورات مطابقة.</p>';
+}
+async function deletePost(kind,index){
+ if(deleting)return;
+ if(!token)return $status('posts-status','اتصل بالمستودع أولًا.','error');
+ if(!['analysis','signal'].includes(kind)||!Number.isSafeInteger(index)||index<0)return;
+ const selected=posts[kind][index];if(!selected)return $status('posts-status','هذه القائمة قديمة. اضغط تحديث القائمة وحاول مرة أخرى.','error');
+ const title=selected.title||selected.pair||selected.asset||'المنشور';
+ const label=kind==='analysis'?'التحليل':'التوصية';
+ if(!window.confirm(`هل أنت متأكد من حذف ${label} «${title}» من الموقع؟\n\nسيُحذف هذا المنشور من القائمة العامة، ويمكن استعادته فقط من سجل GitHub. لن تُحذف صورة الشارت تلقائيًا.\n\nلن يتم إرسال إشعار للمتابعين عند الحذف.`))return;
+ deleting=true;renderExisting();$status('posts-status','جارٍ حذف المنشور من GitHub…','loading');
+ try{
+   const path=filePath(kind),old=await fetchFile(path);
+   if(!Array.isArray(old.items))throw Error('ملف المنشورات ليس قائمة JSON صالحة.');
+   // Compare full contents to protect against deleting a changed/replaced post,
+   // including legacy posts without IDs. Never fall back to an unsafe index.
+   const identical=old.items.map((p,i)=>JSON.stringify(p)===JSON.stringify(selected)?i:-1).filter(i=>i!==-1);
+   if(identical.length!==1)throw Error('تغيّر المنشور أو لم يعد فريدًا؛ اضغط «تحديث القائمة» ثم أعد المحاولة. لم يُحذف شيء.');
+   old.items.splice(identical[0],1);
+   await writeFile(path,encodedJSON(old.items),`delete: ${kind} ${selected.id||title}`,old.sha);
+   // Clear editor if it referenced the deleted post; avoid publishing a stale edit.
+   if(editing?.kind===kind&&posts[kind][editing.index]===selected)reset();
+   await refreshPosts();
+   $status('posts-status',`تم حذف ${label} «${title}» بنجاح. ستظهر النتيجة للجمهور بعد تحديث GitHub Pages.`, 'ok');
+ }catch(e){
+   $status('posts-status','تعذر الحذف: '+e.message+'\nلم نعُدّل القائمة المحلية. حدّث القائمة إذا لزم الأمر.','error');
+ }finally{deleting=false;renderExisting();}
+}
+
 function typeChanged(){const t=$('post-type').value;$('analysis-fields').hidden=t!=='analysis';$('signal-fields').hidden=t!=='signal';$('title-row').hidden=t!=='analysis';$('post-title').required=t==='analysis';$('entry').required=t==='signal';$('sl').required=t==='signal';$('tp').required=t==='signal';$('saved-image').textContent=storedImage?'الصورة الحالية: '+storedImage:'';}
 function setValues(a={}){const t=a.kind||'analysis';$('post-type').value=t;$('asset').value=a.asset||a.pair||'';$('post-title').value=a.title||'';$('timeframe').value=a.timeframe||'4H';$('bias').value=a.bias||'محايد';$('summary').value=a.summary||'';$('body').value=a.body||'';$('invalidation').value=a.invalidation||'';$('chart-url').value=a.chart_url||'';$('levels').value=(a.levels||[]).map(l=>l.label+': '+l.value).join('\n');$('analysis-status').value=a.status==='completed'?'completed':a.status==='invalidated'?'invalidated':'active';$('direction').value=a.dir||'buy';$('signal-status').value=['open','tp','sl','cl'].includes(a.status)?a.status:'open';$('entry').value=a.entry||'';$('tp').value=a.tp||'';$('sl').value=a.sl||'';$('signal-note').value=a.note||'';$('send-notice').checked=!editing;$('chart-image').value='';chosenImage=null;storedImage=a.image||'';$('image-preview').hidden=true;typeChanged();}
 function reset(){editing=null;setValues();$status('publish-status','');}
@@ -23,7 +57,14 @@ async function publish(e){e.preventDefault();if(!token)return;$('publish').disab
 if(type==='analysis'&&chosenImage){$status('publish-status','جارٍ رفع صورة الشارت إلى GitHub…','loading');const bytes=await convertImage(chosenImage);const name='analysis-images/'+post.id+'.jpg';const imageOld=await request(name+'?ref='+BRANCH).then(x=>x.sha).catch(e=>/Not Found/.test(e.message)?null:Promise.reject(e));await writeFile(name,b64(bytes),'media: chart for '+post.id,imageOld);post.image=name;}
 if(editing){const target=list.findIndex(p=>p.id&&p.id===(posts[type][editing.index]?.id));const i=target>=0?target:editing.index;if(i<0||i>=list.length)throw Error('تعذر تحديد المنشور القديم؛ حدّث القائمة.');list[i]=post;}else list.unshift(post);$status('publish-status','جارٍ حفظ بيانات المنشور…','loading');await writeFile(filePath(type),encodedJSON(list),(editing?'edit: ':'publish: ')+(type==='analysis'?'analysis ':'signal ')+(post.id),old.sha);$status('publish-status','تم حفظ المنشور على GitHub بنجاح. قد يحتاج GitHub Pages بضع دقائق للنشر. '+(post.notify?'سترسل مهمة الإشعارات تنبيهًا فقط بعد إعداد OneSignal بنجاح.':''),'ok');editing=null;await refreshPosts();}catch(err){$status('publish-status','تعذر إتمام النشر: '+err.message+'\nإذا رُفعت الصورة وحدث خطأ بعدها، يمكنك إعادة المحاولة؛ لن تُرسل الصورة وحدها إشعارًا.','error');}finally{$('publish').disabled=false;}}
 function preview(){const p=fields(),t=$('post-type').value;$('live-preview').innerHTML=t==='analysis'?`<small>${escape(p.asset)} • ${escape(p.timeframe)} • ${escape(p.bias)}</small><h3>${escape(p.title)}</h3><p>${escape(p.summary)}</p><hr><p>${escape(p.body)}</p><small>إبطال السيناريو: ${escape(p.invalidation||'غير محدد')}</small>`:`<small>${escape(p.pair)} • ${escape(p.dir)}</small><h3>${escape(p.entry)}</h3><p>الهدف: ${escape(p.tp)} | الإيقاف: ${escape(p.sl)}</p><p>${escape(p.note)}</p>`;}
-$('connect').addEventListener('click',connect);$('github-token').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();connect();}});$('post-type').addEventListener('change',typeChanged);$('publish-form').addEventListener('submit',publish);$('preview-post').addEventListener('click',preview);$('new-post').addEventListener('click',reset);$('reload').addEventListener('click',()=>refreshPosts().catch(e=>$status('publish-status',e.message,'error')));$('existing-posts').addEventListener('click',e=>{const b=e.target.closest('[data-edit]');if(b){const [type,i]=b.dataset.edit.split(':');edit(type,Number(i));}});
+$('connect').addEventListener('click',connect);$('github-token').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();connect();}});$('post-type').addEventListener('change',typeChanged);$('publish-form').addEventListener('submit',publish);$('preview-post').addEventListener('click',preview);$('new-post').addEventListener('click',reset);$('reload').addEventListener('click',()=>refreshPosts().catch(e=>$status('publish-status',e.message,'error')));$('existing-posts').addEventListener('click',e=>{
+ const del=e.target.closest('[data-delete]');
+ if(del){const [kind,i]=del.dataset.delete.split(':');deletePost(kind,Number(i));return;}
+ const editButton=e.target.closest('[data-edit]');
+ if(editButton&&!deleting){const [kind,i]=editButton.dataset.edit.split(':');edit(kind,Number(i));}
+});
+$('post-search').addEventListener('input',renderExisting);
+$('post-filter').addEventListener('change',renderExisting);
 $('chart-image').addEventListener('change',()=>{chosenImage=$('chart-image').files[0]||null;const preview=$('image-preview');if(preview.dataset.objectUrl)URL.revokeObjectURL(preview.dataset.objectUrl);if(chosenImage){preview.dataset.objectUrl=URL.createObjectURL(chosenImage);preview.src=preview.dataset.objectUrl;preview.hidden=false;}else preview.hidden=true;});
 $('save-draft').addEventListener('click',()=>{const draft={kind:$('post-type').value,fields:fields()};localStorage.setItem('ict-admin-local-draft',JSON.stringify(draft));$status('publish-status','تم حفظ مسودة نصية على هذا الجهاز فقط، دون صورة الشارت.','ok');});
 $('restore-draft').addEventListener('click',()=>{try{const d=JSON.parse(localStorage.getItem('ict-admin-local-draft'));if(!d)return $status('publish-status','لا توجد مسودة محفوظة.','loading');editing=null;setValues({...d.fields,kind:d.kind});$status('publish-status','تمت استعادة المسودة المحلية.','ok');}catch(e){$status('publish-status','المسودة غير صالحة.','error');}});
