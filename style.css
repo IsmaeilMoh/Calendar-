@@ -646,3 +646,76 @@ footer{padding-bottom:105px}
  .pulse-mover-row.mover-highlight:before{animation:none;opacity:.3}
  .pulse-mover-row{transition:none}
 }
+
+
+/* ICT 4.2 — compact first-screen Market Pulse / original ICT logo in footer */
+/* The brand replacement only affects our own TV badge. The provider widget stays intact. */
+.tape .bottom-ticker-brand{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;padding:3px;border-radius:11px;background:#fff;
+  border:1px solid rgba(255,255,255,.35);box-shadow:0 2px 7px rgba(0,0,0,.22);
+  overflow:hidden
+}
+.tape .bottom-ticker-brand img{display:block;width:100%;height:100%;object-fit:contain;border-radius:6px}
+@media(max-width:760px){
+  .tape .bottom-ticker-brand{display:flex;width:33px;height:33px;padding:3px;border-radius:9px}
+}
+
+/* Keep gainers and losers side by side at typical laptop widths, even inside the aside panel. */
+#market-pulse .panel-top{padding:8px 13px;font-size:11px}
+#market-pulse .pulse-block{padding:9px 12px}
+#market-pulse .pulse-heading{margin-bottom:5px}
+#market-pulse .pulse-heading b{font-size:12px}
+#market-pulse .pulse-quiet-badge{font-size:9px;padding:2px 5px}
+#market-pulse .pulse-movers-board{margin-top:5px;padding:7px 8px;border-radius:13px}
+#market-pulse .pulse-movers-meta{padding:0 1px 6px;gap:5px;font-size:9px;min-height:0;line-height:1.35}
+#market-pulse .movers-time-icon{font-size:13px}
+#market-pulse .movers-fresh-state{padding:2px 5px;font-size:9px}
+#market-pulse .pulse-movers-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:6px}
+#market-pulse .pulse-movers-col{padding:6px 7px;border-radius:10px;min-width:0}
+#market-pulse .pulse-movers-head{margin-bottom:2px;gap:2px}
+#market-pulse .movers-heading-name{gap:4px}
+#market-pulse .movers-heading-name b{font-size:10px}
+#market-pulse .movers-trend-symbol{width:17px;height:17px;border-radius:5px;font-size:12px}
+#market-pulse .movers-head-en{display:none}
+#market-pulse .pulse-mover-row{min-height:31px;padding:4px 1px;gap:3px;border-radius:6px}
+#market-pulse .pulse-mover-row:hover{transform:none}
+#market-pulse .pulse-mover-main{gap:4px;flex:0 1 auto;min-width:0}
+#market-pulse .pulse-mover-copy{min-width:0}
+#market-pulse .pulse-mover-copy b{font-size:10px;letter-spacing:-.01em}
+#market-pulse .pulse-mover-source{display:none}
+#market-pulse .mover-currency-pair{width:27px;height:23px;flex:none}
+#market-pulse .mover-currency-pair img{top:2px;width:20px;height:20px;border-width:1px}
+#market-pulse .mover-currency-pair img:last-child{left:9px}
+#market-pulse .mover-icon,#market-pulse .mover-icon img{width:23px;height:23px}
+#market-pulse .pulse-mover-quote{flex:0 0 auto;align-items:flex-end;gap:2px}
+#market-pulse .pulse-mover-price{font-size:10px;letter-spacing:-.025em}
+#market-pulse .pulse-mover-change{padding:2px 4px;font-size:9px;border-radius:5px;gap:3px}
+#market-pulse .pulse-foot{margin-top:4px;font-size:9px;line-height:1.35}
+#market-pulse .pulse-countdown{margin:3px 0;font-size:22px;line-height:1.25}
+#market-pulse .pulse-news-head{gap:5px;font-size:11px;line-height:1.4}
+#market-pulse .pulse-news-head strong{font-size:12px;line-height:1.45}
+#market-pulse .pulse-impact-label{font-size:9px}
+#market-pulse .pulse-countdown-caption{font-size:10px}
+#market-pulse .pulse-zone-name{gap:5px;margin-bottom:2px}
+#market-pulse .pulse-zone-name strong{font-size:13px}
+#market-pulse .pulse-zone-next,#market-pulse .pulse-zone-timer{font-size:11px;color:var(--muted);line-height:1.45}
+#market-pulse .pulse-zone-next strong,#market-pulse .pulse-zone-timer b{color:var(--ink)}
+#market-pulse .pulse-extra{margin-top:5px;font-size:11px}
+#market-pulse .pulse-extra summary{cursor:pointer;display:list-item;width:max-content;max-width:100%;font-size:10px;font-weight:700;color:var(--accent);line-height:1.4}
+#market-pulse .pulse-extra[open]{margin-bottom:4px}
+#market-pulse .pulse-extra .pulse-zone-desc{margin:6px 0;font-size:11px}
+#market-pulse .pulse-extra .pulse-zone-details,#market-pulse .pulse-extra .pulse-news-info{margin-top:7px;font-size:11px}
+#market-pulse .pulse-extra .pulse-zone-details strong{font-size:11px}
+/* Smaller panels, not cut-off text. The layout remains scrollable naturally on short screens. */
+@container (max-width:365px){
+  #market-pulse .pulse-movers-layout{grid-template-columns:1fr}
+  #market-pulse .pulse-mover-row{min-height:31px}
+  #market-pulse .pulse-mover-source{display:none}
+}
+@media(max-width:600px){
+  #market-pulse .pulse-block{padding:10px 12px}
+  #market-pulse .pulse-movers-board{padding:9px}
+  #market-pulse .pulse-mover-row{min-height:34px}
+}
+@media(prefers-reduced-motion:reduce){#market-pulse .pulse-mover-row{transition:none}}
