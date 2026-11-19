@@ -1,5 +1,5 @@
 // ICT بالعربي v2.0 — offline shell with network-first editable data
-const CACHE='ict-shell-v35-public-20261119';
+const CACHE='ict-shell-v37-market-quotes-20261119';
 const CORE=['./','./index.html','./agenda.html','./style.css','./app.js','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png','./news.json','./recs.json','./analyses.json','./push-config.js','./push.js','./links.json','./agenda.json'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

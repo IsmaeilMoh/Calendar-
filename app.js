@@ -95,7 +95,7 @@ async function fetchMovers(){
  let payload=null;
  try{const r=await fetch('market-movers.json?t='+Date.now(),{cache:'no-store'});if(r.ok)payload=await r.json()}catch(e){console.info('Market snapshot unavailable',e.message)}
  const when=new Date(payload?.updatedAt||''),age=Date.now()-when.getTime();
- const rows=Array.isArray(payload?.items)?payload.items.filter(x=>allowedPulseSymbols.has(x.symbol)&&Number.isFinite(Number(x.change))&&Math.abs(Number(x.change))<100&&Number.isFinite(Date.parse(x.quotedAt))&&typeof x.url==='string'&&/^https:\/\/www\.tradingview\.com\//.test(x.url)).map(x=>({symbol:x.symbol,label:String(x.label||x.symbol),change:Number(x.change),quotedAt:x.quotedAt,proxy:Boolean(x.proxy),url:x.url,category:String(x.category||'')})):[];
+ const rows=Array.isArray(payload?.items)?payload.items.filter(x=>allowedPulseSymbols.has(x.symbol)&&Number.isFinite(Number(x.change))&&Math.abs(Number(x.change))<100&&Number.isFinite(Date.parse(x.quotedAt))&&typeof x.url==='string'&&/^https:\/\/www\.tradingview\.com\//.test(x.url)).map(x=>({symbol:x.symbol,label:String(x.label||x.symbol),change:Number(x.change),price:(x.price!==null&&x.price!==undefined&&x.price!==''&&Number.isFinite(Number(x.price))&&Number(x.price)>0)?Number(x.price):null,quotedAt:x.quotedAt,proxy:Boolean(x.proxy),url:x.url,category:String(x.category||'')})):[];
  S.movers=rows;S.moversUpdated=when;
  S.moversStatus=rows.length&&Number.isFinite(age)&&age>=-300000&&age<moverFreshMs?'fresh':rows.length&&Number.isFinite(age)&&age<72*3600000?'stale':'unavailable';refreshPulse();ticker();
 }
@@ -119,6 +119,21 @@ function currentIctWindow(){
  return {...picked,title:picked.name,others:active.length-1};
 }
 function pulseClock(deadline,klass){return `<b class="en ${klass}" dir="ltr" data-deadline="${Number(deadline)}">${compactCountdown(Number(deadline)-Date.now())}</b>`}
+// ICT v3.7: use the actual published quote; never estimate missing prices from percent change.
+function marketQuotePrice(x){
+ const n=x.price;
+ if(typeof n!=='number'||!Number.isFinite(n)||n<=0)return '—';
+ const fixed=({EURUSD:5,GBPUSD:5,USDJPY:3,USDCHF:5,USDCAD:5,AUDUSD:5,NZDUSD:5,XAUUSD:2,XAGUSD:3,NAS100:2,SP500:2,DJ30:2,WTI:2,BTCUSD:2,ETHUSD:2})[x.symbol]??2;
+ return new Intl.NumberFormat('en-US',{minimumFractionDigits:fixed,maximumFractionDigits:fixed}).format(n);
+}
+function marketTickerCard(x,icon){
+ const trend=x.change>0?'up':x.change<0?'down':'flat';
+ const arrow=trend==='up'?'▲':trend==='down'?'▼':'◆';
+ const pct=(x.change>0?'+':'')+x.change.toFixed(2)+'%';
+ const quote=marketQuotePrice(x);
+ const extra=x.proxy?' — سعر عقد آجل مرجعي':'';
+ return `<span class="market-ticker-item ticker-${trend==='up'?'rising':trend==='down'?'falling':'flat'}" title="${escapeHTML(x.label)}${extra} — ${quote==='—'?'السعر غير متاح':`السعر ${quote}`} • التغير ${pct}"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${escapeHTML(icon)}</span><span class="market-ticker-symbol en" dir="ltr">${escapeHTML(x.symbol)}</span><span class="ticker-last en" dir="ltr" aria-label="السعر">${quote}</span><span class="ticker-change ${trend} en" dir="ltr"><span class="ticker-arrow" aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></span>`;
+}
 function marketPulse(){
  const now=Date.now(),marketReady=['fresh','stale'].includes(S.moversStatus);
  const gainers=[...S.movers].filter(x=>x.change>0).sort((a,b)=>b.change-a.change).slice(0,3);
@@ -130,7 +145,7 @@ function marketPulse(){
    if(x.symbol==='XAGUSD')return 'Ag';
    return ({forex:'⇄',index:'▥',energy:'◈'})[x.category]||'◆';
  };
- const tickerItem=(x)=>`<span class="market-ticker-item ${x.change>=0?'ticker-rising':'ticker-falling'}" title="${escapeHTML(x.label)}${x.proxy?' — عقد آجل مرجعي':''}"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${tickerIcon(x)}</span><span class="market-ticker-symbol en" dir="ltr">${escapeHTML(x.symbol)}</span><strong class="en ticker-change ${x.change>=0?'up':'down'}" dir="ltr">${x.change>=0?'+':''}${x.change.toFixed(2)}%</strong></span>`;
+ const tickerItem=(x)=>marketTickerCard(x,tickerIcon(x));
  const marketItems=[...gainers,...losers];
  const ticker=marketReady&&marketItems.length?`<div class="pulse-ticker" dir="ltr" aria-label="أعلى ثلاثة أصول صعوداً وأعلى ثلاثة أصول هبوطاً من قائمة الأسواق المختارة" tabindex="0"><div class="pulse-ticker-track"><div class="pulse-ticker-group">${marketItems.map(tickerItem).join('')}</div><div class="pulse-ticker-group" aria-hidden="true">${marketItems.map(tickerItem).join('')}</div></div></div><div class="pulse-key"><span class="up">● صعود</span><span class="down">● هبوط</span><span>من 15 أصلًا محددًا • التغير عن الإغلاق المرجعي السابق</span></div>`:`<p class="pulse-unavailable">${S.moversStatus==='loading'?'جارٍ تحميل أسعار الأصول المختارة…':S.moversStatus==='stale'?'عرض آخر لقطة متاحة مع تنبيه بقدمها':'لا تتوفر حاليًا بيانات كافية لحساب ترتيب الرابحين والخاسرين'}</p>`;
  const marketAlternative=!marketReady?`<div class="tv-pulse-fallback" id="market-tv-fallback"><p class="pulse-fallback-note">أسعار مختارة من الأسواق • قد تتأخر البيانات، ولا يعكس الشريط ترتيب الرابحين والخاسرين.</p><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>`:'';
@@ -226,7 +241,7 @@ function ticker(){
  const categoryIcon=(x)=>x.symbol==='BTCUSD'?'₿':x.symbol==='ETHUSD'?'Ξ':x.symbol==='XAUUSD'?'Au':x.symbol==='XAGUSD'?'Ag':({forex:'⇄',index:'▥',energy:'◈'})[x.category]||'◆';
  const label= S.moversStatus==='stale'?'بيانات سابقة': 'تحديث دوري';
  if(freshOrStale&&quotes.length){
-  const items=[...quotes].sort((a,b)=>b.change-a.change).map(x=>`<span class="market-ticker-item ${x.change>=0?'ticker-rising':'ticker-falling'}" title="${escapeHTML(x.label)}${x.proxy?' — عقد آجل مرجعي':''}" ><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${categoryIcon(x)}</span><span class="market-ticker-symbol en" dir="ltr">${escapeHTML(x.symbol)}</span><strong class="en ticker-change ${x.change>=0?'up':'down'}" dir="ltr">${x.change>=0?'+':''}${x.change.toFixed(2)}%</strong></span>`).join('');
+  const items=[...quotes].sort((a,b)=>b.change-a.change).map(x=>marketTickerCard(x,categoryIcon(x))).join('');
   host.innerHTML=`<div class="bottom-ticker-shell"><div class="bottom-ticker-label" aria-label="أسعار الأسواق"><span class="bottom-ticker-dot"></span><span class="en">MARKET WATCH</span></div><div class="bottom-ticker-window" tabindex="0" aria-label="شريط تغير الأصول المختارة، بيانات دورية وليست بثًا لحظيًا"><div class="pulse-ticker-track"><div class="pulse-ticker-group">${items}</div><div class="pulse-ticker-group" aria-hidden="true">${items}</div></div></div><span class="bottom-ticker-status" title="التغير مقابل الإغلاق المرجعي السابق، وليس سعرًا لحظيًا">${label}</span></div>`;
   return;
  }

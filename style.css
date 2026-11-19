@@ -370,3 +370,26 @@ footer{padding-bottom:105px}
 :root[data-theme=dark] .notification-public .public-notify-card{background:linear-gradient(120deg,var(--surface) 60%,rgba(26,66,51,.35))}
 :root[data-theme=dark] .public-push-btn{background:#27664e;color:#fff}
 @media(max-width:600px){.notification-public .public-notify-card{padding:20px 16px;gap:12px;border-radius:17px}.public-notify-icon{flex-basis:42px;width:42px;height:42px;border-radius:13px;font-size:25px}.public-notify-intro{font-size:13px}.public-push-btn{width:100%}.public-notify-privacy{font-size:11px}.public-notify-actions{gap:9px}.public-notify-main h2{font-size:21px}}
+
+/* ICT بالعربي v3.7 — broadcast-style quotes for both market strips */
+.pulse-ticker .market-ticker-item,.bottom-ticker-window .market-ticker-item{gap:8px}
+.pulse-ticker .ticker-last,.bottom-ticker-window .ticker-last{
+  display:inline-flex;align-items:center;white-space:nowrap;
+  font:800 13px/1.2 Inter,Arial,sans-serif;
+  font-variant-numeric:tabular-nums;color:#f5f7f5;letter-spacing:.012em;
+}
+.pulse-ticker .ticker-change,.bottom-ticker-window .ticker-change{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.pulse-ticker .ticker-change strong,.bottom-ticker-window .ticker-change strong{font:inherit}
+.pulse-ticker .ticker-arrow,.bottom-ticker-window .ticker-arrow{font-size:10px;line-height:1;display:inline-block}
+.pulse-ticker .ticker-change.flat,.bottom-ticker-window .ticker-change.flat{color:#c9d3ce;background:rgba(255,255,255,.08)}
+.pulse-ticker .ticker-last{padding:0 2px}
+.bottom-ticker-window .ticker-last{font-size:12px}
+@media(max-width:600px){
+  .pulse-ticker .market-ticker-item,.bottom-ticker-window .market-ticker-item{gap:6px}
+  .pulse-ticker .ticker-last,.bottom-ticker-window .ticker-last{font-size:12px}
+  .pulse-ticker .ticker-change,.bottom-ticker-window .ticker-change{gap:4px}
+  .pulse-ticker .ticker-arrow,.bottom-ticker-window .ticker-arrow{font-size:9px}
+}
