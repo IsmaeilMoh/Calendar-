@@ -1,20 +1,5 @@
 [
   {
-    "id": "a93ea1de-64d0-4bf4-b581-6c3b2c197623",
-    "pair": "XAUUSD",
-    "dir": "sell",
-    "entry": "4230",
-    "tp": "4150",
-    "sl": "4260",
-    "status": "open",
-    "note": "",
-    "date": "2026-11-19T07:38:45.322Z",
-    "published_at": "2026-11-19T07:38:45.322Z",
-    "updated_at": "2026-11-19T07:38:45.322Z",
-    "sample": false,
-    "notify": false
-  },
-  {
     "pair": "EUR/USD",
     "dir": "buy",
     "entry": "0.0000",
