@@ -4,13 +4,25 @@
   const appId=String(window.ICT_PUSH_APP_ID||'').trim();
   const base=new URL('./',document.baseURI).pathname;
   let sdkReady=false, sdkError='', oneSignal=null, initPromise=null;
+  let lastMessage='', lastFailed=false, confirmed=false;
   const validId=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(appId);
   const status=(message,failed=false)=>{
+    lastMessage=message;lastFailed=failed;
     document.querySelectorAll('#ict-push-status').forEach(el=>{
-      el.textContent=message;el.style.color=failed?'var(--red, #c94d56)':'var(--muted, #78817b)';
-      el.setAttribute('role','status');
+      el.textContent=message;el.hidden=!message;el.classList.toggle('is-error',failed);
+    });
+    document.querySelectorAll('#ict-push-subscribe').forEach(el=>{
+      if(confirmed){el.textContent='✓ الإشعارات مفعّلة';el.classList.add('is-subscribed');}
     });
   };
+  const friendlyError=(err)=>{
+    const msg=String(err?.message||err||'');
+    if(Notification.permission==='denied')return 'الإشعارات محظورة في المتصفح. يمكنك السماح بها من إعدادات الموقع.';
+    if(!('Notification' in window)||!('serviceWorker' in navigator))return 'هذا المتصفح لا يدعم الإشعارات على جهازك.';
+    if(/permission|إذن|السماح|رفض/i.test(msg))return 'لم يتم السماح بالإشعارات. يمكنك تغيير الإذن من إعدادات المتصفح.';
+    return 'تعذر تفعيل الإشعارات الآن. حاول مرة أخرى لاحقًا.';
+  };
+  document.addEventListener('ict-view-rendered',()=>status(lastMessage,lastFailed));
   const usefulError=err=>{
     const message=String(err?.message||err||'خطأ غير معروف');
     if(/service.worker|serviceworker|scope|registration/i.test(message))return 'تعذر تسجيل Service Worker الخاص بـOneSignal. راجع مسار الملف وإعداد Scope. ('+message+')';
@@ -44,12 +56,15 @@
           oneSignal=OneSignal;sdkReady=true;
           window.ICTOneSignal=OneSignal;
           resolve(OneSignal);
+          if(OneSignal.User.PushSubscription.optedIn&&OneSignal.User.PushSubscription.id){
+            confirmed=true;status('الإشعارات مفعّلة بالفعل على هذا الجهاز.');
+          }
           document.dispatchEvent(new Event('ict-push-ready'));
         }catch(err){sdkError=usefulError(err);reject(new Error(sdkError));}
       });
       document.head.appendChild(sdk);
     });
-    initPromise.catch(err=>{console.warn('ICT OneSignal:',err);status(sdkError||usefulError(err),true)});
+    initPromise.catch(err=>{console.warn('ICT OneSignal:',err);});
   }
   async function subscribe(){
     if(sdkError)throw new Error(sdkError);
@@ -74,11 +89,11 @@
     const button=e.target.closest('#ict-push-subscribe');
     if(!button)return;
     button.disabled=true;
-    status('جارٍ الاتصال بـOneSignal والتحقق من الاشتراك…');
+    status('جارٍ تفعيل الإشعارات…');
     try{
       await subscribe();
-      status('تم الاشتراك بنجاح في إشعارات الخلفية. تحقق من ظهور جهازك داخل OneSignal → Audience → Subscriptions.');
-    }catch(err){status(err?.message||'تعذر الاشتراك. تحقق من إعداد OneSignal.',true);}
+      confirmed=true;status('تم تفعيل الإشعارات بنجاح. ستصلك التحديثات التي اخترتها.');
+    }catch(err){console.warn('ICT Push subscription:',err);status(friendlyError(err),true);}
     finally{button.disabled=false;}
   });
   document.addEventListener('change',async e=>{

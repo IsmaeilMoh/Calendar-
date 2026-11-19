@@ -339,3 +339,34 @@ footer{padding-bottom:105px}
 
 /* ICT 3.3 — push subscription card */
 .push-callout{margin:17px 0 9px;padding:17px;background:var(--accent-soft);border:1px solid var(--line);border-radius:14px}.push-callout strong{font-size:16px}.push-callout p{font-size:13px;line-height:1.8;color:var(--muted);margin:7px 0}.push-callout button{font-size:14px;background:var(--surface);color:var(--ink)}
+
+
+/* ICT Arabic 3.5: audience-first opt-in invitation */
+.notification-public{margin:26px 0 30px;direction:rtl}
+.notification-public .public-notify-card{display:flex;gap:22px;align-items:flex-start;padding:26px 29px;border:1px solid var(--line);border-radius:21px;background:linear-gradient(120deg,var(--surface) 65%,var(--accent-soft));box-shadow:var(--shadow)}
+.public-notify-icon{position:relative;flex:0 0 58px;width:58px;height:58px;border-radius:19px;display:grid;place-items:center;font-size:32px;font-weight:800;background:#17352c;color:#fff;line-height:1}
+.public-notify-icon span{position:absolute;top:11px;left:11px;font-size:10px;color:#7ee3b5}
+.public-notify-main{flex:1;min-width:0}
+.public-notify-eyebrow{display:inline-block;font:800 11px Inter,Arial,sans-serif;color:var(--green);letter-spacing:.12em;margin-bottom:3px}
+.public-notify-main h2{font-size:clamp(21px,2.3vw,27px);line-height:1.5;margin:0 0 6px;font-weight:800}
+.public-notify-intro{font-size:14px;line-height:1.9;color:var(--muted);max-width:650px;margin:0 0 16px}
+.public-notify-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.public-push-btn{border-radius:12px;min-height:45px;padding:10px 22px;background:#17352c;color:#fff;font-weight:800;box-shadow:0 7px 20px rgba(17,49,37,.13)}
+.public-push-btn:hover{filter:brightness(1.16)}
+.public-push-btn:disabled{opacity:.65;cursor:wait}
+.public-push-btn.is-subscribed{background:#137657;color:white}
+.public-notify-privacy{font-size:12px;color:var(--muted)}
+.public-notify-status{padding:8px 12px;border-radius:10px;background:var(--accent-soft);color:var(--green);font-size:13px;line-height:1.8;margin:12px 0 4px;font-weight:700}
+.public-notify-status.is-error{background:rgba(201,77,86,.08);color:var(--red)}
+.public-notify-status[hidden]{display:none!important}
+.public-notify-options{margin-top:17px;border-top:1px solid var(--line);padding-top:11px;font-size:13px;color:var(--muted)}
+.public-notify-options summary{cursor:pointer;display:list-item;font-weight:700;max-width:max-content;color:var(--accent)}
+.public-notify-preferences{display:flex;flex-wrap:wrap;gap:10px 22px;margin:16px 0 12px;color:var(--ink)}
+.public-notify-preferences label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;line-height:1.6}
+.public-notify-preferences input{accent-color:var(--green);width:17px;height:17px}
+.public-notify-local{display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;padding-top:12px;border-top:1px dashed var(--line)}
+.public-notify-local select{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px}
+.public-notify-local .chip{font-size:12px;padding:6px 11px}
+:root[data-theme=dark] .notification-public .public-notify-card{background:linear-gradient(120deg,var(--surface) 60%,rgba(26,66,51,.35))}
+:root[data-theme=dark] .public-push-btn{background:#27664e;color:#fff}
+@media(max-width:600px){.notification-public .public-notify-card{padding:20px 16px;gap:12px;border-radius:17px}.public-notify-icon{flex-basis:42px;width:42px;height:42px;border-radius:13px;font-size:25px}.public-notify-intro{font-size:13px}.public-push-btn{width:100%}.public-notify-privacy{font-size:11px}.public-notify-actions{gap:9px}.public-notify-main h2{font-size:21px}}
