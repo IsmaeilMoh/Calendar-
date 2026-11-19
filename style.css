@@ -719,3 +719,75 @@ footer{padding-bottom:105px}
   #market-pulse .pulse-mover-row{min-height:34px}
 }
 @media(prefers-reduced-motion:reduce){#market-pulse .pulse-mover-row{transition:none}}
+
+
+/* ICT 4.3 — Economic brief and ICT session side by side with vertical content. */
+#market-pulse{container-type:inline-size}
+#market-pulse .pulse-brief-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:stretch;gap:8px;
+  padding:8px 12px 11px;
+}
+#market-pulse .pulse-brief-grid > .pulse-block{
+  min-width:0;display:flex;flex-direction:column;
+  padding:12px 11px 10px;
+  border:1px solid var(--line);border-radius:13px;
+  background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface) 92%,var(--accent) 8%));
+  box-shadow:0 2px 10px rgba(0,0,0,.035);
+}
+#market-pulse .pulse-brief-grid .pulse-heading{
+  display:flex;flex-wrap:wrap;align-items:center;gap:5px 7px;
+  margin-bottom:9px;
+}
+#market-pulse .pulse-brief-grid .pulse-heading b{
+  font-size:14px;line-height:1.55;letter-spacing:0;
+}
+#market-pulse .pulse-brief-grid .pulse-heading .pulse-quiet-badge{
+  font-size:9px;line-height:1.3;padding:3px 6px;
+}
+#market-pulse .pulse-brief-grid .pulse-news-head{
+  display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+  min-width:0;line-height:1.5;
+}
+#market-pulse .pulse-brief-grid .pulse-news-head strong{
+  flex:initial;min-width:0;font-size:15px;line-height:1.55;
+  overflow-wrap:anywhere;
+}
+#market-pulse .pulse-brief-grid .pulse-currency{font-size:11px;padding:4px 7px}
+#market-pulse .pulse-brief-grid .pulse-impact-label{font-size:10px;line-height:1.5}
+#market-pulse .pulse-brief-grid .pulse-countdown{
+  display:flex;flex-direction:column;align-items:flex-start;gap:1px;
+  margin:8px 0 4px;font-size:27px;line-height:1.25;
+  font-variant-numeric:tabular-nums;
+}
+#market-pulse .pulse-brief-grid .pulse-countdown-caption{font-size:12px;line-height:1.5}
+#market-pulse .pulse-brief-grid .pulse-zone-name{
+  display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;
+  margin-bottom:7px;
+}
+#market-pulse .pulse-brief-grid .pulse-zone-name strong{
+  font-size:16px;line-height:1.5;overflow-wrap:anywhere;
+}
+#market-pulse .pulse-brief-grid .pulse-state{font-size:11px;line-height:1.6}
+#market-pulse .pulse-brief-grid .pulse-zone-next,
+#market-pulse .pulse-brief-grid .pulse-zone-timer{
+  font-size:13px;line-height:1.65;overflow-wrap:anywhere;
+}
+#market-pulse .pulse-brief-grid .pulse-zone-next strong{font-size:14px}
+#market-pulse .pulse-brief-grid .pulse-unavailable{font-size:13px;line-height:1.75}
+#market-pulse .pulse-brief-grid .pulse-extra{margin-top:auto;padding-top:9px;min-width:0}
+#market-pulse .pulse-brief-grid .pulse-extra summary{font-size:12px;line-height:1.6}
+#market-pulse .pulse-brief-grid .pulse-extra[open]{margin-top:10px}
+#market-pulse .pulse-brief-grid .pulse-extra .pulse-zone-desc,
+#market-pulse .pulse-brief-grid .pulse-extra .pulse-zone-details,
+#market-pulse .pulse-brief-grid .pulse-extra .pulse-news-info{font-size:12px;line-height:1.75}
+@container (max-width:420px){
+  #market-pulse .pulse-brief-grid{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  #market-pulse .pulse-brief-grid{padding:8px 12px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  #market-pulse .pulse-brief-grid > .pulse-block{scroll-behavior:auto}
+}

@@ -1,5 +1,5 @@
 // ICT بالعربي v2.0 — offline shell with network-first editable data
-const CACHE='ict-shell-v42-compact-first-screen-20261119';
+const CACHE='ict-shell-v43-compact-first-screen-20261119';
 const CORE=['./','./index.html','./agenda.html','./style.css','./app.js','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png','./news.json','./recs.json','./analyses.json','./push-config.js','./push.js','./links.json','./agenda.json','./market-icons/eur.svg', './market-icons/usd.svg', './market-icons/gbp.svg', './market-icons/jpy.svg', './market-icons/chf.svg', './market-icons/cad.svg', './market-icons/aud.svg', './market-icons/nzd.svg', './market-icons/gold.svg', './market-icons/silver.svg', './market-icons/nas100.svg', './market-icons/sp500.svg', './market-icons/dj30.svg', './market-icons/oil.svg', './market-icons/btc.svg', './market-icons/eth.svg', './market-icons/market.svg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
