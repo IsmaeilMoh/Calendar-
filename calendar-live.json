@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T13:37:36.884222Z",
+  "updatedAt": "2026-11-19T16:20:37.840523Z",
   "source": "Forex Factory weekly public JSON feed (unofficial)",
   "events": [
     {
@@ -1013,16 +1013,6 @@
       "actual": "—"
     },
     {
-      "id": "2026-11-19T10:15:00-05:00-USD-Mortgage Delinquencies",
-      "title": "Mortgage Delinquencies",
-      "date": "2026-11-19T15:15:00Z",
-      "country": "USD",
-      "impact": "Low",
-      "forecast": "—",
-      "previous": "4.37%",
-      "actual": "—"
-    },
-    {
       "id": "2026-11-19T10:30:00-05:00-USD-Natural Gas Storage",
       "title": "Natural Gas Storage",
       "date": "2026-11-19T15:30:00Z",
@@ -1030,6 +1020,16 @@
       "impact": "Low",
       "forecast": "25B",
       "previous": "61B",
+      "actual": "—"
+    },
+    {
+      "id": "2026-11-19T11:30:00-05:00-USD-Mortgage Delinquencies",
+      "title": "Mortgage Delinquencies",
+      "date": "2026-11-19T16:30:00Z",
+      "country": "USD",
+      "impact": "Low",
+      "forecast": "—",
+      "previous": "4.37%",
       "actual": "—"
     },
     {
