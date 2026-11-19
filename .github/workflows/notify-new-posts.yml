@@ -8,19 +8,25 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: notify-new-posts-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout content and history
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Send push for newly published posts
+      - name: Find new posts and notify opted-in subscribers
         env:
           ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
           ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
           BEFORE_REV: ${{ github.event.before }}
-        run: python scripts/notify_push.py posts
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: python scripts/notify_new_posts.py
