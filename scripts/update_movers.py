@@ -65,7 +65,7 @@ def get_one(inst):
     change=(price/prev-1)*100
     if abs(change)>99:raise ValueError('Unreasonable change: '+yahoo)
     return {'symbol':symbol,'label':label,'category':group,'change':round(change,4),
-            'quotedAt':quote_at.isoformat().replace('+00:00','Z'),'proxy':proxy,
+            'price':round(price,8),'quotedAt':quote_at.isoformat().replace('+00:00','Z'),'proxy':proxy,
             'url':'https://www.tradingview.com/symbols/'+tv+'/'}
 
 if __name__=='__main__':
