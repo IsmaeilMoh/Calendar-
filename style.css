@@ -393,3 +393,92 @@ footer{padding-bottom:105px}
   .pulse-ticker .ticker-change,.bottom-ticker-window .ticker-change{gap:4px}
   .pulse-ticker .ticker-arrow,.bottom-ticker-window .ticker-arrow{font-size:9px}
 }
+
+
+/* ICT بالعربي v3.8 — contrasting light-glass footer, white quotes on dark capsules.
+   The Market Pulse top strip keeps its existing dark design. */
+.tape{
+  background:linear-gradient(125deg,rgba(255,255,255,.93),rgba(238,245,242,.86) 52%,rgba(255,255,255,.92));
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 15px 38px rgba(6,30,21,.15),inset 0 1px 1px rgba(255,255,255,.96);
+  backdrop-filter:blur(20px) saturate(155%);
+  -webkit-backdrop-filter:blur(20px) saturate(155%);
+}
+.tape .bottom-ticker-label{
+  background:rgba(231,243,235,.48);
+  border-right:1px solid rgba(35,70,55,.12);
+  color:#173b2d;
+}
+.tape .bottom-ticker-dot{
+  background:#0d956d;
+  box-shadow:0 0 0 4px rgba(13,149,109,.12);
+}
+.tape .bottom-ticker-status{
+  color:#466155;
+  border-left:1px solid rgba(35,70,55,.14);
+}
+.tape .bottom-ticker-window::before{
+  background:linear-gradient(90deg,rgba(244,250,246,.96),rgba(244,250,246,0));
+}
+.tape .bottom-ticker-window::after{
+  background:linear-gradient(270deg,rgba(244,250,246,.96),rgba(244,250,246,0));
+}
+/* Neutral pale glass tape, with distinct dark quote tiles to ensure white price readability. */
+.tape .bottom-ticker-window .market-ticker-item{
+  background:linear-gradient(135deg,#25372f,#192b25);
+  border:1px solid rgba(8,35,23,.23);
+  box-shadow:0 3px 9px rgba(18,38,29,.13),inset 0 1px 0 rgba(255,255,255,.10);
+}
+.tape .bottom-ticker-window .market-ticker-item:hover{
+  background:linear-gradient(135deg,#30483d,#20382e);
+  border-color:rgba(28,99,73,.4);
+}
+.tape .bottom-ticker-window .market-ticker-symbol{
+  color:#f4f8f6;
+}
+.tape .bottom-ticker-window .ticker-last,
+.tape .bottom-ticker-window .market-ticker-item .ticker-last{
+  color:#fff !important;
+  -webkit-text-fill-color:#fff;
+  font-weight:800;
+  text-shadow:0 1px 2px rgba(0,0,0,.2);
+}
+.tape .bottom-ticker-window .ticker-change.up{
+  color:#7cf0bd;
+  background:rgba(12,131,90,.25);
+  border-color:rgba(124,240,189,.22);
+}
+.tape .bottom-ticker-window .ticker-change.down{
+  color:#ff9aa6;
+  background:rgba(196,59,76,.23);
+  border-color:rgba(255,154,166,.22);
+}
+.tape .bottom-ticker-window .ticker-change.flat{
+  color:#e1e9e4;
+  background:rgba(255,255,255,.10);
+}
+/* Preserve contrast if the data feed switches to the existing TradingView fallback. */
+.tape .bottom-ticker-fallback .bottom-ticker-tv{
+  background:#1d2e27;
+  border-radius:0 12px 12px 0;
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .tape{background:#f2f8f3;border-color:#dce9e0}
+}
+@media (prefers-contrast:more){
+  .tape{background:#fff;border-color:#6e8e7a}
+  .tape .bottom-ticker-window .market-ticker-item{background:#15251d}
+}
+
+/* ICT v3.9: embedded TradingView prices, dark leader ticker and pale-glass footer. */
+.tv-live-pulse{margin-top:10px;background:#172221;border:1px solid rgba(255,255,255,.13);border-radius:13px;overflow:hidden;min-height:77px;direction:ltr}
+.tv-live-pulse .tradingview-widget-container,.tv-live-pulse .tradingview-widget-container__widget{min-height:76px;width:100%;overflow:hidden}
+.tv-live-pulse iframe{max-width:100%;display:block}
+.pulse-market .pulse-foot{font-size:11px;line-height:1.65}
+.tape .tv-market-bottom{background:transparent}
+.tape .tv-market-bottom .bottom-ticker-tv{height:100%;background:#1a2825;overflow:hidden;min-width:0}
+.tape .tv-market-bottom .tradingview-widget-container,
+.tape .tv-market-bottom .tradingview-widget-container__widget{height:100%;width:100%;min-height:100%}
+.tape .tv-market-bottom .bottom-ticker-label{color:#174936;background:rgba(238,248,241,.92)}
+.tape .tv-market-bottom .bottom-ticker-status{color:#285342;background:rgba(238,248,241,.92)}
+@media(max-width:600px){.tv-live-pulse{min-height:72px}.tv-live-pulse .tradingview-widget-container{min-height:70px}}
