@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T10:17:51.360887Z",
+  "updatedAt": "2026-11-19T10:46:06.172960Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
   "changeBasis": "Yahoo chart previous close; not uniform 24h",
   "items": [
@@ -7,8 +7,9 @@
       "symbol": "EURUSD",
       "label": "يورو / دولار",
       "category": "forex",
-      "change": -0.4344,
-      "quotedAt": "2026-11-19T10:17:43Z",
+      "change": -0.3529,
+      "price": 1.1011,
+      "quotedAt": "2026-11-19T10:45:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/EURUSD/"
     },
@@ -16,8 +17,9 @@
       "symbol": "GBPUSD",
       "label": "جنيه / دولار",
       "category": "forex",
-      "change": -0.582,
-      "quotedAt": "2026-11-19T10:17:43Z",
+      "change": -0.461,
+      "price": 1.317,
+      "quotedAt": "2026-11-19T10:45:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/GBPUSD/"
     },
@@ -25,8 +27,9 @@
       "symbol": "USDJPY",
       "label": "دولار / ين",
       "category": "forex",
-      "change": -0.0031,
-      "quotedAt": "2026-11-19T10:17:47Z",
+      "change": 0.0075,
+      "price": 159.887,
+      "quotedAt": "2026-11-19T10:46:05Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDJPY/"
     },
@@ -34,8 +37,9 @@
       "symbol": "USDCHF",
       "label": "دولار / فرنك",
       "category": "forex",
-      "change": 0.7776,
-      "quotedAt": "2026-11-19T10:17:49Z",
+      "change": 0.7298,
+      "price": 0.842,
+      "quotedAt": "2026-11-19T10:46:05Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCHF/"
     },
@@ -43,8 +47,9 @@
       "symbol": "USDCAD",
       "label": "دولار / كندي",
       "category": "forex",
-      "change": 0.3155,
-      "quotedAt": "2026-11-19T10:17:50Z",
+      "change": 0.2735,
+      "price": 1.43,
+      "quotedAt": "2026-11-19T10:46:05Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCAD/"
     },
@@ -53,7 +58,8 @@
       "label": "أسترالي / دولار",
       "category": "forex",
       "change": -1.3515,
-      "quotedAt": "2026-11-19T10:17:43Z",
+      "price": 0.6715,
+      "quotedAt": "2026-11-19T10:45:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/AUDUSD/"
     },
@@ -61,8 +67,9 @@
       "symbol": "NZDUSD",
       "label": "نيوزيلندي / دولار",
       "category": "forex",
-      "change": -0.2525,
-      "quotedAt": "2026-11-19T10:17:43Z",
+      "change": -0.2885,
+      "price": 0.5529,
+      "quotedAt": "2026-11-19T10:45:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/NZDUSD/"
     },
@@ -70,8 +77,9 @@
       "symbol": "XAUUSD",
       "label": "الذهب — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -3.1923,
-      "quotedAt": "2026-11-19T10:07:46Z",
+      "change": -3.1456,
+      "price": 3731.8,
+      "quotedAt": "2026-11-19T10:36:02Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAUUSD/"
     },
@@ -79,8 +87,9 @@
       "symbol": "XAGUSD",
       "label": "الفضة — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -3.2917,
-      "quotedAt": "2026-11-19T10:07:51Z",
+      "change": -3.6123,
+      "price": 45.095,
+      "quotedAt": "2026-11-19T10:36:02Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAGUSD/"
     },
@@ -89,6 +98,7 @@
       "label": "NASDAQ 100",
       "category": "index",
       "change": -4.4336,
+      "price": 27116.258,
       "quotedAt": "2026-11-18T22:15:59Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/NDX/"
@@ -98,6 +108,7 @@
       "label": "S&P 500",
       "category": "index",
       "change": -3.8815,
+      "price": 7323.63,
       "quotedAt": "2026-11-18T21:57:25Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/SPX/"
@@ -107,6 +118,7 @@
       "label": "Dow Jones",
       "category": "index",
       "change": -4.3598,
+      "price": 50198.17,
       "quotedAt": "2026-11-18T21:57:27Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/DJI/"
@@ -115,8 +127,9 @@
       "symbol": "WTI",
       "label": "خام WTI — عقد آجل",
       "category": "energy",
-      "change": -3.3714,
-      "quotedAt": "2026-11-19T10:07:50Z",
+      "change": -3.4064,
+      "price": 82.8,
+      "quotedAt": "2026-11-19T10:36:00Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/USOIL/"
     },
@@ -124,8 +137,9 @@
       "symbol": "BTCUSD",
       "label": "Bitcoin",
       "category": "crypto",
-      "change": -2.2815,
-      "quotedAt": "2026-11-19T10:17:47Z",
+      "change": -2.2916,
+      "price": 63808.52,
+      "quotedAt": "2026-11-19T10:45:58Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/BTCUSD/"
     },
@@ -133,8 +147,9 @@
       "symbol": "ETHUSD",
       "label": "Ethereum",
       "category": "crypto",
-      "change": -1.5699,
-      "quotedAt": "2026-11-19T10:17:43Z",
+      "change": -1.6832,
+      "price": 1804.6,
+      "quotedAt": "2026-11-19T10:46:00Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/ETHUSD/"
     }
