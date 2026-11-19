@@ -1,13 +1,1 @@
-[
-  {
-    "pair": "XAU/USD",
-    "dir": "sell",
-    "entry": "0000.00",
-    "sl": "0000.00",
-    "tp": "0000.00",
-    "status": "open",
-    "date": "2026-11-17",
-    "note": "نموذج توضيحي. الحالة تكون open أو tp أو sl أو cl.",
-    "sample": true
-  }
-]
+[]
