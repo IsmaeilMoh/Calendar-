@@ -791,3 +791,35 @@ footer{padding-bottom:105px}
 @media (prefers-reduced-motion:reduce){
   #market-pulse .pulse-brief-grid > .pulse-block{scroll-behavior:auto}
 }
+
+
+/* ICT 4.3.1 — FIX: keep both compact vertical-content cards side by side on laptop.
+   The 420px container query in v4.3 incorrectly stacked cards on narrow desktop columns.
+   This desktop rule intentionally follows that query. */
+@media screen and (min-width: 761px){
+  #market-pulse .pulse-brief-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:9px;
+    padding:9px 11px 12px;
+    align-items:stretch;
+  }
+  #market-pulse .pulse-brief-grid > .pulse-block{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    padding:13px 11px 12px;
+  }
+  #market-pulse .pulse-brief-grid .pulse-heading{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin:0 0 7px}
+  #market-pulse .pulse-brief-grid .pulse-heading b{font-size:clamp(13px,1.05vw,16px);line-height:1.5}
+  #market-pulse .pulse-brief-grid .pulse-news-head{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  #market-pulse .pulse-brief-grid .pulse-news-head strong{font-size:clamp(14px,1.14vw,17px);line-height:1.5}
+  #market-pulse .pulse-brief-grid .pulse-countdown{font-size:clamp(25px,2.2vw,32px);line-height:1.35}
+  #market-pulse .pulse-brief-grid .pulse-zone-name strong{font-size:clamp(15px,1.2vw,18px)}
+  #market-pulse .pulse-brief-grid .pulse-zone-timer,
+  #market-pulse .pulse-brief-grid .pulse-zone-next{font-size:14px}
+}
+@media screen and (max-width:760px){
+  #market-pulse .pulse-brief-grid{grid-template-columns:minmax(0,1fr)}
+}
