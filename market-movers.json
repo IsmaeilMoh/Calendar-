@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T02:55:37.988638Z",
+  "updatedAt": "2026-11-19T03:59:44.918170Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
   "changeBasis": "Yahoo chart previous close; not uniform 24h",
   "items": [
@@ -7,8 +7,8 @@
       "symbol": "EURUSD",
       "label": "يورو / دولار",
       "category": "forex",
-      "change": -0.7511,
-      "quotedAt": "2026-11-19T02:54:44Z",
+      "change": -0.8054,
+      "quotedAt": "2026-11-19T03:58:46Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/EURUSD/"
     },
@@ -16,8 +16,8 @@
       "symbol": "GBPUSD",
       "label": "جنيه / دولار",
       "category": "forex",
-      "change": -0.7256,
-      "quotedAt": "2026-11-19T02:54:44Z",
+      "change": -0.786,
+      "quotedAt": "2026-11-19T03:58:46Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/GBPUSD/"
     },
@@ -25,8 +25,8 @@
       "symbol": "USDJPY",
       "label": "دولار / ين",
       "category": "forex",
-      "change": -0.2346,
-      "quotedAt": "2026-11-19T02:55:36Z",
+      "change": -0.1801,
+      "quotedAt": "2026-11-19T03:59:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDJPY/"
     },
@@ -34,8 +34,8 @@
       "symbol": "USDCHF",
       "label": "دولار / فرنك",
       "category": "forex",
-      "change": 0.9451,
-      "quotedAt": "2026-11-19T02:55:36Z",
+      "change": 0.981,
+      "quotedAt": "2026-11-19T03:59:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCHF/"
     },
@@ -43,8 +43,8 @@
       "symbol": "USDCAD",
       "label": "دولار / كندي",
       "category": "forex",
-      "change": 0.6311,
-      "quotedAt": "2026-11-19T02:55:36Z",
+      "change": 0.6451,
+      "quotedAt": "2026-11-19T03:59:43Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCAD/"
     },
@@ -52,8 +52,8 @@
       "symbol": "AUDUSD",
       "label": "أسترالي / دولار",
       "category": "forex",
-      "change": -1.9979,
-      "quotedAt": "2026-11-19T02:53:44Z",
+      "change": -1.8951,
+      "quotedAt": "2026-11-19T03:57:46Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/AUDUSD/"
     },
@@ -62,7 +62,7 @@
       "label": "نيوزيلندي / دولار",
       "category": "forex",
       "change": -0.9197,
-      "quotedAt": "2026-11-19T02:53:44Z",
+      "quotedAt": "2026-11-19T03:57:46Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/NZDUSD/"
     },
@@ -70,8 +70,8 @@
       "symbol": "XAUUSD",
       "label": "الذهب — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -3.888,
-      "quotedAt": "2026-11-19T02:45:35Z",
+      "change": -4.328,
+      "quotedAt": "2026-11-19T03:49:42Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAUUSD/"
     },
@@ -79,8 +79,8 @@
       "symbol": "XAGUSD",
       "label": "الفضة — عقود COMEX الآجلة",
       "category": "metals",
-      "change": -8.1907,
-      "quotedAt": "2026-11-19T02:45:20Z",
+      "change": -8.3743,
+      "quotedAt": "2026-11-19T03:49:45Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/XAGUSD/"
     },
@@ -115,8 +115,8 @@
       "symbol": "WTI",
       "label": "خام WTI — عقد آجل",
       "category": "energy",
-      "change": -7.1816,
-      "quotedAt": "2026-11-19T02:45:33Z",
+      "change": -7.4413,
+      "quotedAt": "2026-11-19T03:49:36Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/USOIL/"
     },
@@ -124,8 +124,8 @@
       "symbol": "BTCUSD",
       "label": "Bitcoin",
       "category": "crypto",
-      "change": -4.1409,
-      "quotedAt": "2026-11-19T02:55:34Z",
+      "change": -3.3245,
+      "quotedAt": "2026-11-19T03:59:43Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/BTCUSD/"
     },
@@ -133,8 +133,8 @@
       "symbol": "ETHUSD",
       "label": "Ethereum",
       "category": "crypto",
-      "change": -3.5029,
-      "quotedAt": "2026-11-19T02:55:31Z",
+      "change": -2.3631,
+      "quotedAt": "2026-11-19T03:59:38Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/ETHUSD/"
     }
