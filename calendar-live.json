@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T16:20:37.840523Z",
+  "updatedAt": "2026-11-19T19:20:12.877462Z",
   "source": "Forex Factory weekly public JSON feed (unofficial)",
   "events": [
     {
@@ -1023,9 +1023,9 @@
       "actual": "—"
     },
     {
-      "id": "2026-11-19T11:30:00-05:00-USD-Mortgage Delinquencies",
+      "id": "2026-11-19T10:46:00-05:00-USD-Mortgage Delinquencies",
       "title": "Mortgage Delinquencies",
-      "date": "2026-11-19T16:30:00Z",
+      "date": "2026-11-19T15:46:00Z",
       "country": "USD",
       "impact": "Low",
       "forecast": "—",
