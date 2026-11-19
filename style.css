@@ -553,3 +553,96 @@ footer{padding-bottom:105px}
   .pulse-mover-price{font-size:11px}
   .tape .bottom-ticker-label{padding:0 9px}
 }
+
+/* ICT 4.1 — refined professional movers panel; responsive, accessible, clickable. */
+.pulse-market{container-type:inline-size}
+.pulse-movers-board{
+  display:block;position:relative;margin-top:10px;padding:12px;
+  background:linear-gradient(140deg,rgba(28,36,41,.98),rgba(15,22,27,.98));
+  border:1px solid rgba(194,221,211,.16);border-radius:20px;
+  box-shadow:0 18px 36px rgba(3,12,17,.17),inset 0 1px rgba(255,255,255,.07);
+  backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);
+}
+.pulse-movers-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-height:20px;padding:0 3px 11px;color:#bac8c4;font-size:10px;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.08)}
+.pulse-movers-meta b{color:#e1eeea;font-weight:700}
+.movers-time-icon{font-size:17px;color:#90b6a6;line-height:1}
+.movers-fresh-state{margin-inline-start:auto;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;color:#c7eadc;background:rgba(54,171,127,.13);border:1px solid rgba(93,216,166,.17);font-weight:700}
+.movers-fresh-state.is-stale{background:rgba(201,153,69,.15);color:#ffe3a3;border-color:rgba(214,169,77,.24)}
+.pulse-movers-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,274px),1fr));gap:10px;margin-top:11px}
+.pulse-movers-col{
+  min-width:0;padding:12px;border-radius:14px;
+  background:linear-gradient(160deg,rgba(255,255,255,.058),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.095);box-shadow:inset 0 1px rgba(255,255,255,.045)
+}
+.pulse-movers-col.is-up{border-color:rgba(48,175,127,.21)}
+.pulse-movers-col.is-down{border-color:rgba(217,86,102,.2)}
+.pulse-movers-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:7px}
+.movers-heading-name{display:flex;align-items:center;gap:7px;min-width:0}
+.movers-heading-name b{font-size:12px;color:#f4fbf7;white-space:nowrap}
+.movers-trend-symbol{display:inline-flex;align-items:center;justify-content:center;flex:none;width:24px;height:24px;border-radius:8px;font:800 16px/1 Arial,sans-serif}
+.is-up .movers-trend-symbol{color:#78edbc;background:rgba(47,169,116,.15)}
+.is-down .movers-trend-symbol{color:#ff9da6;background:rgba(214,69,87,.16)}
+.movers-head-en{color:#9caeaa;letter-spacing:.04em;font:700 9px/1 Inter,Arial,sans-serif;white-space:nowrap}
+.pulse-mover-row{
+  position:relative;display:flex;align-items:center;justify-content:space-between;min-width:0;gap:6px;
+  margin:0;padding:9px 5px;border-top:1px solid rgba(255,255,255,.065);
+  border-radius:9px;color:inherit;text-decoration:none;outline-offset:2px;transition:background .15s ease, transform .15s ease
+}
+.pulse-mover-row:first-of-type{border-top:0}
+.pulse-mover-row:hover,.pulse-mover-row:focus-visible{background:rgba(255,255,255,.085);transform:translateY(-1px)}
+.pulse-mover-main{display:flex;align-items:center;gap:9px;min-width:0;flex:1 1 auto}
+.pulse-mover-copy{display:flex;flex-direction:column;min-width:0;gap:3px}
+.pulse-mover-copy b{color:#f7faf9;font:800 12px/1.2 Inter,Arial,sans-serif;white-space:nowrap}
+.pulse-mover-source{max-width:105px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#aabbb5;font-size:10px;line-height:1.2}
+.pulse-mover-quote{display:flex;align-items:flex-end;flex-direction:column;gap:4px;flex:none;min-width:0}
+.pulse-mover-price{color:#f6fbf8;font:800 12px/1.2 Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pulse-mover-change{display:inline-flex;gap:5px;align-items:center;padding:4px 7px;border-radius:7px;font:800 10px/1.1 Inter,Arial,sans-serif;white-space:nowrap}
+.pulse-mover-change.up{color:#80edbd;background:rgba(27,148,101,.14);border:1px solid rgba(93,219,172,.16)}
+.pulse-mover-change.down{color:#ff9eaa;background:rgba(209,66,89,.14);border:1px solid rgba(247,133,151,.16)}
+.pulse-mover-change.flat{color:#d7e4de;background:rgba(255,255,255,.09)}
+.mover-currency-pair{display:block;flex:none;position:relative;width:42px;height:31px}
+.mover-currency-pair img{position:absolute;top:3px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.35);border:1.5px solid #29383b}
+.mover-currency-pair img:first-child{left:0;z-index:1}
+.mover-currency-pair img:last-child{left:16px}
+.mover-icon{width:35px;height:35px;display:inline-flex;flex:none;align-items:center;justify-content:center}
+.mover-icon img{display:block;width:35px;height:35px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.28)}
+.pulse-mover-row.mover-highlight:before{
+ content:"";position:absolute;inset:1px;border-radius:9px;pointer-events:none;
+ box-shadow:inset 0 0 0 1px rgba(110,235,178,.18);animation:ictMildPulse 3.5s ease-in-out infinite
+}
+.pulse-mover-row.down.mover-highlight:before{box-shadow:inset 0 0 0 1px rgba(255,145,159,.18)}
+@keyframes ictMildPulse{0%,100%{opacity:.18}50%{opacity:.75}}
+.pulse-market .pulse-key{margin-top:10px}
+.pulse-market .pulse-key span{padding:0;border:0;background:none;color:var(--muted);font-size:10px;line-height:1.65}
+.pulse-market .pulse-foot{font-size:10px;line-height:1.6;margin-top:6px;color:var(--muted)}
+@container (max-width:375px){
+ .pulse-movers-layout{grid-template-columns:1fr}
+ .pulse-movers-board{padding:9px}
+ .pulse-movers-col{padding:10px}
+ .pulse-mover-source{max-width:95px}
+}
+/* The modern TradingView ticker is a Web Component; never clip its internal text. */
+.tape{
+  height:58px;display:flex;align-items:center;overflow:visible;
+  background:linear-gradient(135deg,rgba(32,39,43,.96),rgba(18,24,28,.97));
+  border:1px solid rgba(179,212,201,.15);border-radius:16px;
+  box-shadow:0 15px 36px rgba(5,13,17,.27),inset 0 1px rgba(255,255,255,.06)
+}
+.tape .glass-bottom-tv{display:flex;align-items:center;gap:7px;padding:0 8px;height:100%;width:100%;overflow:visible;min-width:0}
+.tape .bottom-ticker-label{height:34px;align-self:center;display:inline-flex;align-items:center;padding:0 11px;border-radius:10px;background:rgba(255,255,255,.075);color:#f2f8f5;border:1px solid rgba(255,255,255,.10);font:800 10px/1 Inter,Arial,sans-serif}
+.tape .bottom-ticker-dot{width:6px;height:6px;background:#56dfaa;box-shadow:0 0 0 4px rgba(56,211,148,.12)}
+.tape .bottom-ticker-tv{flex:1;min-width:0;min-height:0;height:auto;display:flex;align-items:center;overflow:visible;padding:0;border:0;background:none;border-radius:0}
+.tape .tv-compact-tape{display:block;flex:1;min-width:0;max-width:100%;width:100%;color-scheme:dark}
+.tape .bottom-ticker-status{height:28px;padding:0 8px;font-size:9px;background:rgba(44,164,116,.09);color:#a2d9bf;border-color:rgba(44,164,116,.18)}
+.tape .tv-ticker-fallback{font-size:12px;color:#dcece4;padding:6px 10px}
+@media(max-width:760px){
+ .tape{height:55px;bottom:calc(8px + env(safe-area-inset-bottom))}
+ .tape .glass-bottom-tv{padding:0 6px;gap:6px}
+ .tape .bottom-ticker-label{height:31px;padding:0 7px;font-size:9px;letter-spacing:.015em}
+ .tape .bottom-ticker-status{display:none}
+ .mobile-bottom{bottom:calc(70px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){
+ .pulse-mover-row.mover-highlight:before{animation:none;opacity:.3}
+ .pulse-mover-row{transition:none}
+}

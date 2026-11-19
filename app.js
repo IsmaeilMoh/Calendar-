@@ -133,24 +133,37 @@ function marketTickerCard(x,icon){
  const extra=x.proxy?' — سعر عقد آجل مرجعي':'';
  return `<span class="market-ticker-item ticker-${trend==='up'?'rising':trend==='down'?'falling':'flat'}" title="${escapeHTML(x.label)}${extra} — ${quote==='—'?'السعر غير متاح':`السعر ${quote}`} • التغير ${pct}"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${escapeHTML(icon)}</span><span class="market-ticker-symbol en" dir="ltr">${escapeHTML(x.symbol)}</span><span class="ticker-last en" dir="ltr" aria-label="السعر">${quote}</span><span class="ticker-change ${trend} en" dir="ltr"><span class="ticker-arrow" aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></span>`;
 }
-function marketIcon(x){
- const bySymbol={EURUSD:'€$',GBPUSD:'£$',USDJPY:'¥',USDCHF:'Fr',USDCAD:'C$',AUDUSD:'A$',NZDUSD:'NZ',XAUUSD:'Au',XAGUSD:'Ag',NAS100:'NQ',SP500:'SP',DJ30:'DJ',WTI:'Oil',BTCUSD:'₿',ETHUSD:'Ξ'};
- return bySymbol[x.symbol]||String(x.symbol||'').slice(0,2).toUpperCase();
+// Local vector insignia/flags: no external logo hotlinks and no proprietary TradingView artwork.
+const marketFlagPairs={EURUSD:['eur','usd'],GBPUSD:['gbp','usd'],USDJPY:['usd','jpy'],USDCHF:['usd','chf'],USDCAD:['usd','cad'],AUDUSD:['aud','usd'],NZDUSD:['nzd','usd']};
+const marketIconFiles={XAUUSD:'gold',XAGUSD:'silver',NAS100:'nas100',SP500:'sp500',DJ30:'dj30',WTI:'oil',BTCUSD:'btc',ETHUSD:'eth'};
+function marketLogo(x){
+ const flags=marketFlagPairs[x.symbol];
+ if(flags)return `<span class="mover-currency-pair" aria-hidden="true"><img src="market-icons/${flags[0]}.svg" alt=""><img src="market-icons/${flags[1]}.svg" alt=""></span>`;
+ const icon=marketIconFiles[x.symbol]||'market';
+ return `<span class="mover-icon" aria-hidden="true"><img src="market-icons/${icon}.svg" alt=""></span>`;
 }
-function moverRow(x){
+function tvChartUrl(symbol){return `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tvMarketSymbols[symbol]||'FX:EURUSD')}`;}
+function moverRow(x,highlight){
  const trend=x.change>0?'up':x.change<0?'down':'flat';
- const arrow=trend==='up'?'▲':trend==='down'?'▼':'◆';
+ const arrow=trend==='up'?'↗':trend==='down'?'↘':'→';
  const pct=(x.change>0?'+':'')+x.change.toFixed(2)+'%';
- return `<div class="pulse-mover-row ${trend}"><div class="pulse-mover-main"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${escapeHTML(marketIcon(x))}</span><div class="pulse-mover-copy"><b class="en" dir="ltr">${escapeHTML(x.symbol)}</b><span class="en pulse-mover-price" dir="ltr">${marketQuotePrice(x)}</span></div></div><span class="pulse-mover-change ${trend} en" dir="ltr"><span aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></div>`;
+ const date=new Date(x.quotedAt||S.moversUpdated);
+ const stamp=Number.isFinite(date.getTime())?dateFormat(date.toISOString()):'';
+ const delayed=S.moversStatus!=='fresh';
+ const quote=delayed?'—':marketQuotePrice(x);
+ const priceTitle=quote==='—'?'سعر غير متاح من لقطة حديثة':`السعر الدوري المرجعي ${quote}`;
+ return `<a class="pulse-mover-row ${trend}${highlight?' mover-highlight':''}" href="${escapeHTML(tvChartUrl(x.symbol))}" target="_blank" rel="noopener noreferrer" aria-label="فتح شارت ${escapeHTML(x.label)} على TradingView" title="${escapeHTML(priceTitle)}${stamp?' • '+escapeHTML(stamp):''}"><span class="pulse-mover-main">${marketLogo(x)}<span class="pulse-mover-copy"><b class="en" dir="ltr">${escapeHTML(x.symbol)}</b><small class="pulse-mover-source">${escapeHTML(x.label)}</small></span></span><span class="pulse-mover-quote"><b class="en pulse-mover-price" dir="ltr">${quote}</b><span class="pulse-mover-change ${trend} en" dir="ltr"><span aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></span></a>`;
 }
 function moversBoard(){
  if(!Array.isArray(S.movers)||!S.movers.length)return '';
- const good=S.movers.filter(x=>Number.isFinite(x.change)).slice();
+ const good=S.movers.filter(x=>tvMarketSymbols[x.symbol]&&Number.isFinite(x.change)).slice();
  if(!good.length)return '';
  const rising=good.filter(x=>x.change>0).sort((a,b)=>b.change-a.change).slice(0,3);
  const falling=good.filter(x=>x.change<0).sort((a,b)=>a.change-b.change).slice(0,3);
  if(!rising.length&&!falling.length)return '';
- return `<div class="pulse-movers-board"><div class="pulse-movers-col is-up"><div class="pulse-movers-head"><b>الأكثر صعودًا</b><span class="pulse-quiet-badge">TOP GAINERS</span></div>${rising.length?rising.map(moverRow).join(''):`<p class="pulse-movers-empty">لا توجد أصول صاعدة حاليًا</p>`}</div><div class="pulse-movers-col is-down"><div class="pulse-movers-head"><b>الأكثر هبوطًا</b><span class="pulse-quiet-badge">TOP LOSERS</span></div>${falling.length?falling.map(moverRow).join(''):`<p class="pulse-movers-empty">لا توجد أصول هابطة حاليًا</p>`}</div></div>`;
+ const when=S.moversUpdated instanceof Date&&Number.isFinite(S.moversUpdated.getTime())?dateFormat(S.moversUpdated.toISOString()):'غير متاح';
+ const freshness=S.moversStatus==='fresh'?'لقطة دورية':'بيانات قديمة';
+ return `<div class="pulse-movers-board"><div class="pulse-movers-meta"><span class="movers-time-icon" aria-hidden="true">◷</span><span>آخر تحديث: <b>${escapeHTML(when)}</b></span><span class="movers-fresh-state ${S.moversStatus==='fresh'?'':'is-stale'}">${freshness}</span></div><div class="pulse-movers-layout"><div class="pulse-movers-col is-up"><div class="pulse-movers-head"><div class="movers-heading-name"><span class="movers-trend-symbol">↗</span><b>الأكثر صعودًا</b></div><span class="movers-head-en">TOP GAINERS</span></div>${rising.length?rising.map((x,i)=>moverRow(x,i===0&&Math.abs(x.change)>=2)).join(''):`<p class="pulse-movers-empty">لا توجد أصول صاعدة</p>`}</div><div class="pulse-movers-col is-down"><div class="pulse-movers-head"><div class="movers-heading-name"><span class="movers-trend-symbol">↘</span><b>الأكثر هبوطًا</b></div><span class="movers-head-en">TOP LOSERS</span></div>${falling.length?falling.map((x,i)=>moverRow(x,i===0&&Math.abs(x.change)>=2)).join(''):`<p class="pulse-movers-empty">لا توجد أصول هابطة</p>`}</div></div></div>`;
 }
 // TradingView displays the quotes; snapshot metadata is used ONLY to choose
 // the leaders/laggards, never as displayed market prices.
@@ -185,7 +198,7 @@ function pulseLeaders(){
 function marketPulse(){
  const now=Date.now(),leaders=pulseLeaders();
  const board=moversBoard()||`<div class="tv-live-pulse fallback" data-tv-key="EURUSD|XAUUSD|NAS100|BTCUSD|GBPUSD|ETHUSD"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>`;
- const ticker=`${board}<div class="pulse-key"><span>${moversBoard()?'الأسعار والتغيرات تُعرض داخل قائمة زجاجية أنيقة من تصميم ICT بالعربي.':'أسعار TradingView وفق الرمز والمصدر المختارين'}</span></div>`;
+ const ticker=`${board}<div class="pulse-key"><span>${moversBoard()?'ترتيب وتغيرات دورية حسب آخر لقطة؛ قد تختلف الأسعار عن عروض TradingView المباشرة. اضغط الأصل لفتح شارت TradingView.':'أسعار TradingView وفق الرمز والمصدر المختارين.'}</span></div>`;
  const marketAlternative='';
  const next=['fresh','stale'].includes(S.liveStatus)?S.liveEvents.find(e=>e.impact===3&&e.dt.getTime()>now&&e.dt.getTime()<now+8*86400000):null;
  const economic=next?`<div class="pulse-news-head"><span class="pulse-currency">${escapeHTML(next.currency)}</span><strong>${escapeHTML(next.title)}</strong><span class="pulse-impact-label">تأثير مرتفع${S.liveStatus==='stale'?' • تحقق من الموعد':''}</span></div><div class="pulse-countdown">${pulseClock(next.dt.getTime(),'pulse-news-clock')}<span class="pulse-countdown-caption">حتى صدور الخبر</span></div><div class="pulse-news-info"><span>الموعد: <b>${escapeHTML(showDate(next.dt,'date'))} — ${escapeHTML(showDate(next.dt))}</b> (${escapeHTML(zoneLabel())})</span><span>السابق: <b class="en" dir="ltr">${escapeHTML(next.previous)}</b></span><span>المتوقع: <b class="en" dir="ltr">${escapeHTML(next.forecast)}</b></span></div>`:`<p class="pulse-unavailable">${S.liveStatus==='fresh'?'لا يوجد خبر مرتفع التأثير قادم في الأجندة المتاحة':'لم تصل بيانات أحداث حديثة بعد؛ راجع أجندة TradingView ضمن صفحة الأجندة'}</p>`;
@@ -290,9 +303,25 @@ function ticker(){
  if(host.querySelector('#tv-bottom-ticker'))return;
  host.innerHTML=`<div class="bottom-ticker-shell tv-market-bottom glass-bottom-tv">
    <div class="bottom-ticker-label" aria-label="أسعار الأسواق"><span class="bottom-ticker-dot"></span><span class="en">MARKET WATCH</span></div>
-   <div class="bottom-ticker-tv" id="tv-bottom-ticker"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>
-   <span class="bottom-ticker-status" title="قد تتأخر بيانات بعض الأسواق حسب المصدر والترخيص">LIVE</span></div>`;
- mountTvTicker(host.querySelector('#tv-bottom-ticker .tradingview-widget-container'),tvMarketOrder,'dark',true);
+   <div class="bottom-ticker-tv" id="tv-bottom-ticker" role="region" aria-label="شريط أسعار TradingView المختصر">
+     <tv-ticker-tape class="tv-compact-tape" symbols="${tvMarketOrder.map(s=>tvMarketSymbols[s]).join(',')}" item-size="compact" theme="dark" transparent="true" dir="ltr"></tv-ticker-tape>
+   </div>
+   <span class="bottom-ticker-status" title="قد تتأخر بيانات بعض الأسواق حسب المصدر والترخيص">TV</span></div>`;
+ // TradingView's current Web Component can render its own compact layout.
+ // Do not crop or force a shorter iframe than the widget's internal content.
+ if(!document.querySelector('script[data-ict-tv-tape]')){
+   const script=document.createElement('script');
+   script.type='module';
+   script.src='https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js';
+   script.dataset.ictTvTape='yes';
+   script.onerror=()=>{
+     const slot=document.getElementById('tv-bottom-ticker');
+     if(slot&&slot.querySelector('tv-ticker-tape')){
+       slot.innerHTML='<div class="tv-ticker-fallback" role="status">تعذر تحميل أسعار الأسواق الآن — تحقق من الاتصال.</div>';
+     }
+   };
+   document.head.appendChild(script);
+ }
 }
 document.addEventListener('click',e=>{const tab=e.target.closest('[data-content-tab]');if(tab){state.contentTab=tab.dataset.contentTab;render();return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){showHeroSlide(Number(heroDot.dataset.heroIndex));return}const heroNav=e.target.closest('[data-hero-move]');if(heroNav){showHeroSlide(heroSlideIndex+Number(heroNav.dataset.heroMove));return}const heroPause=e.target.closest('[data-hero-pause]');if(heroPause){heroSlidePaused=!heroSlidePaused;heroPause.textContent=heroSlidePaused?'▶':'Ⅱ';heroPause.setAttribute('aria-label',heroSlidePaused?'تشغيل التبديل التلقائي':'إيقاف التبديل التلقائي');initHeroSlider();return}const chip=e.target.closest('[data-filter]');if(chip){state[chip.dataset.filter]=chip.dataset.value;render()}if(e.target.closest('#refresh-clock'))render();if(e.target.closest('#refresh-news'))fetchLiveNews();if(e.target.closest('#refresh-calendar')){S.liveStatus='loading';render();fetchLiveCalendar().then(()=>{render();futureAlerts()})}const heat=e.target.closest('[data-heat]');if(heat){document.querySelectorAll('[data-heat]').forEach(b=>b.classList.toggle('active',b===heat));const table=document.querySelector('#forex-heatmap tv-forex-table');if(table){if(heat.dataset.heat==='heatmap')table.setAttribute('heatmap','');else table.removeAttribute('heatmap')}}if(e.target.closest('#enable-alerts')){toggleAlerts()}if(e.target.closest('#reset-filters')){state.country='ALL';state.impact='all';state.day='all';state.search='';render()}});
 document.addEventListener('change',e=>{const ids={'country-filter':'country','impact-filter':'impact','day-filter':'day'};if(ids[e.target.id]){state[ids[e.target.id]]=e.target.value;render()}if(e.target.id==='tz-selector'){localStorage.setItem('ict-timezone',e.target.value);render();updateHeaderDate()}if(e.target.id==='analysis-asset'){state.analysisAsset=e.target.value;render()}if(e.target.id==='alert-news-opt')localStorage.setItem('ict-alert-news',e.target.checked?'yes':'no');if(e.target.id==='alert-sessions-opt')localStorage.setItem('ict-alert-sessions',e.target.checked?'yes':'no');if(e.target.id==='alert-posts-opt')localStorage.setItem('ict-alert-posts',e.target.checked?'yes':'no');if(e.target.id==='alert-lead'){localStorage.setItem('ict-alert-before',e.target.value);futureAlerts()}});
