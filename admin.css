@@ -8,3 +8,6 @@
 .admin-list-tools label{font-size:12px;margin:0}
 #posts-status{font-size:13px;white-space:pre-wrap;margin:8px 0;overflow-wrap:anywhere}
 @media(max-width:580px){.admin-list-tools{grid-template-columns:1fr 1fr}.admin-post{align-items:start}}
+
+/* ICT 4.5 — private studio insights */
+.studio-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:16px 0}.studio-metric{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px;display:flex;flex-direction:column;gap:6px}.studio-metric small{color:var(--muted)}.studio-metric strong{font-size:25px}#studio-health-result{line-height:1.9;overflow-wrap:anywhere;font-size:13px;margin-top:9px}
