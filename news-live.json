@@ -1,7 +1,18 @@
 {
-  "updated_at": "2026-11-19T17:09:38Z",
+  "updated_at": "2026-11-19T18:29:54Z",
   "mode": "rss-attributed",
   "items": [
+    {
+      "id": "51a57565c0739eb2c956",
+      "title": "الأردن يوقع اتفاقات استثمارية بقيمة 100 مليون دولار في المياه ومذكرة لتصنيع السيارات",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-19T17:17:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1152988/%D8%A7%D9%84%D8%A3%D8%B1%D8%AF%D9%86-%D9%8A%D9%88%D9%82%D8%B9-%D8%A7%D8%AA%D9%81%D8%A7%D9%82%D8%A7%D8%AA-%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1%D9%8A%D8%A9-%D8%A8%D9%82%D9%8A%D9%85%D8%A9-100-%D9%85%D9%84%D9%8A%D9%88%D9%86-%D8%AF%D9%88%D9%84%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D9%88%D9%85%D8%B0%D9%83%D8%B1%D8%A9-%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9-%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/19/1712290.webp"
+    },
     {
       "id": "a2db7bfaf9ada4f1e7f6",
       "title": "«فيليب موريس» لـCNN الاقتصادية: البيئة التنظيمية في الإمارات ساعدت على طرح «آيكوس» و«زين»",
@@ -375,17 +386,6 @@
       "priority": 2,
       "language": "ar",
       "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/15/1711823.jfif"
-    },
-    {
-      "id": "dc700c5dbb6a014390d1",
-      "title": "استثمارات بـ1.3 مليار جنيه تعيد تشغيل خط أسمنت متوقف في مصر منذ 7 سنوات",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-15T15:38:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152653/%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A813-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D8%AA%D8%B9%D9%8A%D8%AF-%D8%AA%D8%B4%D8%BA%D9%8A%D9%84-%D8%AE%D8%B7-%D8%A3%D8%B3%D9%85%D9%86%D8%AA-%D9%85%D8%AA%D9%88%D9%82%D9%81-%D9%81%D9%8A-%D9%85%D8%B5%D8%B1-%D9%85%D9%86%D8%B0-7-%D8%B3%D9%86%D9%88%D8%A7%D8%AA",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/15/1711801.webp"
     }
   ],
   "source_count": 1,
