@@ -133,6 +133,25 @@ function marketTickerCard(x,icon){
  const extra=x.proxy?' — سعر عقد آجل مرجعي':'';
  return `<span class="market-ticker-item ticker-${trend==='up'?'rising':trend==='down'?'falling':'flat'}" title="${escapeHTML(x.label)}${extra} — ${quote==='—'?'السعر غير متاح':`السعر ${quote}`} • التغير ${pct}"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${escapeHTML(icon)}</span><span class="market-ticker-symbol en" dir="ltr">${escapeHTML(x.symbol)}</span><span class="ticker-last en" dir="ltr" aria-label="السعر">${quote}</span><span class="ticker-change ${trend} en" dir="ltr"><span class="ticker-arrow" aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></span>`;
 }
+function marketIcon(x){
+ const bySymbol={EURUSD:'€$',GBPUSD:'£$',USDJPY:'¥',USDCHF:'Fr',USDCAD:'C$',AUDUSD:'A$',NZDUSD:'NZ',XAUUSD:'Au',XAGUSD:'Ag',NAS100:'NQ',SP500:'SP',DJ30:'DJ',WTI:'Oil',BTCUSD:'₿',ETHUSD:'Ξ'};
+ return bySymbol[x.symbol]||String(x.symbol||'').slice(0,2).toUpperCase();
+}
+function moverRow(x){
+ const trend=x.change>0?'up':x.change<0?'down':'flat';
+ const arrow=trend==='up'?'▲':trend==='down'?'▼':'◆';
+ const pct=(x.change>0?'+':'')+x.change.toFixed(2)+'%';
+ return `<div class="pulse-mover-row ${trend}"><div class="pulse-mover-main"><span class="ticker-asset-icon ticker-cat-${escapeHTML(x.category||'misc')}" aria-hidden="true">${escapeHTML(marketIcon(x))}</span><div class="pulse-mover-copy"><b class="en" dir="ltr">${escapeHTML(x.symbol)}</b><span class="en pulse-mover-price" dir="ltr">${marketQuotePrice(x)}</span></div></div><span class="pulse-mover-change ${trend} en" dir="ltr"><span aria-hidden="true">${arrow}</span><strong>${pct}</strong></span></div>`;
+}
+function moversBoard(){
+ if(!Array.isArray(S.movers)||!S.movers.length)return '';
+ const good=S.movers.filter(x=>Number.isFinite(x.change)).slice();
+ if(!good.length)return '';
+ const rising=good.filter(x=>x.change>0).sort((a,b)=>b.change-a.change).slice(0,3);
+ const falling=good.filter(x=>x.change<0).sort((a,b)=>a.change-b.change).slice(0,3);
+ if(!rising.length&&!falling.length)return '';
+ return `<div class="pulse-movers-board"><div class="pulse-movers-col is-up"><div class="pulse-movers-head"><b>الأكثر صعودًا</b><span class="pulse-quiet-badge">TOP GAINERS</span></div>${rising.length?rising.map(moverRow).join(''):`<p class="pulse-movers-empty">لا توجد أصول صاعدة حاليًا</p>`}</div><div class="pulse-movers-col is-down"><div class="pulse-movers-head"><b>الأكثر هبوطًا</b><span class="pulse-quiet-badge">TOP LOSERS</span></div>${falling.length?falling.map(moverRow).join(''):`<p class="pulse-movers-empty">لا توجد أصول هابطة حاليًا</p>`}</div></div>`;
+}
 // TradingView displays the quotes; snapshot metadata is used ONLY to choose
 // the leaders/laggards, never as displayed market prices.
 const tvMarketSymbols={
@@ -144,14 +163,14 @@ const tvMarketSymbols={
 };
 const tvMarketOrder=['EURUSD','GBPUSD','USDJPY','USDCHF','USDCAD','AUDUSD','NZDUSD','XAUUSD','XAGUSD','NAS100','SP500','DJ30','WTI','BTCUSD','ETHUSD'];
 function tvTickerSymbols(list){return list.filter(s=>tvMarketSymbols[s]).map(s=>({proName:tvMarketSymbols[s],title:s}));}
-function mountTvTicker(root,symbols,theme){
+function mountTvTicker(root,symbols,theme,transparent=true){
  if(!root||root.dataset.tvMounted==='yes')return;
  root.dataset.tvMounted='yes';
  const script=document.createElement('script');
  script.async=true;
  script.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
  script.text=JSON.stringify({symbols:tvTickerSymbols(symbols),showSymbolLogo:false,
-   isTransparent:false,displayMode:'adaptive',colorTheme:theme,locale:'en'});
+   isTransparent:transparent,displayMode:'adaptive',colorTheme:theme,locale:'en'});
  root.appendChild(script);
 }
 function pulseLeaders(){
@@ -165,17 +184,14 @@ function pulseLeaders(){
 }
 function marketPulse(){
  const now=Date.now(),leaders=pulseLeaders();
- const selected=leaders||['EURUSD','XAUUSD','NAS100','BTCUSD','GBPUSD','ETHUSD'];
- const selectionKey=selected.join('|');
- const ticker=`<div class="tv-live-pulse" data-tv-key="${selectionKey}">
-    <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div>
-   </div><div class="pulse-key"><span>أسعار TradingView وفق الرمز والمصدر المختارين</span></div>`;
+ const board=moversBoard()||`<div class="tv-live-pulse fallback" data-tv-key="EURUSD|XAUUSD|NAS100|BTCUSD|GBPUSD|ETHUSD"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>`;
+ const ticker=`${board}<div class="pulse-key"><span>${moversBoard()?'الأسعار والتغيرات تُعرض داخل قائمة زجاجية أنيقة من تصميم ICT بالعربي.':'أسعار TradingView وفق الرمز والمصدر المختارين'}</span></div>`;
  const marketAlternative='';
  const next=['fresh','stale'].includes(S.liveStatus)?S.liveEvents.find(e=>e.impact===3&&e.dt.getTime()>now&&e.dt.getTime()<now+8*86400000):null;
  const economic=next?`<div class="pulse-news-head"><span class="pulse-currency">${escapeHTML(next.currency)}</span><strong>${escapeHTML(next.title)}</strong><span class="pulse-impact-label">تأثير مرتفع${S.liveStatus==='stale'?' • تحقق من الموعد':''}</span></div><div class="pulse-countdown">${pulseClock(next.dt.getTime(),'pulse-news-clock')}<span class="pulse-countdown-caption">حتى صدور الخبر</span></div><div class="pulse-news-info"><span>الموعد: <b>${escapeHTML(showDate(next.dt,'date'))} — ${escapeHTML(showDate(next.dt))}</b> (${escapeHTML(zoneLabel())})</span><span>السابق: <b class="en" dir="ltr">${escapeHTML(next.previous)}</b></span><span>المتوقع: <b class="en" dir="ltr">${escapeHTML(next.forecast)}</b></span></div>`:`<p class="pulse-unavailable">${S.liveStatus==='fresh'?'لا يوجد خبر مرتفع التأثير قادم في الأجندة المتاحة':'لم تصل بيانات أحداث حديثة بعد؛ راجع أجندة TradingView ضمن صفحة الأجندة'}</p>`;
  const zone=currentIctWindow();
  const session=zone.active?`<div class="pulse-zone-name"><span class="pulse-indicator is-active"></span><strong dir="ltr">${escapeHTML(zone.title)}</strong><span class="pulse-state">نشطة الآن</span></div><p class="pulse-zone-desc">${escapeHTML(zone.description)}</p><div class="pulse-zone-details"><span>بتوقيت نيويورك <strong class="en" dir="ltr">${zone.start} – ${zone.end}</strong></span><span>بتوقيتك <strong class="en" dir="ltr">${escapeHTML(showDate(zone.startDate))} – ${escapeHTML(showDate(zone.endDate))}</strong></span><span>متبقٍ على النهاية ${pulseClock(zone.endDate.getTime(),'pulse-zone-clock')}</span></div>${zone.others?`<small>هناك ${zone.others} نافذة أخرى متزامنة</small>`:''}`:`<div class="pulse-zone-name"><span class="pulse-indicator"></span><strong>${escapeHTML(zone.title)}</strong></div>${zone.next?`<p class="pulse-zone-desc">النافذة القادمة: <strong dir="ltr">${escapeHTML(zone.next.name)}</strong> — ${escapeHTML(zone.next.description)}</p><div class="pulse-zone-details"><span>نيويورك <strong class="en" dir="ltr">${zone.next.start} – ${zone.next.end}</strong></span><span>بداية النافذة بتوقيتك <strong class="en" dir="ltr">${escapeHTML(showDate(zone.next.startDate))}</strong></span><span>تبدأ بعد ${pulseClock(zone.next.startDate.getTime(),'pulse-zone-clock')}</span></div>`:''}`;
- return `<div class="panel-top"><span>MARKET PULSE</span><span class="outline-pill">ملخص التداول</span></div><div class="pulse-block pulse-market"><div class="pulse-heading"><b>الأكثر صعودًا وهبوطًا</b><span class="pulse-quiet-badge">${leaders?'ترتيب دوري':'أسواق مختارة'}</span></div>${ticker}${marketAlternative}<div class="pulse-foot">${leaders?'ترتيب الصعود والهبوط حسب لقطة سابقة بتاريخ '+escapeHTML(showDate(S.moversUpdated,'date'))+' '+escapeHTML(showDate(S.moversUpdated))+'؛ أما الأسعار والنسب داخل الشريط فمن TradingView.':'قائمة أسعار مختارة. يتوفر ترتيب الصعود والهبوط عندما تصل لقطة سوق حديثة.'} بعض المصادر والبورصات قد تعرض بيانات متأخرة؛ تحقق من الرمز ومصدره في TradingView.</div></div><div class="pulse-block pulse-event"><div class="pulse-heading"><b>الخبر الاقتصادي القوي القادم</b><span class="pulse-quiet-badge">HIGH IMPACT</span></div>${economic}</div><div class="pulse-block pulse-session"><div class="pulse-heading"><b>نافذة ICT الحالية</b><span class="pulse-quiet-badge">NEW YORK TIME</span></div>${session}</div>`;
+ return `<div class="panel-top"><span>MARKET PULSE</span><span class="outline-pill">ملخص التداول</span></div><div class="pulse-block pulse-market"><div class="pulse-heading"><b>الأكثر صعودًا وهبوطًا</b><span class="pulse-quiet-badge">${leaders?'ترتيب دوري':'أسواق مختارة'}</span></div>${ticker}${marketAlternative}<div class="pulse-foot">${leaders?'القائمة مرتبة وفق آخر لقطة سوق متاحة بتاريخ '+escapeHTML(showDate(S.moversUpdated,'date'))+' '+escapeHTML(showDate(S.moversUpdated))+'.':'قائمة أسعار مختارة. يتوفر ترتيب الصعود والهبوط عندما تصل لقطة سوق حديثة.'} قارن كل أصل مع نفس الرمز والمصدر في TradingView للحصول على أفضل تطابق.</div></div><div class="pulse-block pulse-event"><div class="pulse-heading"><b>الخبر الاقتصادي القوي القادم</b><span class="pulse-quiet-badge">HIGH IMPACT</span></div>${economic}</div><div class="pulse-block pulse-session"><div class="pulse-heading"><b>نافذة ICT الحالية</b><span class="pulse-quiet-badge">NEW YORK TIME</span></div>${session}</div>`;
 }
 function refreshPulse(){
  const node=document.getElementById('market-pulse');if(!node||state.page!=='home')return;
@@ -272,11 +288,11 @@ function ticker(){
  const host=$('tape');if(!host)return;
  // Do not rebuild and reset the live iframe on every snapshot refresh or theme change.
  if(host.querySelector('#tv-bottom-ticker'))return;
- host.innerHTML=`<div class="bottom-ticker-shell tv-market-bottom">
+ host.innerHTML=`<div class="bottom-ticker-shell tv-market-bottom glass-bottom-tv">
    <div class="bottom-ticker-label" aria-label="أسعار الأسواق"><span class="bottom-ticker-dot"></span><span class="en">MARKET WATCH</span></div>
    <div class="bottom-ticker-tv" id="tv-bottom-ticker"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>
-   <span class="bottom-ticker-status" title="قد تتأخر بيانات بعض الأسواق حسب المصدر والترخيص">TradingView</span></div>`;
- mountTvTicker(host.querySelector('#tv-bottom-ticker .tradingview-widget-container'),tvMarketOrder,'dark');
+   <span class="bottom-ticker-status" title="قد تتأخر بيانات بعض الأسواق حسب المصدر والترخيص">LIVE</span></div>`;
+ mountTvTicker(host.querySelector('#tv-bottom-ticker .tradingview-widget-container'),tvMarketOrder,'dark',true);
 }
 document.addEventListener('click',e=>{const tab=e.target.closest('[data-content-tab]');if(tab){state.contentTab=tab.dataset.contentTab;render();return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){showHeroSlide(Number(heroDot.dataset.heroIndex));return}const heroNav=e.target.closest('[data-hero-move]');if(heroNav){showHeroSlide(heroSlideIndex+Number(heroNav.dataset.heroMove));return}const heroPause=e.target.closest('[data-hero-pause]');if(heroPause){heroSlidePaused=!heroSlidePaused;heroPause.textContent=heroSlidePaused?'▶':'Ⅱ';heroPause.setAttribute('aria-label',heroSlidePaused?'تشغيل التبديل التلقائي':'إيقاف التبديل التلقائي');initHeroSlider();return}const chip=e.target.closest('[data-filter]');if(chip){state[chip.dataset.filter]=chip.dataset.value;render()}if(e.target.closest('#refresh-clock'))render();if(e.target.closest('#refresh-news'))fetchLiveNews();if(e.target.closest('#refresh-calendar')){S.liveStatus='loading';render();fetchLiveCalendar().then(()=>{render();futureAlerts()})}const heat=e.target.closest('[data-heat]');if(heat){document.querySelectorAll('[data-heat]').forEach(b=>b.classList.toggle('active',b===heat));const table=document.querySelector('#forex-heatmap tv-forex-table');if(table){if(heat.dataset.heat==='heatmap')table.setAttribute('heatmap','');else table.removeAttribute('heatmap')}}if(e.target.closest('#enable-alerts')){toggleAlerts()}if(e.target.closest('#reset-filters')){state.country='ALL';state.impact='all';state.day='all';state.search='';render()}});
 document.addEventListener('change',e=>{const ids={'country-filter':'country','impact-filter':'impact','day-filter':'day'};if(ids[e.target.id]){state[ids[e.target.id]]=e.target.value;render()}if(e.target.id==='tz-selector'){localStorage.setItem('ict-timezone',e.target.value);render();updateHeaderDate()}if(e.target.id==='analysis-asset'){state.analysisAsset=e.target.value;render()}if(e.target.id==='alert-news-opt')localStorage.setItem('ict-alert-news',e.target.checked?'yes':'no');if(e.target.id==='alert-sessions-opt')localStorage.setItem('ict-alert-sessions',e.target.checked?'yes':'no');if(e.target.id==='alert-posts-opt')localStorage.setItem('ict-alert-posts',e.target.checked?'yes':'no');if(e.target.id==='alert-lead'){localStorage.setItem('ict-alert-before',e.target.value);futureAlerts()}});

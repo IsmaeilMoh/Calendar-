@@ -482,3 +482,74 @@ footer{padding-bottom:105px}
 .tape .tv-market-bottom .bottom-ticker-label{color:#174936;background:rgba(238,248,241,.92)}
 .tape .tv-market-bottom .bottom-ticker-status{color:#285342;background:rgba(238,248,241,.92)}
 @media(max-width:600px){.tv-live-pulse{min-height:72px}.tv-live-pulse .tradingview-widget-container{min-height:70px}}
+
+/* ICT 4.0 — premium glass market movers and refined dark ticker */
+.pulse-market{overflow:visible}
+.pulse-movers-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.pulse-movers-col{position:relative;padding:16px 16px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(160deg,rgba(28,37,40,.86),rgba(17,24,27,.94));box-shadow:0 14px 34px rgba(5,13,16,.18),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(16px) saturate(125%);-webkit-backdrop-filter:blur(16px) saturate(125%)}
+.pulse-movers-col.is-up{border-color:rgba(58,185,136,.18)}
+.pulse-movers-col.is-down{border-color:rgba(213,89,100,.18)}
+.pulse-movers-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.pulse-movers-head b{font-size:14px;color:#f5f7f6}
+.pulse-movers-col .pulse-quiet-badge{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);color:#d7e1dc}
+.pulse-mover-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07)}
+.pulse-mover-row:first-of-type{border-top:0;padding-top:0}
+.pulse-mover-main{display:flex;align-items:center;gap:10px;min-width:0}
+.pulse-mover-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pulse-mover-copy b{font:800 13px/1.2 Inter,Arial,sans-serif;color:#fff}
+.pulse-mover-price{font:700 12px/1.2 Inter,Arial,sans-serif;color:#c9d3ce;white-space:nowrap}
+.pulse-mover-change{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:7px 10px;border-radius:999px;border:1px solid transparent;font:800 12px/1 Inter,Arial,sans-serif;font-variant-numeric:tabular-nums}
+.pulse-mover-change.up{background:rgba(17,142,97,.18);border-color:rgba(95,224,177,.18);color:#7ce4bd}
+.pulse-mover-change.down{background:rgba(205,73,91,.16);border-color:rgba(255,149,160,.16);color:#ff9aa6}
+.pulse-mover-change.flat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.10);color:#d4ddd8}
+.pulse-movers-empty{margin:0;color:#bcc7c2;font-size:12px;line-height:1.7}
+.tv-live-pulse.fallback{background:linear-gradient(160deg,rgba(28,37,40,.86),rgba(17,24,27,.94));border-radius:18px;border-color:rgba(255,255,255,.10)}
+.pulse-key{margin-top:12px}
+.pulse-key span{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#c5d0cb}
+
+/* Refined global-style bottom tape */
+.tape{
+  background:linear-gradient(135deg,rgba(24,30,33,.94),rgba(18,24,27,.92));
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 16px 38px rgba(4,10,12,.24),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(18px) saturate(130%);
+  -webkit-backdrop-filter:blur(18px) saturate(130%);
+}
+.glass-bottom-tv{display:flex;align-items:center;gap:10px;width:100%;height:100%;padding:0 10px}
+.tape .bottom-ticker-label{
+  align-self:stretch;display:flex;align-items:center;gap:7px;padding:0 12px;
+  border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  color:#eef3f1;flex:none
+}
+.tape .bottom-ticker-dot{background:#31c38d;box-shadow:0 0 0 4px rgba(49,195,141,.18)}
+.tape .bottom-ticker-tv{min-width:0;flex:1;height:40px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);overflow:hidden;padding:0 2px}
+.tape .tv-market-bottom .tradingview-widget-container,
+.tape .tv-market-bottom .tradingview-widget-container__widget{height:40px;min-height:40px;width:100%}
+.tape .tv-market-bottom iframe{height:40px!important;min-height:40px!important}
+.tape .bottom-ticker-status{
+  flex:none;padding:0 12px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:999px;border:1px solid rgba(63,211,155,.18);background:rgba(63,211,155,.09);color:#9deac9;
+  font:800 11px/1 Inter,Arial,sans-serif;letter-spacing:.08em
+}
+.bottom-ticker-window::before,.bottom-ticker-window::after{display:none}
+@media(max-width:900px){
+  .pulse-movers-board{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .tape{height:54px;border-radius:16px}
+  .glass-bottom-tv{padding:0 8px;gap:8px}
+  .tape .bottom-ticker-label{padding:0 10px;font-size:10px}
+  .tape .bottom-ticker-tv{height:38px}
+  .tape .tv-market-bottom .tradingview-widget-container,
+  .tape .tv-market-bottom .tradingview-widget-container__widget,
+  .tape .tv-market-bottom iframe{height:38px!important;min-height:38px!important}
+  .tape .bottom-ticker-status{display:none}
+}
+@media(max-width:520px){
+  .pulse-movers-col{padding:14px}
+  .pulse-mover-row{gap:10px}
+  .pulse-mover-change{padding:6px 8px;font-size:11px}
+  .pulse-mover-copy b{font-size:12px}
+  .pulse-mover-price{font-size:11px}
+  .tape .bottom-ticker-label{padding:0 9px}
+}
