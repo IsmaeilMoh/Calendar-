@@ -1,0 +1,7 @@
+/* ICT بالعربي 6.6 — unified public typography. Primary font from original site's style.css. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+:root{--ict-font-ar:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;--ict-font-latin:Inter,Arial,sans-serif}
+html[lang="ar"] body,html[lang="ar"] body :is(h1,h2,h3,h4,h5,h6,p,span,small,strong,b,a,button,input,select,textarea,label,summary,li,td,th,legend,caption,time,nav,header,footer){font-family:var(--ict-font-ar)!important}
+html[lang="ar"] body :is(.en,[dir="ltr"],.numeric,.asset-price,.asset-change,.asset-kicker,.market-ticker-symbol,.trade-rr){font-family:var(--ict-font-latin)!important}
+/* Keep UI icon fonts, if supplied by third-party libraries, out of the override. */
+html[lang="ar"] body :is([class*="material-icons"],[class*="fa-"],[class*="lucide"]){font-family:inherit}

@@ -138,3 +138,22 @@ html[data-theme="dark"] #app .ops-stats-row span{background:rgba(109,216,166,.06
 .ict-analytics-consent button.outline{background:transparent;color:#e0eee5;border:1px solid #6c9180}
 .ict-analytics-consent button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(max-width:500px){.ict-analytics-consent{inset:auto 10px 72px 10px;width:auto}}
+
+/* 6.6 -- No duplicated homepage content, focused decision desk */
+#app .ops-room.ops-room-v66{margin:16px 0 18px;padding:16px}
+#app .ops-room-v66 .ops-room-head{align-items:center;margin-bottom:13px}
+#app .ops-room-v66 .ops-room-head h2{font-size:clamp(21px,2.3vw,28px)}
+#app .ops-room-v66 .ops-room-head p{font-size:13px;line-height:1.7}
+#app .ops-room-v66 .ops-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#app .ops-room-v66 .ops-card{grid-column:auto;gap:7px;padding:14px;min-height:165px}
+#app .ops-room-v66 .ops-card h3{font-size:16px;line-height:1.55}
+#app .ops-room-v66 .ops-stats-row{gap:5px}
+#app .ops-room-v66 .ops-stats-row span{padding:7px 5px;text-align:center}
+#app .ops-room-v66 .ops-stats-row b{font-size:18px}
+#app .ops-room-v66 .ops-stats-row small{font-size:10px}
+#app .ops-room-v66 .ops-meta-list{font-size:12px}
+#app .ops-room-v66 .ops-v66-headlink{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:var(--surface);color:var(--ink);font-weight:700;font-size:12px}
+#app .ops-room-v66 .ops-v66-arrow{display:block;margin-top:auto;font-size:12px;color:var(--green);font-weight:800}
+@media(max-width:1120px){#app .ops-room-v66 .ops-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#app .ops-room-v66 .ops-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#app .ops-room-v66 .ops-room-head{align-items:stretch}}
+@media(max-width:560px){#app .ops-room-v66 .ops-grid{grid-template-columns:1fr}#app .ops-room-v66 .ops-card{min-height:0}#app .ops-room-v66 .ops-stats-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
