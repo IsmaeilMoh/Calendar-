@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T13:32:08.240803Z",
+  "updatedAt": "2026-11-20T16:14:35.233579Z",
   "source": "Forex Factory weekly public JSON feed (unofficial)",
   "events": [
     {
@@ -1240,6 +1240,16 @@
       "impact": "Medium",
       "forecast": "—",
       "previous": "4.3%",
+      "actual": "—"
+    },
+    {
+      "id": "2026-11-20T12:00:00-05:00-USD-President Trump Speaks",
+      "title": "President Trump Speaks",
+      "date": "2026-11-20T17:00:00Z",
+      "country": "USD",
+      "impact": "Medium",
+      "forecast": "—",
+      "previous": "—",
       "actual": "—"
     },
     {
