@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T10:23:41.571039Z",
+  "updatedAt": "2026-11-20T13:32:08.240803Z",
   "source": "Forex Factory weekly public JSON feed (unofficial)",
   "events": [
     {
@@ -340,6 +340,16 @@
       "impact": "Low",
       "forecast": "25.4K",
       "previous": "30.3K",
+      "actual": "—"
+    },
+    {
+      "id": "2026-11-17T02:00:00-05:00-GBP-HMRC Payrolls Change",
+      "title": "HMRC Payrolls Change",
+      "date": "2026-11-17T07:00:00Z",
+      "country": "GBP",
+      "impact": "Low",
+      "forecast": "9K",
+      "previous": "13K",
       "actual": "—"
     },
     {
