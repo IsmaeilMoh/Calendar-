@@ -1,7 +1,29 @@
 {
-  "updated_at": "2026-11-20T15:58:34Z",
+  "updated_at": "2026-11-20T16:59:53Z",
   "mode": "rss-attributed",
   "items": [
+    {
+      "id": "7fe41eb49649641cd49b",
+      "title": "قطر تتعهد باستثمارات إضافية بـ15 مليار يورو في ألمانيا",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-20T16:08:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1153059/%D9%82%D8%B7%D8%B1-%D8%AA%D8%AA%D8%B9%D9%87%D8%AF-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A5%D8%B6%D8%A7%D9%81%D9%8A%D8%A9-%D8%A815-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D9%8A%D9%88%D8%B1%D9%88-%D9%81%D9%8A-%D8%A3%D9%84%D9%85%D8%A7%D9%86%D9%8A%D8%A7",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/20/1712403.webp"
+    },
+    {
+      "id": "1abc4b043e495b0fcd8d",
+      "title": "تحسن ثقة المستهلكين في أوروبا خلال أوروبا.. هل يستعيد الاقتصاد زخمه؟",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-20T15:56:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1153057/%D8%AA%D8%AD%D8%B3%D9%86-%D8%AB%D9%82%D8%A9-%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%87%D9%84%D9%83%D9%8A%D9%86-%D9%81%D9%8A-%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D8%A7-%D8%AE%D9%84%D8%A7%D9%84-%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D8%A7-%D9%87%D9%84-%D9%8A%D8%B3%D8%AA%D8%B9%D9%8A%D8%AF-%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF-%D8%B2%D8%AE%D9%85%D9%87",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/20/1712401.webp"
+    },
     {
       "id": "7ad988f0cd2cd6353bdc",
       "title": "هل تتراجع بريطانيا عن بريكست؟ قمة بروكسل تختبر العلاقات مع أوروبا",
@@ -364,28 +386,6 @@
       "priority": 2,
       "language": "ar",
       "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712013.webp"
-    },
-    {
-      "id": "62c726997e88a9991a00",
-      "title": "إيطاليا تقترب من الخروج من إجراءات العجز المفرط بالاتحاد الأوروبي في 2027",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-17T14:19:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152794/%D8%A5%D9%8A%D8%B7%D8%A7%D9%84%D9%8A%D8%A7-%D8%AA%D9%82%D8%AA%D8%B1%D8%A8-%D9%85%D9%86-%D8%A7%D9%84%D8%AE%D8%B1%D9%88%D8%AC-%D9%85%D9%86-%D8%A5%D8%AC%D8%B1%D8%A7%D8%A1%D8%A7%D8%AA-%D8%A7%D9%84%D8%B9%D8%AC%D8%B2-%D8%A7%D9%84%D9%85%D9%81%D8%B1%D8%B7-%D8%A8%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF-%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D9%8A-%D9%81%D9%8A-2027",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712010.webp"
-    },
-    {
-      "id": "71f83499fe34873dd562",
-      "title": "المفوضية الأوروبية تتوقع نمواً معتدلاً لمنطقة اليورو.. وفرنسا نقطة الضعف",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-17T14:10:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152788/%D8%A7%D9%84%D9%85%D9%81%D9%88%D8%B6%D9%8A%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D9%8A%D8%A9-%D8%AA%D8%AA%D9%88%D9%82%D8%B9-%D9%86%D9%85%D9%88%D8%A7-%D9%85%D8%B9%D8%AA%D8%AF%D9%84%D8%A7-%D9%84%D9%85%D9%86%D8%B7%D9%82%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D8%B1%D9%88-%D9%88%D9%81%D8%B1%D9%86%D8%B3%D8%A7-%D9%86%D9%82%D8%B7%D8%A9-%D8%A7%D9%84%D8%B6%D8%B9%D9%81",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712008.webp"
     }
   ],
   "source_count": 1,
