@@ -78,23 +78,23 @@ html{scroll-padding-top:22px}
 
 /* 6.0 — homepage operations room */
 #app .ops-room{margin:18px 0 24px;padding:18px;border:1px solid rgba(30,74,58,.14);border-radius:22px;background:linear-gradient(180deg,rgba(250,253,251,.92),rgba(242,248,245,.98));box-shadow:0 12px 32px rgba(13,31,24,.06)}
-html.dark #app .ops-room{background:linear-gradient(180deg,rgba(17,29,28,.96),rgba(12,21,21,.98));border-color:rgba(145,213,182,.14);box-shadow:0 16px 36px rgba(0,0,0,.22)}
+html[data-theme="dark"] #app .ops-room{background:linear-gradient(180deg,rgba(17,29,28,.96),rgba(12,21,21,.98));border-color:rgba(145,213,182,.14);box-shadow:0 16px 36px rgba(0,0,0,.22)}
 #app .ops-room-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
 #app .ops-room-head h2{margin:4px 0 6px;font-size:clamp(24px,2.4vw,32px);line-height:1.15}
 #app .ops-room-head p{margin:0;color:var(--muted);max-width:70ch}
 #app .ops-health{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
 #app .ops-health-chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.65);border:1px solid rgba(56,137,102,.16);font-size:12px;color:var(--muted);white-space:nowrap}
-html.dark #app .ops-health-chip{background:rgba(255,255,255,.04);border-color:rgba(145,213,182,.12)}
-#app .ops-health-chip b{color:var(--text)}
+html[data-theme="dark"] #app .ops-health-chip{background:rgba(255,255,255,.04);border-color:rgba(145,213,182,.12)}
+#app .ops-health-chip b{color:var(--ink)}
 #app .ops-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
 #app .ops-card{grid-column:span 4;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(248,251,249,.98));border:1px solid rgba(37,92,70,.12);text-decoration:none;color:inherit;min-width:0;transition:border-color .16s,transform .16s,box-shadow .16s,background .16s}
-html.dark #app .ops-card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.02));border-color:rgba(145,213,182,.1)}
+html[data-theme="dark"] #app .ops-card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.02));border-color:rgba(145,213,182,.1)}
 #app .ops-card:hover{transform:translateY(-2px);border-color:rgba(56,137,102,.32);box-shadow:0 14px 28px rgba(10,28,22,.09)}
-html.dark #app .ops-card:hover{box-shadow:0 16px 28px rgba(0,0,0,.24)}
+html[data-theme="dark"] #app .ops-card:hover{box-shadow:0 16px 28px rgba(0,0,0,.24)}
 #app .ops-card-major{grid-column:span 6}
 #app .ops-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 #app .ops-tag{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(57,145,106,.10);color:#1e6b49;border:1px solid rgba(56,137,102,.16);font-size:11px;font-weight:800;letter-spacing:.04em}
-html.dark #app .ops-tag{background:rgba(109,216,166,.10);color:#97e7bf;border-color:rgba(136,227,186,.16)}
+html[data-theme="dark"] #app .ops-tag{background:rgba(109,216,166,.10);color:#97e7bf;border-color:rgba(136,227,186,.16)}
 #app .ops-tag.ops-live{background:rgba(25,184,109,.11);color:#14794a}
 #app .ops-kicker{font-size:12px;color:var(--muted);font-weight:700}
 #app .ops-card h3{margin:0;font-size:20px;line-height:1.25}
@@ -102,12 +102,12 @@ html.dark #app .ops-tag{background:rgba(109,216,166,.10);color:#97e7bf;border-co
 #app .ops-big-countdown b{font-size:inherit}
 #app .ops-countdown{font-size:inherit}
 #app .ops-meta-list{display:grid;gap:6px;color:var(--muted);font-size:13px}
-#app .ops-meta-list b{color:var(--text)}
+#app .ops-meta-list b{color:var(--ink)}
 #app .ops-note{color:var(--muted)}
 #app .ops-copy{margin:0;color:var(--muted);line-height:1.7;font-size:13px}
 #app .ops-stats-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 #app .ops-stats-row span{display:block;padding:10px;border-radius:14px;background:rgba(57,145,106,.06);border:1px solid rgba(57,145,106,.11)}
-html.dark #app .ops-stats-row span{background:rgba(109,216,166,.06);border-color:rgba(136,227,186,.08)}
+html[data-theme="dark"] #app .ops-stats-row span{background:rgba(109,216,166,.06);border-color:rgba(136,227,186,.08)}
 #app .ops-stats-row small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}
 #app .ops-stats-row b{display:block;font-size:20px}
 #app .ops-move-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px}
