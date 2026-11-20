@@ -119,3 +119,7 @@ html[data-theme="dark"] #app .ops-stats-row span{background:rgba(109,216,166,.06
 @media(max-width:1120px){#app .ops-card{grid-column:span 6}#app .ops-card-major{grid-column:span 6}}
 @media(max-width:760px){#app .ops-room{padding:14px;border-radius:18px}#app .ops-room-head{flex-direction:column}#app .ops-health{justify-content:flex-start}#app .ops-grid{grid-template-columns:1fr}#app .ops-card,#app .ops-card-major{grid-column:auto}#app .ops-card h3{font-size:18px}#app .ops-big-countdown{font-size:22px}#app .ops-stats-row{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:520px){#app .ops-stats-row{grid-template-columns:1fr}#app .ops-health-chip{font-size:11px;padding:7px 10px}}
+
+/* 6.2 — CTA in published recommendation cards */
+.trade-pro-card .trade-workflow-action{display:inline-flex;align-self:flex-start;margin-top:12px;padding:9px 13px;border:1px solid rgba(83,183,135,.4);background:rgba(51,169,112,.10);border-radius:10px;color:var(--green,#2a9d66);font-weight:800;text-decoration:none;font-size:12px;line-height:1.5}
+.trade-pro-card .trade-workflow-action:hover{background:rgba(51,169,112,.20)}

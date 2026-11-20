@@ -1,7 +1,7 @@
 /* ICT بالعربي 6.0 — resilient offline shell. The OneSignal worker is separate. */
-const CACHE='ict-shell-v612-chartfix-20261120';
+const CACHE='ict-shell-v62-workflow-20261120';
 const PREFIX='ict-shell-';
-const CORE=['./','./index.html','./style.css','./app.js','./platform.css','./platform.js','./workspace.html','./workspace.css','./workspace.js','./intelligence.html','./intelligence.css','./intelligence.js','./research.html','./research.css','./research.js','./smart-desk.html','./smart-desk.css','./smart-desk.js','./assets.html','./asset.css','./asset.js','./asset-config.js','./assets/XAUUSD.html','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png'];
+const CORE=['./','./index.html','./style.css','./app.js','./platform.css','./platform.js','./workspace.html','./workspace.css','./workspace.js','./intelligence.html','./intelligence.css','./intelligence.js','./research.html','./research.css','./research.js','./smart-desk.html','./smart-desk.css','./smart-desk.js','./assets.html','./asset.css','./asset.js','./asset-config.js','./assets/XAUUSD.html','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png','./workflow.html','./workflow.css','./workflow.js'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(CACHE);
  // A single unavailable optional file must not prevent future site updates.

@@ -14,3 +14,6 @@
 .asset-tv .tradingview-widget-container__widget iframe{display:block!important;width:100%!important;height:100%!important;min-height:100%!important;max-width:none!important;position:absolute!important;inset:0!important;border:0!important}
 @media (max-width:860px){.asset-tv{height:clamp(370px,64vw,530px)!important;min-height:0!important}.asset-tv>.tradingview-widget-container,.asset-tv>.tradingview-widget-container>.tradingview-widget-container__widget{height:100%!important}}
 @media (max-width:530px){.asset-tv{height:clamp(360px,110vw,480px)!important;min-height:0!important}.asset-tv>.tradingview-widget-container,.asset-tv>.tradingview-widget-container>.tradingview-widget-container__widget{height:100%!important}.asset-chart-panel{padding:12px!important}}
+
+/* 6.2 workflow entry from asset recommendation cards */
+.asset-item .meta .asset-workflow-link{background:rgba(113,224,174,.10);padding:5px 9px;border-radius:8px;border:1px solid rgba(113,224,174,.28);font-weight:800}
