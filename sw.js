@@ -1,5 +1,5 @@
 /* ICT بالعربي 5.4 — resilient offline shell. The OneSignal worker is separate. */
-const CACHE='ict-shell-v54-platform-20261119';
+const CACHE='ict-shell-v541-compact-center-20261120';
 const PREFIX='ict-shell-';
 const CORE=['./','./index.html','./style.css','./app.js','./platform.css','./platform.js','./workspace.html','./workspace.css','./workspace.js','./intelligence.html','./intelligence.css','./intelligence.js','./research.html','./research.css','./research.js','./smart-desk.html','./smart-desk.css','./smart-desk.js','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
