@@ -16,7 +16,7 @@ const shortcuts=[
  ['↗','التوصيات والتحليلات',root+'#recs'],['▤','الأخبار',root+'#news'],
  ['▦','الأجندة الاقتصادية',root+'#agenda'],['◉','ذكاء الأسواق',root+'intelligence.html'],
  ['▣','مختبر الأبحاث',root+'research.html'],['✦','غرفة المتداول',root+'smart-desk.html'],
- ['◇','رحلة الصفقة',root+'workflow.html'],['◎','موثوقية البيانات',root+'trust.html'],
+ ['◇','رحلة الصفقة',root+'workflow.html'],
  ['☷','أدوات ICT',root+'#ict']
 ];
 const dock=document.createElement('nav');dock.className='ict65-dock';dock.setAttribute('aria-label','التنقل السريع للموبايل');
