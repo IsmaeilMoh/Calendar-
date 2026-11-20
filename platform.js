@@ -4,6 +4,7 @@
 const routes=[
   {file:'index.html',label:'الرئيسية',href:'./#home'},
   {file:'workspace.html',label:'مساحتي',href:'workspace.html'},
+  {file:'assets.html',label:'الأصول',href:'assets.html'},
   {file:'intelligence.html',label:'ذكاء الأسواق',href:'intelligence.html'},
   {file:'research.html',label:'مختبر الأبحاث',href:'research.html'},
   {file:'smart-desk.html',label:'غرفة المتداول',href:'smart-desk.html'},
