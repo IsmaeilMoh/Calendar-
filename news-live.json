@@ -1,7 +1,29 @@
 {
-  "updated_at": "2026-11-20T20:02:06Z",
+  "updated_at": "2026-11-20T20:53:58Z",
   "mode": "rss-attributed",
   "items": [
+    {
+      "id": "e956deaff719a5194b49",
+      "title": "عاجل: ترامب: الولايات المتحدة تريد قصر مبيعات الرقائق إلى الصين على الإصدارات الأقدم",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-20T19:51:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1153081/%D8%B9%D8%A7%D8%AC%D9%84-%D8%AA%D8%B1%D8%A7%D9%85%D8%A8-%D8%A7%D9%84%D9%88%D9%84%D8%A7%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%A9-%D8%AA%D8%B1%D9%8A%D8%AF-%D9%82%D8%B5%D8%B1-%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D8%B1%D9%82%D8%A7%D8%A6%D9%82-%D8%A5%D9%84%D9%89-%D8%A7%D9%84%D8%B5%D9%8A%D9%86-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A3%D9%82%D8%AF%D9%85",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/20/1712430.webp"
+    },
+    {
+      "id": "3d736d38ff75298c596c",
+      "title": "ترامب: لا يزال العمل مستمراً للتوصل إلى اتفاق تجاري عادل مع كندا",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-20T19:18:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1153080/%D8%AA%D8%B1%D8%A7%D9%85%D8%A8-%D9%84%D8%A7-%D9%8A%D8%B2%D8%A7%D9%84-%D8%A7%D9%84%D8%B9%D9%85%D9%84-%D9%85%D8%B3%D8%AA%D9%85%D8%B1%D8%A7-%D9%84%D9%84%D8%AA%D9%88%D8%B5%D9%84-%D8%A5%D9%84%D9%89-%D8%A7%D8%AA%D9%81%D8%A7%D9%82-%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A-%D8%B9%D8%A7%D8%AF%D9%84-%D9%85%D8%B9-%D9%83%D9%86%D8%AF%D8%A7",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/20/1712428.webp"
+    },
     {
       "id": "7fe41eb49649641cd49b",
       "title": "قطر تتعهد باستثمارات إضافية بـ15 مليار يورو في ألمانيا",
@@ -364,28 +386,6 @@
       "priority": 2,
       "language": "ar",
       "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712038.webp"
-    },
-    {
-      "id": "3c86e0eee131f7b630bc",
-      "title": "الصين تعارض قيوداً أميركية جديدة على رقائق الذكاء الاصطناعي",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-17T14:53:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152796/%D8%A7%D9%84%D8%B5%D9%8A%D9%86-%D8%AA%D8%B9%D8%A7%D8%B1%D8%B6-%D9%82%D9%8A%D9%88%D8%AF%D8%A7-%D8%A3%D9%85%D9%8A%D8%B1%D9%83%D9%8A%D8%A9-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D8%B9%D9%84%D9%89-%D8%B1%D9%82%D8%A7%D8%A6%D9%82-%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1-%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712014.webp"
-    },
-    {
-      "id": "128a0a8198549c58c9c6",
-      "title": "ارتفاع أسعار الواردات والصادرات الأميركية 1.1% خلال أكتوبر",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-17T14:45:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152795/%D8%A7%D8%B1%D8%AA%D9%81%D8%A7%D8%B9-%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1-%D8%A7%D9%84%D9%88%D8%A7%D8%B1%D8%AF%D8%A7%D8%AA-%D9%88%D8%A7%D9%84%D8%B5%D8%A7%D8%AF%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D8%B1%D9%83%D9%8A%D8%A9-11-%D8%AE%D9%84%D8%A7%D9%84-%D8%A3%D9%83%D8%AA%D9%88%D8%A8%D8%B1",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712013.webp"
     }
   ],
   "source_count": 1,
