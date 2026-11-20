@@ -1,0 +1,57 @@
+/* ICT بالعربي v6.7 — scope all changes to the homepage; preserve push behavior. */
+#app .ops-room-v66 .ops-card-dna {
+  border-color: rgba(55,145,105,.24);
+  background: linear-gradient(145deg, rgba(220,244,231,.75), rgba(255,255,255,.95));
+}
+html[data-theme="dark"] #app .ops-room-v66 .ops-card-dna {
+  background:linear-gradient(145deg,rgba(39,84,66,.26),rgba(255,255,255,.025));
+  border-color:rgba(136,227,186,.19);
+}
+#app .ops-room-v66 .ops-card-dna .ops-v66-arrow {margin-top:auto}
+
+/* Compact, high-contrast push invitation without changing IDs or preferences. */
+#app .notification-compact.notification-public {margin:19px 0 24px}
+#app .notification-compact .public-notify-card {
+  padding:15px 19px;
+  gap:15px;
+  border-radius:16px;
+  align-items:center;
+}
+#app .notification-compact .public-notify-icon {
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  font-size:23px;
+}
+#app .notification-compact .public-notify-icon span {top:5px;left:6px;font-size:8px}
+#app .notification-compact .public-notify-eyebrow {font-size:9px;margin-bottom:0}
+#app .notification-compact .public-notify-main h2 {font-size:clamp(17px,1.65vw,21px);line-height:1.4;margin:0 0 4px}
+#app .notification-compact .public-notify-intro {
+  max-width:none;
+  font-size:12px;
+  line-height:1.65;
+  margin:0 0 9px;
+}
+#app .notification-compact .public-notify-actions {gap:9px}
+#app .notification-compact .public-push-btn {
+  min-height:36px;
+  padding:7px 14px;
+  font-size:12px;
+  border-radius:9px;
+  box-shadow:0 4px 12px rgba(17,49,37,.12);
+}
+#app .notification-compact .public-notify-privacy {font-size:11px}
+#app .notification-compact .public-notify-options {margin-top:9px;padding-top:7px;font-size:12px}
+#app .notification-compact .public-notify-preferences {margin:10px 0}
+@media (max-width:600px) {
+  #app .notification-compact .public-notify-card {padding:12px;gap:10px;align-items:flex-start}
+  #app .notification-compact .public-notify-icon {flex-basis:36px;width:36px;height:36px;border-radius:11px;font-size:20px}
+  #app .notification-compact .public-notify-main h2 {font-size:17px}
+  #app .notification-compact .public-notify-intro {font-size:11px;line-height:1.6}
+  #app .notification-compact .public-push-btn {min-height:38px;padding:8px 12px;width:auto;max-width:100%}
+  #app .notification-compact .public-notify-privacy {font-size:10px}
+}
+@media (max-width:370px) {
+  #app .notification-compact .public-notify-actions {align-items:flex-start;flex-direction:column}
+}
