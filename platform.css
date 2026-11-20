@@ -123,3 +123,8 @@ html[data-theme="dark"] #app .ops-stats-row span{background:rgba(109,216,166,.06
 /* 6.2 — CTA in published recommendation cards */
 .trade-pro-card .trade-workflow-action{display:inline-flex;align-self:flex-start;margin-top:12px;padding:9px 13px;border:1px solid rgba(83,183,135,.4);background:rgba(51,169,112,.10);border-radius:10px;color:var(--green,#2a9d66);font-weight:800;text-decoration:none;font-size:12px;line-height:1.5}
 .trade-pro-card .trade-workflow-action:hover{background:rgba(51,169,112,.20)}
+
+/* v6.3 — operational trust access, scoped to homepage */
+#app .ops-health-link{display:inline-flex;align-items:center;text-decoration:none;font-weight:800;color:var(--text)}
+#app .ops-health-link:hover{border-color:rgba(66,164,117,.6);background:rgba(59,165,109,.11)}
+#app .ops-health-link:focus-visible{outline:2px solid #54bc8d;outline-offset:2px}

@@ -1,0 +1,34 @@
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const definitions=[
+ {file:'market-movers.json',name:'لقطات حركة الأسواق',kind:'movers',ttl:6*3600000,source:'لقطات مرجعية دورية؛ قد تستخدم أسعار عقود بديلة'},
+ {file:'calendar-live.json',name:'الأجندة الاقتصادية',kind:'calendar',ttl:24*3600000,source:'أحداث ونتائج منشورة في تغذية الموقع'},
+ {file:'news-live.json',name:'الأخبار الاقتصادية',kind:'news',ttl:4*3600000,source:'عناوين وروابط منشورة من مصادر خارجية'},
+ {file:'recs.json',name:'التوصيات المنشورة',kind:'list',ttl:null,source:'ملف المحتوى العام المنشور من لوحة الإدارة'},
+ {file:'analyses.json',name:'التحليلات الفنية',kind:'list',ttl:null,source:'ملف التحليلات المنشورة من لوحة الإدارة'},
+ {file:'links.json',name:'روابط التواصل',kind:'list',ttl:null,source:'ملف روابط عامة تابع للموقع'},
+ {file:'agenda.json',name:'الأجندة المرجعية',kind:'agenda',ttl:null,source:'بيانات مرجعية ثابتة؛ لا تمثل تحديثًا لحظيًا'}
+];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=t=>{if(!Number.isFinite(t))return 'غير متاح';return new Intl.DateTimeFormat('ar-u-nu-latn',{dateStyle:'medium',timeStyle:'short'}).format(new Date(t))};
+const human=ms=>!Number.isFinite(ms)?'غير معروف':ms<60000?`${Math.max(0,Math.floor(ms/1000))} ثانية`:ms<3600000?`${Math.round(ms/60000)} دقيقة`:`${Math.round(ms/3600000)} ساعة`;
+function inspect(config,payload,received){const result={name:config.name,file:config.file,source:config.source,ok:false,status:'error',count:null,updated:null,ms:received,error:''};let items=[];
+ if(config.kind==='movers'){items=Array.isArray(payload?.items)?payload.items:[];result.updated=Date.parse(payload?.updatedAt||'');const valid=items.filter(x=>x&&typeof x.symbol==='string'&&Number.isFinite(Number(x.change))&&x.quotedAt&&Number.isFinite(Date.parse(x.quotedAt)));if(!valid.length){result.error='لا توجد صفوف أسعار صالحة';return result}result.count=valid.length;}
+ else if(config.kind==='calendar'){items=Array.isArray(payload?.events)?payload.events:[];result.updated=Date.parse(payload?.updatedAt||'');const valid=items.filter(x=>x&&x.title&&x.date&&Number.isFinite(Date.parse(x.date)));if(!valid.length){result.error='لا توجد أحداث اقتصادية صالحة';return result}result.count=valid.length;}
+ else if(config.kind==='news'){items=Array.isArray(payload?.items)?payload.items:[];result.updated=Date.parse(payload?.updated_at||'');const valid=items.filter(x=>x&&x.title&&typeof x.url==='string'&&x.url.startsWith('https://'));if(!valid.length){result.error='لا توجد عناوين مع روابط مصادر صالحة';return result}result.count=valid.length;}
+ else if(config.kind==='agenda'){if(!payload||typeof payload!=='object'||!Array.isArray(payload.days)){result.error='صيغة الأجندة المرجعية غير متوقعة';return result}result.count=payload.days.length;}
+ else {if(!Array.isArray(payload)){result.error='ملف المنشورات ليس قائمة كما هو متوقع';return result}result.count=payload.length;}
+ result.ok=true;result.status='fresh';if(config.ttl){const age=received-result.updated;result.age=age;if(!Number.isFinite(result.updated)||age< -300000||age>config.ttl)result.status='stale';}return result;}
+async function load(config){const t=performance.now(),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);try{const response=await fetch(config.file+'?trust='+Date.now(),{cache:'no-store',signal:controller.signal,headers:{'Accept':'application/json'}});if(!response.ok)throw new Error('HTTP '+response.status);const payload=await response.json();const result=inspect(config,payload,Date.now());result.ms=Math.round(performance.now()-t);return result}catch(e){return {name:config.name,file:config.file,source:config.source,ok:false,status:'error',count:null,updated:null,ms:Math.round(performance.now()-t),error:e.name==='AbortError'?'انتهت مهلة التحميل (12 ثانية)':'تعذر جلب الملف أو قراءة صيغته'}}finally{clearTimeout(timer)}}
+function print(results){const fresh=results.filter(x=>x.status==='fresh').length,stale=results.filter(x=>x.status==='stale').length,errors=results.filter(x=>x.status==='error').length;
+ $('overall').textContent=errors?'بعض المصادر غير متاحة':stale?'بعض البيانات قديمة':'جميع المصادر قابلة للقراءة';
+ $('stats').innerHTML=[['قابلة للقراءة',fresh],['قديمة',stale],['غير متاحة / خاطئة',errors],['إجمالي المصادر',results.length]].map(([label,value])=>`<div class="stat"><small>${label}</small><strong>${value}</strong></div>`).join('');
+ $('sources').innerHTML=results.map(x=>`<article class="source"><div class="source-head"><h3>${esc(x.name)}</h3><span class="status ${x.status==='fresh'?'':x.status==='stale'?'stale':'error'}">${x.status==='fresh'?'قابل للقراءة':x.status==='stale'?'بيانات قديمة':'غير متاح'}</span></div><p>${esc(x.source)}</p><dl><dt>الملف</dt><dd><a href="${encodeURI(x.file)}" target="_blank" rel="noopener noreferrer">${esc(x.file)}</a></dd><dt>عدد العناصر</dt><dd>${x.count===null?'—':x.count}</dd><dt>توقيت الملف</dt><dd>${x.updated?fmt(x.updated):'لا يذكر توقيتًا موثوقًا'}</dd><dt>عمر التحديث</dt><dd>${Number.isFinite(x.age)?human(x.age):'غير معروف أو غير مطلوب'}</dd><dt>زمن التحميل</dt><dd>${Number.isFinite(x.ms)?x.ms+' ms':'—'}</dd></dl>${x.error?`<p role="alert">${esc(x.error)}</p>`:''}</article>`).join('');
+ $('checked-at').textContent='آخر فحص من هذا الجهاز: '+fmt(Date.now());}
+function showBrowser(){const nav=performance.getEntriesByType('navigation')[0];const dom=nav&&Number.isFinite(nav.domContentLoadedEventEnd)?Math.round(nav.domContentLoadedEventEnd):null;const total=nav&&Number.isFinite(nav.duration)?Math.round(nav.duration):null;
+ const worker='serviceWorker'in navigator?(navigator.serviceWorker.controller?'يتحكم بالصفحة':'مدعوم، لكن غير متحكم بالصفحة'):'غير مدعوم';
+ const online=navigator.onLine?'المتصفح يبلّغ بوجود اتصال':'المتصفح يبلّغ بانقطاع الاتصال';
+ $('health').innerHTML=[[online,'الحالة لا تثبت وصول الخادم'],[worker,'حالة عامل التخزين المؤقت'],[dom===null?'—':dom+' ms','DOMContentLoaded — على هذا الجهاز'],[total===null?'—':total+' ms','مدة تحميل المستند — على هذا الجهاز']].map(([value,note])=>`<div><b>${esc(value)}</b><span>${esc(note)}</span></div>`).join('');}
+let running=false;async function run(){if(running)return;running=true;$('check-all').disabled=true;$('overall').textContent='جارٍ فحص المصادر…';$('sources').innerHTML='<p class="muted">جارٍ الفحص، دون تخزين نسخ من المحتوى…</p>';const results=await Promise.all(definitions.map(load));print(results);showBrowser();$('check-all').disabled=false;running=false;}
+$('check-all').addEventListener('click',run);window.addEventListener('online',showBrowser);window.addEventListener('offline',showBrowser);showBrowser();run();
+})();
