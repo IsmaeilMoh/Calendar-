@@ -1,50 +1,14 @@
-/* ICT بالعربي 6.8 splash patch | logo rises from bottom + loading line moves right-to-left */
-#ict-launch-splash{
-  position:fixed; inset:0; z-index:2147483000;
-  background:#ffffff; color:#0f1720;
-  display:none; align-items:center; justify-content:center;
-  overflow:hidden; isolation:isolate; pointer-events:auto;
-}
+/* ICT بالعربي 6.8.2 | Approved subtle reveal splash */
+#ict-launch-splash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:none;align-items:center;justify-content:center;overflow:hidden;isolation:isolate}
 #ict-launch-splash.ict-splash-active{display:flex}
-#ict-launch-splash .ict-splash-shell{
-  position:relative; width:min(88vw,360px); height:min(72vh,440px);
-  display:flex; align-items:center; justify-content:center;
-}
-#ict-launch-splash .ict-splash-logo{
-  position:absolute; left:50%; top:50%; width:min(252px,72vw); max-width:72vw; height:auto;
-  transform:translate(-50%,calc(-50% + 72px)) scale(.82);
-  opacity:0; filter:blur(6px);
-  will-change:transform,opacity,filter;
-  animation:ict-splash-rise 980ms cubic-bezier(.16,1,.3,1) both;
-}
-#ict-launch-splash .ict-splash-track{
-  position:absolute; left:50%; top:71.5%; transform:translateX(-50%);
-  width:min(132px,38vw); height:4px; border-radius:999px;
-  background:#e5e7eb; overflow:hidden; opacity:0;
-  animation:ict-splash-track-fade 360ms 650ms ease forwards;
-}
-#ict-launch-splash .ict-splash-stroke{
-  position:absolute; top:0; right:-44%; width:44%; height:100%;
-  border-radius:inherit; background:#111827;
-  animation:ict-splash-rtl 1500ms 820ms linear infinite;
-}
-#ict-launch-splash.ict-splash-leaving{
-  animation:ict-splash-out 420ms ease both;
-}
-@keyframes ict-splash-rise{
-  0%{transform:translate(-50%,calc(-50% + 72px)) scale(.82);opacity:0;filter:blur(6px)}
-  65%{opacity:1}
-  84%{transform:translate(-50%,-51%) scale(1.02);opacity:1;filter:blur(0)}
-  100%{transform:translate(-50%,-50%) scale(1);opacity:1;filter:blur(0)}
-}
-@keyframes ict-splash-track-fade{to{opacity:1}}
-@keyframes ict-splash-rtl{0%{right:-44%}100%{right:100%}}
-@keyframes ict-splash-out{to{opacity:0}}
-@media (max-width:390px){
-  #ict-launch-splash .ict-splash-logo{width:min(230px,72vw)}
-  #ict-launch-splash .ict-splash-track{top:73.5%}
-}
-@media (prefers-reduced-motion:reduce){
-  #ict-launch-splash, #ict-launch-splash *{animation:none!important;transition:none!important}
-  #ict-launch-splash.ict-splash-active{display:none!important}
-}
+#ict-launch-splash .ict-splash-stack{display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(85vw,320px);gap:44px;transform:translateY(-8px)}
+#ict-launch-splash .ict-splash-logo{display:block;width:clamp(145px,44vw,182px);height:auto;object-fit:contain;opacity:0;transform:translateY(35px) scale(.92);filter:blur(3px);animation:ict-rise 1050ms 110ms cubic-bezier(.16,1,.3,1) both}
+#ict-launch-splash .ict-splash-track{position:relative;flex:0 0 3px;width:132px;height:3px;background:#e5e7eb;border-radius:999px;overflow:hidden;opacity:0;animation:ict-track-in 350ms 650ms ease both}
+#ict-launch-splash .ict-splash-fill{display:block;position:absolute;inset:0;background:#151a1d;border-radius:inherit;transform-origin:right center;transform:scaleX(0);animation:ict-fill-rtl 1500ms 760ms cubic-bezier(.35,.05,.25,1) both}
+#ict-launch-splash.ict-splash-leaving{animation:ict-splash-leave 420ms ease both}
+@keyframes ict-rise{0%{opacity:0;transform:translateY(35px) scale(.92);filter:blur(3px)}70%{opacity:1;filter:blur(0)}85%{transform:translateY(-3px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes ict-track-in{to{opacity:1}}
+@keyframes ict-fill-rtl{to{transform:scaleX(1)}}
+@keyframes ict-splash-leave{to{opacity:0;visibility:hidden}}
+@media (max-width:390px){#ict-launch-splash .ict-splash-stack{gap:40px}#ict-launch-splash .ict-splash-logo{width:min(42vw,164px)}#ict-launch-splash .ict-splash-track{width:122px}}
+@media (prefers-reduced-motion:reduce){#ict-launch-splash,#ict-launch-splash *{animation:none!important;transition:none!important}#ict-launch-splash.ict-splash-active{display:none!important}}
