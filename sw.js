@@ -1,14 +1,42 @@
-/* ICT بالعربي 6.3 — conservative, network-first shell; separate OneSignal worker untouched. */
-const CACHE='ict-shell-v67-visitor-admin-20261120';const PREFIX='ict-shell-';
-const CORE=['./','./index.html','./style.css','./app.js','./platform.css','./platform.js','./mobile.css','./mobile.js','./typography.css','./analytics-config.js','./analytics.js','./workspace.html','./workspace.css','./workspace.js','./intelligence.html','./intelligence.css','./intelligence.js','./research.html','./research.css','./research.js','./smart-desk.html','./smart-desk.css','./smart-desk.js','./assets.html','./asset.css','./asset.js','./asset-config.js','./assets/XAUUSD.html','./workflow.html','./workflow.css','./workflow.js','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png'];
-const shellUrl=path=>new URL(path,self.registration.scope).href;
-self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);for(let i=0;i<CORE.length;i+=5){await Promise.allSettled(CORE.slice(i,i+5).map(async file=>{const url=shellUrl(file),r=await fetch(url,{cache:'reload'});if(r.ok&&r.type==='basic')await cache.put(url,r)}))}await self.skipWaiting()})()));
-self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
-self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET')return;const url=new URL(req.url),scope=new URL(self.registration.scope);if(url.origin!==scope.origin||!url.pathname.startsWith(scope.pathname))return;
-if(/\/(?:admin\.html|admin\.js|admin\.css|trust\.html|trust\.js|trust\.css|analytics\.html|analytics-dashboard\.js|analytics\.css|push-config\.js|push\.js)$/.test(url.pathname))return;
-const filename=url.pathname.split('/').pop()||'index.html';
-// Every JSON response is network-only. Do not silently reuse stale economic or personal data.
-if(filename.endsWith('.json')&&filename!=='manifest.json'){event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>new Response(JSON.stringify({error:'offline',updatedAt:null,items:[],events:[]}),{status:503,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}})));return}
-// Only cache known static resources, never user data, API endpoints or arbitrary routes.
-const isStatic=/\.(?:html|css|js|svg|png|jpg|jpeg|webp|ico|woff2?)$/.test(filename)||req.mode==='navigate';if(!isStatic)return;
-event.respondWith((async()=>{const cache=await caches.open(CACHE);try{const res=await fetch(req,{cache:'no-cache'});if(res.ok&&res.type==='basic')event.waitUntil(cache.put(req,res.clone()));return res}catch(err){const cached=await cache.match(req,{ignoreSearch:true});if(cached)return cached;if(req.mode==='navigate')return new Response('<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>غير متصل</title><body style="font-family:Tahoma;padding:3rem;background:#122;color:white"><h1>الاتصال غير متاح</h1><p>لم يتم حفظ هذه الصفحة للاستخدام دون اتصال. حاول إعادة فتحها بعد الاتصال بالشبكة.</p><a href="./" style="color:#9ed">الرئيسية</a></body></html>',{status:503,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});throw err}})())});
+/* ICT بالعربي 5.4 — resilient offline shell. The OneSignal worker is separate. */
+const CACHE='ict-shell-v55-typography-20261120';
+const PREFIX='ict-shell-';
+const CORE=['./','./index.html','./style.css','./app.js','./platform.css','./typography.css','./platform.js','./workspace.html','./workspace.css','./workspace.js','./intelligence.html','./intelligence.css','./intelligence.js','./research.html','./research.css','./research.js','./smart-desk.html','./smart-desk.css','./smart-desk.js','./manifest.json','./logo-original.jpeg','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+ const cache=await caches.open(CACHE);
+ // A single unavailable optional file must not prevent future site updates.
+ await Promise.allSettled(CORE.map(async path=>{const url=new URL(path,self.registration.scope).href;const response=await fetch(url,{cache:'reload'});if(response.ok)await cache.put(url,response)}));
+ await self.skipWaiting();
+})()));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{
+ const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)));
+ await self.clients.claim();
+})()));
+self.addEventListener('fetch',event=>{
+ const request=event.request;if(request.method!=='GET')return;
+ const url=new URL(request.url),scope=new URL(self.registration.scope);
+ if(url.origin!==scope.origin||!url.pathname.startsWith(scope.pathname))return;
+ if(url.pathname.includes('/push/')||/\/(admin\.html|admin\.js|admin\.css)$/.test(url.pathname))return;
+ const name=url.pathname.split('/').pop()||'index.html';
+ if(name==='news-live.json'||name==='calendar-live.json'||name==='market-movers.json'){
+  // Live public data must be requested from the network, never presented as fresh from the shell cache.
+  event.respondWith(fetch(request,{cache:'no-store'}).catch(()=>new Response('{}',{status:503,headers:{'Content-Type':'application/json'}})));
+  return;
+ }
+ const isJson=name.endsWith('.json');
+ const isCode=/\.(?:html|css|js)$/.test(name)||request.mode==='navigate';
+ const storageKey=isJson?new Request(new URL(url.pathname,scope.origin).href):request;
+ event.respondWith((async()=>{
+  const cache=await caches.open(CACHE);
+  try{
+   const response=await fetch(request,{cache:isCode?'no-cache':'default'});
+   if(response.ok && response.type==='basic')event.waitUntil(cache.put(storageKey,response.clone()));
+   return response;
+  }catch(error){
+   const saved=await cache.match(storageKey);
+   if(saved)return saved;
+   if(request.mode==='navigate'){const shell=await cache.match(new URL('index.html',scope.href).href);return shell||new Response('غير متصل بالإنترنت',{status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}});}
+   throw error;
+  }
+ })());
+});
