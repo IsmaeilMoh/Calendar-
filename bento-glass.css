@@ -25,8 +25,8 @@ html[data-ict-page="home"] :is(
 ),
 html[data-ict-page]:not([data-ict-page="home"]) :is(
  .card,.panel,.ws-card,.ws-module,.ws-personal-bar,.ws-stat,
- .hero-note,.ws-hero-side,.snapshot,.source-status,.status,.data-status,
- .metrics>*,.feed>*,.ict54-hub
+ .hero-note,.ws-hero-side,.snapshot,
+ .metrics>*,.ict54-hub
 ){
  border:1px solid var(--ict-glass-stroke)!important;
  border-radius:var(--ict-bento-radius);

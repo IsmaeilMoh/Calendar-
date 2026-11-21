@@ -1,0 +1,33 @@
+/* ICT بالعربي 6.8.5 — Operations room safety layer.
+   Only the original 6.8 #app .ops-room block is targeted.
+   Prevents unstyled text if a legacy platform stylesheet is stale or partial. */
+#app .ops-room.ops-room-v66{
+ display:block; box-sizing:border-box; min-width:0;
+ margin:16px 0 20px; padding:18px;
+ border:1px solid var(--ict-border,#314850);border-radius:20px;
+ background:linear-gradient(150deg,var(--ict-card,#15252e),var(--ict-card2,#1d3139));
+ color:var(--ict-text,#eef5f2);
+ box-shadow:var(--ict-shadow,0 12px 30px #0002);
+}
+#app .ops-room-v66 *,#app .ops-room-v66 *::before,#app .ops-room-v66 *::after{box-sizing:border-box}
+#app .ops-room-v66 .ops-room-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px;flex-wrap:wrap}
+#app .ops-room-v66 .ops-room-head h2{margin:4px 0 6px;font-size:clamp(21px,2.35vw,28px);line-height:1.5;color:var(--ict-text,#eef5f2)}
+#app .ops-room-v66 .ops-room-head p{margin:0;max-width:70ch;color:var(--ict-muted,#9bb5b1);font-size:13px;line-height:1.8}
+#app .ops-room-v66 .ops-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;align-items:stretch}
+#app .ops-room-v66 .ops-card{display:flex;flex-direction:column;gap:8px;grid-column:auto;min-width:0;min-height:168px;padding:16px;border:1px solid var(--ict-border,#314850);border-radius:16px;text-decoration:none!important;color:var(--ict-text,#eef5f2);background:linear-gradient(155deg,var(--ict-card,#15252e),var(--ict-card2,#1d3139));box-shadow:0 6px 20px #0001}
+#app .ops-room-v66 .ops-card:hover{border-color:var(--ict-accent,#81c6ae)}
+#app .ops-room-v66 .ops-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+#app .ops-room-v66 .ops-tag{display:inline-block;border-radius:7px;padding:4px 7px;background:var(--ict-hover,#253f42);color:var(--ict-highlight,#b1e9d3);font-size:10px;line-height:1.4;font-family:Inter,Arial,sans-serif;font-weight:700;letter-spacing:.04em}
+#app .ops-room-v66 .ops-kicker{font-size:11px;color:var(--ict-muted,#9bb5b1)}
+#app .ops-room-v66 .ops-card h3{font-size:16px;line-height:1.55;margin:0;color:var(--ict-text,#eef5f2)}
+#app .ops-room-v66 .ops-copy{font-size:12px;line-height:1.75;color:var(--ict-muted,#9bb5b1);margin:0}
+#app .ops-room-v66 .ops-stats-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#app .ops-room-v66 .ops-stats-row span{display:block;text-align:center;padding:8px 4px;border-radius:10px;border:1px solid var(--ict-border,#314850);background:var(--ict-card2,#1d3139);min-width:0}
+#app .ops-room-v66 .ops-stats-row small{display:block;color:var(--ict-muted,#9bb5b1);font-size:10px;line-height:1.5}
+#app .ops-room-v66 .ops-stats-row b{display:block;color:var(--ict-text,#eef5f2);font-size:18px;line-height:1.4}
+#app .ops-room-v66 .ops-meta-list{font-size:12px;color:var(--ict-muted,#9bb5b1);overflow-wrap:anywhere}
+#app .ops-room-v66 .ops-v66-arrow{margin-top:auto;font-size:12px;font-weight:800;color:var(--ict-highlight,#b1e9d3)}
+#app .ops-room-v66 .ops-v66-headlink{display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:9px 13px;border:1px solid var(--ict-border,#314850);border-radius:10px;background:var(--ict-card2,#1d3139);color:var(--ict-text,#eef5f2);font-weight:700;text-decoration:none;font-size:12px}
+@media(max-width:1120px){#app .ops-room-v66 .ops-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){#app .ops-room.ops-room-v66{padding:13px;border-radius:16px}#app .ops-room-v66 .ops-grid{grid-template-columns:1fr}#app .ops-room-v66 .ops-card{min-height:0}#app .ops-room-v66 .ops-stats-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:350px){#app .ops-room-v66 .ops-stats-row{grid-template-columns:1fr}}
