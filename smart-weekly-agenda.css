@@ -1,0 +1,5 @@
+/* ICT بالعربي 6.8.33 — weekly agenda controls */
+.calendar-week-switch{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:15px 0 18px;direction:rtl}
+.calendar-week-switch .chip{min-height:40px}
+.calendar-week-label{font:inherit;font-size:.85rem;color:var(--muted);margin-inline-start:auto}
+@media(max-width:640px){.calendar-week-label{flex-basis:100%;margin-inline-start:0}}
