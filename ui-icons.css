@@ -803,3 +803,54 @@ html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control::after{
 @media(max-width:360px){
   html body .header .header-actions #theme.theme-btn{padding:5px 6px!important;gap:3px!important;}
 }
+
+
+/* ICT بالعربي 6.8.22 | Logo + site name only — content-sized glass badge. */
+.header .header-inner > a.brand,
+.topbar .header-inner > a.brand,
+.ws-header .ws-header-content > a.ws-brand,
+body > .topbar > a.brand {
+  flex: 0 0 auto !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  width: max-content !important;
+  max-width: min(100%, 265px) !important;
+  min-width: 0 !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 7px 11px !important;
+  white-space: nowrap;
+}
+.header .header-inner > a.brand > span,
+.topbar .header-inner > a.brand > span,
+.ws-header .ws-header-content > a.ws-brand > span,
+body > .topbar > a.brand > span {
+  display: inline-flex !important;
+  flex: 0 1 auto !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  gap: 0 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+.header .header-inner > a.brand :is(.brand-name, b),
+.topbar .header-inner > a.brand strong,
+.ws-header .ws-header-content > a.ws-brand strong,
+body > .topbar > a.brand > span {
+  line-height: 1.3 !important;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .header .header-inner > a.brand,
+  .topbar .header-inner > a.brand,
+  .ws-header .ws-header-content > a.ws-brand,
+  body > .topbar > a.brand { gap: 7px !important; padding: 6px 9px !important; }
+  .header .header-inner > a.brand img,
+  .topbar .header-inner > a.brand img,
+  .ws-header .ws-header-content > a.ws-brand img,
+  body > .topbar > a.brand img { width: 36px !important; height: 36px !important; }
+}
