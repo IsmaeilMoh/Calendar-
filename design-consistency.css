@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+/* ICT بالعربي 6.8.6 | design-consistency.css
+  Additive design layer ONLY. Inherits approved 6.8.3 palette without reordering page content.
+  Last stylesheet: fixes legacy hardcoded cards, typographic inconsistencies, compact tool center.
+*/
+/* One typography family across all public HTML pages; financial numbers remain Inter. */
+html[data-ict-page] body,
+html[data-ict-page] :is(button,input,select,textarea,label,p,h1,h2,h3,h4,h5,h6,a,small,summary,th,td),
+html[data-ict-page] :is(.navigation a,.ict54-hub,.ict54-hub-title,.ict68-theme-control,.tool-card,.market-ticker-label){
+ font-family:'Almarai',Tahoma,Arial,sans-serif!important;
+}
+html[data-ict-page] :is(.en,.numeric,time,.ticker-last,.market-ticker-symbol,.ticker-change,.pair,.zone-side strong,.snapshot-val b,[dir=ltr]){
+ font-family:'Inter',Arial,sans-serif!important;font-variant-numeric:tabular-nums;
+}
+html[data-ict-page] :is(h1,h2,h3,h4,.tool-card strong){font-weight:800;letter-spacing:0}
+html[data-ict-page] :is(.eyebrow,.ops-tag,.edition){letter-spacing:.02em}
+
+/* Home surface: every panel gets the same approved neutral palette. */
+html[data-ict-page=home] :is(.page,.welcome,.welcome-aside,.pulse-desk,#market-pulse,
+ .pulse-market,.pulse-movers-board,.pulse-mover-row,.pulse-block,.pulse-brief-grid>.pulse-block,
+ .market-pulse,.market-card,.ops-room,.ops-card,.trader-desk,.desk-tile,
+ .tool-card,.card,.metric,.hero,.news-stack,.news-line,.home-recs,
+ .chart-shell,.clock-banner,.zones,.zone-row,.event-table,.event-row,
+ .calendar-stats .metric,.cta,.feature-strip,.data-status,.notice,.empty,
+ .session-pro-item,.ict-session-pro,.academy-card,.intelligence-card,.calculator-card,
+ .smart-trade-card,.trade-card,.result-card,.panel,.panel-card){border-color:var(--ict-border)}
+html[data-ict-page=home] :is(.welcome,.welcome-aside,.pulse-desk,#market-pulse,
+ .pulse-movers-board,.pulse-brief-grid>.pulse-block,.ops-room,.ops-card,
+ .trader-desk,.desk-tile,.tool-card,.card,.metric,.news-stack,
+ .chart-shell,.clock-banner,.zones,.event-table,.calendar-stats .metric,
+ .cta,.feature-strip,.data-status,.notice,.empty,
+ .session-pro-item,.ict-session-pro,.academy-card,.intelligence-card,.calculator-card,
+ .smart-trade-card,.trade-card,.result-card,.panel,.panel-card){
+ background:linear-gradient(147deg,var(--ict-card),var(--ict-card2))!important;
+ color:var(--ict-text);box-shadow:var(--ict-shadow);
+}
+html[data-ict-page=home] :is(.pulse-block,.pulse-mover-row,.news-line,.zone-row,.event-row,
+ .kv>div,.filter-bar,.check-row,.market-pills a,.agenda-tools input,.agenda-tools select,
+ .chip,.tag,.outline-pill,.pulse-quiet-badge,.pulse-ticker,.pulse-key,.session-tabs,
+ .session-pro-state,.feed-item,.mini-card,.news-item,.trade-stat,.ops-stats-row>span){
+ background:var(--ict-card2);border-color:var(--ict-border);color:var(--ict-text);
+}
+/* Market Pulse is deliberately no longer locked to its original dark hardcoded backgrounds. */
+html[data-ict-page=home] #market-pulse :is(.pulse-heading,.pulse-market,.pulse-block,.pulse-brief-grid,.pulse-movers-layout,.pulse-mover-row,
+ .pulse-movers-board,.pulse-news,.pulse-zone,.pulse-extra,.pulse-foot,.pulse-key){
+ border-color:var(--ict-border);color:var(--ict-text);
+}
+html[data-ict-page=home] #market-pulse :is(.pulse-brief-grid>.pulse-block,.pulse-movers-board,.pulse-mover-row){
+ background:linear-gradient(150deg,var(--ict-card),var(--ict-card2))!important;
+}
+html[data-ict-page=home] #market-pulse :is(.pulse-quiet-badge,.pulse-currency,.pulse-state,.pulse-extra summary){
+ color:var(--ict-highlight);background:var(--ict-hover);border-color:var(--ict-border);
+}
+html[data-ict-page=home] #market-pulse :is(.pulse-news-info,.pulse-zone-desc,.pulse-zone-details,
+ .pulse-foot,.pulse-key,.pulse-countdown-caption,.pulse-unavailable,.pulse-mover-source){color:var(--ict-muted)}
+html[data-ict-page=home] #market-pulse :is(.pulse-heading b,.pulse-news-head strong,.pulse-zone-name strong,
+ .pulse-countdown,.pulse-zone-details strong,.pulse-news-info b){color:var(--ict-text)}
+html[data-ict-page=home] #market-pulse .pulse-ticker{background:var(--ict-card2)!important;border-color:var(--ict-border)}
+html[data-ict-page=home] #market-pulse .tv-live-pulse{background:var(--ict-card2)!important;border-color:var(--ict-border)!important}
+/* Agenda, recommendations, news, ICT tools: containers and rows share the same palette. */
+html[data-ict-page=home] :is(.event-head,.event-row:nth-child(2n),.calendar-day,.rec-head,
+ .rec-card,.rec-status,.news-card,.news-item,.filter-bar,.news-meta,
+ .zone-side,.session-pro-head,.tool-center,.calc-card,.academy-lesson,
+ .calculator-panel,.trade-summary,.risk-box,.settings-grid,.analysis-card,
+ .detail-card,.recs-board,.feed,.search-box,.table-wrap){
+ border-color:var(--ict-border);color:var(--ict-text);
+}
+html[data-ict-page=home] :is(.event-head,.event-row:nth-child(2n),.kv>div,.mini-icon,
+ .market-pills a,.chip,.zone-row,.trade-summary,.risk-box,.settings-grid,
+ .analysis-card,.rec-card,.news-card,.news-item,.detail-card,.calc-card,.academy-lesson){
+ background:var(--ict-card2)!important;
+}
+html[data-ict-page=home] :is(.btn,.chip.active,.install){background:var(--ict-accent);color:var(--ict-accent-contrast);border-color:var(--ict-accent)}
+html[data-ict-page=home] :is(.btn-outline,.chip:not(.active),.agenda-tools select,.agenda-tools input){
+ background:var(--ict-card)!important;color:var(--ict-text);border-color:var(--ict-border);
+}
+html[data-ict-page=home] :is(.page-title,.section-title h2,.section-heading h2,.card h3,.tool-card strong,.event-name,.news-line h3){color:var(--ict-text)}
+html[data-ict-page=home] :is(.subtle,.lead,.card p,.tool-card>span:not(.tool-glyph),
+ .news-line p,.card-meta,.small-meta,.event-name small,.notice,.zone-row p){color:var(--ict-muted)}
+html[data-ict-page=home] :is(.pulse-countdown,.clock-banner strong,.event-name,.zone-row strong){color:var(--ict-text)}
+html[data-theme=light][data-ict-page=home] .welcome h1 em{color:var(--ict-highlight)}
+html[data-theme=dark][data-ict-page=home] .welcome h1 em{color:var(--ict-accent)}
+
+/* Compact trading center; preserve every shortcut and natural order. */
+html[data-ict-page=home] #app>.section-title:has(+.tool-grid){margin:23px 0 10px}
+html[data-ict-page=home] #app .tool-grid{
+ display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;
+}
+html[data-ict-page=home] #app .tool-grid>.tool-card{
+ min-height:126px;min-width:0;padding:12px 13px;border-radius:13px;gap:3px;
+ display:flex;align-items:flex-start;flex-direction:column;
+}
+html[data-ict-page=home] #app .tool-grid>.tool-card .tool-glyph{
+ width:29px;height:29px;border-radius:8px;font-size:17px;margin:0 0 3px;background:var(--ict-hover);color:var(--ict-highlight);
+}
+html[data-ict-page=home] #app .tool-grid>.tool-card strong{font-size:13px;line-height:1.45}
+html[data-ict-page=home] #app .tool-grid>.tool-card>span:not(.tool-glyph){font-size:11px;line-height:1.5}
+html[data-ict-page=home] #app .tool-grid>.tool-card b{font-size:10px;line-height:1.35;padding-top:4px;margin-top:auto;color:var(--ict-highlight)}
+@media(max-width:1100px){html[data-ict-page=home] #app .tool-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:740px){html[data-ict-page=home] #app .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){html[data-ict-page=home] #app .tool-grid{gap:7px}html[data-ict-page=home] #app .tool-grid>.tool-card{padding:11px;min-height:119px}}
+
+/* Navigator location is managed by design-consistency.js without touching trading logic. */
+html[data-ict-page=home] #app>.ict54-hub.ict68-hub-near-center{
+ position:relative;z-index:1;margin:22px 0 8px;border:1px solid var(--ict-border);border-radius:14px;
+ background:linear-gradient(130deg,var(--ict-card),var(--ict-card2))!important;
+ color:var(--ict-text);overflow:hidden;box-shadow:var(--ict-shadow);
+}
+html[data-ict-page=home] #app>.ict54-hub .ict54-hub-inner{max-width:none;padding:7px 11px}
+@media(max-width:600px){html[data-ict-page=home] #app>.ict54-hub .ict54-hub-title{font-size:11px}}
+
+/* Standalone pages: remap extra legacy palette tokens; don't break chart colors or outcome alerts. */
+html[data-ict-page=workspace]{--panel:var(--ict-card);--panel2:var(--ict-card2);--txt:var(--ict-text);--edge:var(--ict-border)}
+html[data-ict-page=intelligence],html[data-ict-page=research],html[data-ict-page=smart-desk]{
+ --panel:var(--ict-card);--panel2:var(--ict-card2);--pane:var(--ict-card);--edge:var(--ict-border);
+ --txt:var(--ict-text);--text:var(--ict-text);--ink:var(--ict-text);--dim:var(--ict-muted);
+}
+html[data-ict-page]:not([data-ict-page=home]) :is(.hero,.ws-hero,.hero-note,.ws-hero-side,.search-result,.leader,.peer,
+ .snapshot,.readiness,.check-row,.ws-stat,.ws-check-item,.ws-risk-note,.ws-module,.ws-card,.stat,.metric,
+ .feed .item,.panel,.card,.result,.insight,.ws-personal-bar,.status,.tabs,.ws-tabs,
+ .searchform,.examples button,.source-status,.data-status,.notice){
+ background:linear-gradient(150deg,var(--ict-card),var(--ict-card2))!important;
+ border-color:var(--ict-border)!important;color:var(--ict-text);
+}
+html[data-ict-page]:not([data-ict-page=home]) :is(.leader.active,.peer.active,.tabs button.active,.tab.active,.ws-tab.active){
+ background:var(--ict-hover)!important;color:var(--ict-highlight)!important;border-color:var(--ict-accent)!important;
+}
+html[data-ict-page]:not([data-ict-page=home]) :is(.hero p,.ws-hero p,.desc,.micro-note,.notice,.ws-footnote,
+ .metric small,.snapshot-name small,.feed .item small,.panel-title p){color:var(--ict-muted)}
+html[data-ict-page]:not([data-ict-page=home]) :is(.hero strong,.ws-hero strong,.metric strong,
+ .panel h3,.card h3,.item b,.search-result b){color:var(--ict-text)}
+html[data-ict-page]:not([data-ict-page=home]) :is(.ws-module-icon,.ws-move-buttons button,.hero-pills span,
+ .tab,.ws-tab,.tabs button:not(.active),.outline,.ghost,.ws-secondary,.upload){
+ background:var(--ict-card2)!important;color:var(--ict-text)!important;border-color:var(--ict-border)!important;
+}
+html[data-ict-page]:not([data-ict-page=home]) :is(.tag,.source-status,.ws-tag){color:var(--ict-highlight)!important;border-color:var(--ict-border)}
+html[data-ict-page]:not([data-ict-page=home]) :is(.ws-meter,.progress){background:var(--ict-card3)}
+html[data-ict-page]:not([data-ict-page=home]) :is(.progress>span,.ws-meter>span){background:var(--ict-accent)}
+/* Preserve semantic status indicators for danger/success. */
+html[data-ict-page]:not([data-ict-page=home]) :is(.down,.ws-danger,.source-status.bad){color:var(--ict-red)!important}
+html[data-ict-page]:not([data-ict-page=home]) :is(.up,.ws-safe){color:var(--ict-green)!important}
+
+/* Only fixed bottom MARKET ticker stays charcoal in both themes; mobile nav remains themed. */
+html[data-ict-page=home] .tape{
+ background:linear-gradient(125deg,#111b22,#192b32 58%,#14242a)!important;
+ color:#eaf4ee!important;border:1px solid #32454b!important;
+ box-shadow:0 5px 30px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.06)!important;
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-label,.bottom-ticker-status){
+ background:#1b3034!important;color:#e6f4ec!important;border-color:#3b5558!important;
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-window,.bottom-ticker-fallback,.tv-market-bottom,.bottom-ticker-tv){
+ background:#132329!important;border-color:#314950!important;color:#f0f7f3!important;
+}
+html[data-ict-page=home] .tape .bottom-ticker-window::before{
+ background:linear-gradient(90deg,rgba(19,35,41,.98),rgba(19,35,41,0))!important;
+}
+html[data-ict-page=home] .tape .bottom-ticker-window::after{
+ background:linear-gradient(270deg,rgba(19,35,41,.98),rgba(19,35,41,0))!important;
+}
+html[data-ict-page=home] .tape .bottom-ticker-window .market-ticker-item{
+ background:linear-gradient(135deg,#263b3c,#1b3034)!important;border-color:#3b5558!important;
+}
+html[data-ict-page=home] .tape :is(.market-ticker-symbol,.ticker-last,.bottom-ticker-label,.bottom-ticker-status){color:#f0f7f3!important}
+/* Don't darken mobile nav, header, or other page elements when the light theme is selected. */
+@media(prefers-reduced-motion:reduce){html[data-ict-page=home] #app .tool-card{transition:none!important}}
