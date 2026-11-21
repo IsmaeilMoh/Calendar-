@@ -592,3 +592,163 @@ body > .topbar > .brand small{display:block;margin-top:2px;}
     letter-spacing:.09em;
   }
 }
+
+
+/* ICT بالعربي 6.8.20 — fit brand to content & animated premium glass rim.
+   Important: override the older mobile flex:1 which stretched the badge.
+   Keep the existing logo image/wording intact. */
+:root[data-theme="dark"]{
+  --ict-brand-rim-a:rgba(207,255,233,.58);
+  --ict-brand-rim-b:rgba(113,218,179,.58);
+  --ict-brand-rim-soft:rgba(162,223,202,.23);
+  --ict-brand-gleam:rgba(236,255,248,.44);
+}
+:root[data-theme="light"]{
+  --ict-brand-rim-a:rgba(255,255,255,.94);
+  --ict-brand-rim-b:rgba(40,142,124,.42);
+  --ict-brand-rim-soft:rgba(177,156,122,.28);
+  --ict-brand-gleam:rgba(255,255,255,.94);
+}
+:where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand),
+body > .topbar > a.brand{
+  flex:0 0 auto!important;
+  flex-grow:0!important;
+  flex-shrink:0!important;
+  width:max-content!important;
+  min-width:0!important;
+  max-width:100%!important;
+  align-self:center;
+  justify-content:flex-start;
+  box-sizing:border-box;
+  white-space:nowrap;
+  border-color:var(--ict-brand-rim-soft)!important;
+  background:var(--uii-brand-surface)!important;
+  box-shadow:var(--uii-brand-shadow),inset 0 0 0 1px rgba(255,255,255,.045)!important;
+}
+/* Strong but fine line, with a shine that follows the rounded perimeter. */
+:where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand)::before,
+body > .topbar > a.brand::before{
+  content:"";
+  inset:0;
+  border:0;
+  padding:1.4px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(120deg,var(--ict-brand-rim-a),transparent 23%,var(--ict-brand-rim-soft) 46%,var(--ict-brand-rim-b) 70%,var(--ict-brand-rim-a))!important;
+  background-size:240% 240%!important;
+  background-position:0% 50%;
+  opacity:.88;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  transition:opacity .2s ease;
+  z-index:2;
+}
+:where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand)::after,
+body > .topbar > a.brand::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(112deg,transparent 23%,rgba(255,255,255,.02) 32%,var(--ict-brand-gleam) 48%,rgba(255,255,255,.03) 57%,transparent 70%)!important;
+  opacity:0;
+  transform:translateX(-120%);
+  z-index:0;
+}
+:where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand):is(:hover,:focus-visible)::before,
+body > .topbar > a.brand:is(:hover,:focus-visible)::before{
+  opacity:1;
+  animation:ict-brand-border-shine 1.6s ease forwards;
+}
+:where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand):is(:hover,:focus-visible)::after,
+body > .topbar > a.brand:is(:hover,:focus-visible)::after{
+  opacity:.35;
+  animation:ict-brand-sweep 1.15s ease forwards;
+}
+@keyframes ict-brand-border-shine {to{background-position:100% 50%}}
+@keyframes ict-brand-sweep {from{transform:translateX(-120%)}to{transform:translateX(120%)}}
+@media(max-width:760px){
+  /* Exact-width compact badge, no legacy flex growth or stretched white space. */
+  :where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand),
+  body > .topbar > a.brand{
+    width:max-content!important;
+    max-width:min(100%,210px)!important;
+    min-width:0!important;
+    flex:0 0 auto!important;
+    padding:5px 7px!important;
+    gap:7px!important;
+    border-radius:14px!important;
+  }
+  :where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand) img,
+  body > .topbar > a.brand img{
+    width:35px!important;
+    height:35px!important;
+    min-width:35px;
+    max-width:35px!important;
+    max-height:35px!important;
+    border-radius:10px!important;
+    object-fit:contain;
+  }
+  .header .header-inner>a.brand>span,
+  .topbar .header-inner>a.brand>span,
+  .ws-header-content>a.ws-brand>span,
+  body > .topbar > a.brand>span{
+    flex:0 1 auto!important;
+    width:max-content!important;
+    min-width:0!important;
+    gap:1px;
+  }
+  .header .header-inner>a.brand .brand-name,
+  .topbar .header-inner>a.brand strong,
+  .ws-header-content>a.ws-brand strong,
+  body > .topbar > a.brand>span{
+    font-size:clamp(12px,3.3vw,14px)!important;
+    line-height:1.25!important;
+    white-space:nowrap;
+  }
+  .header .header-inner>a.brand .brand-sub,
+  .topbar .header-inner>a.brand small,
+  .ws-header-content>a.ws-brand small,
+  body > .topbar > a.brand small{
+    display:block!important;
+    font-size:clamp(6.5px,1.85vw,8.5px)!important;
+    letter-spacing:0!important;
+    line-height:1.35!important;
+    white-space:nowrap;
+  }
+  /* Avoid header crowding: allow other nav flex items to shrink rather than badge stretch. */
+  .header .header-inner{gap:7px!important;justify-content:space-between;min-width:0}
+  .header .header-actions{flex:0 0 auto!important;margin-inline-start:auto}
+}
+@media(max-width:360px){
+  .header .header-inner>a.brand,
+  .topbar .header-inner>a.brand,
+  .ws-header-content>a.ws-brand,
+  body > .topbar > a.brand{padding:5px 6px!important;gap:5px!important}
+  .header .header-inner>a.brand img,
+  .topbar .header-inner>a.brand img,
+  .ws-header-content>a.ws-brand img,
+  body > .topbar > a.brand img{width:32px!important;height:32px!important;min-width:32px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  :where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand)::before,
+  :where(.header .header-inner,.topbar .header-inner,.ws-header-content) > :is(a.brand,a.ws-brand)::after,
+  body > .topbar > a.brand::before,
+  body > .topbar > a.brand::after{animation:none!important;transition:none!important}
+}
+/* Specificity guard against 6.8.18's mobile .header .brand{flex:1!important}. */
+@media(max-width:760px){
+  html body .header .header-inner > a.brand,
+  html body .topbar .header-inner > a.brand,
+  html body .ws-header .ws-header-content > a.ws-brand,
+  html body > header.topbar > a.brand{
+    flex:0 0 auto!important;
+    flex-grow:0!important;
+    flex-shrink:0!important;
+    width:max-content!important;
+    max-width:min(100%,210px)!important;
+    min-width:0!important;
+  }
+}
