@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-21T15:00:45.188591Z",
+  "thisWeek": {
+    "ok": true,
+    "count": 125,
+    "coverage": "full"
+  },
+  "nextWeek": {
+    "ok": true,
+    "count": 2,
+    "coverage": "partial",
+    "primaryError": "HTTP Error 404: Not Found"
+  }
+}

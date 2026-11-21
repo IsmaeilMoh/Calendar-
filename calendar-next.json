@@ -1,1 +1,29 @@
-{"updatedAt":null,"weekStart":null,"source":"Forex Factory weekly public JSON feed (unofficial)","events":[]}
+{
+  "updatedAt": "2026-11-21T15:00:46.264802Z",
+  "weekStart": "2026-11-23",
+  "source": "XOOMAR (US high-impact excerpt)",
+  "sourceUrl": "https://xoomar.com/economic-calendar-api",
+  "coverage": "partial",
+  "events": [
+    {
+      "id": "us-2026-11-25T13:30:00+00:00-Personal Income and Outlays (PCE)",
+      "title": "Personal Income and Outlays (PCE)",
+      "date": "2026-11-25T13:30:00Z",
+      "country": "USD",
+      "impact": "High",
+      "forecast": "—",
+      "actual": "—",
+      "previous": "3.6000"
+    },
+    {
+      "id": "us-2026-11-25T13:30:00+00:00-Initial Jobless Claims",
+      "title": "Initial Jobless Claims",
+      "date": "2026-11-25T13:30:00Z",
+      "country": "USD",
+      "impact": "High",
+      "forecast": "—",
+      "actual": "—",
+      "previous": "—"
+    }
+  ]
+}
