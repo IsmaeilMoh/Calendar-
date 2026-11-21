@@ -11,6 +11,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
+from ff_web_calendar import fetch_week
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GAZA = ZoneInfo('Asia/Gaza')
 FF = 'https://nfs.faireconomy.media/ff_calendar_{}.json'
@@ -24,7 +26,7 @@ def current_monday():
 
 def request_json(url):
     req = urllib.request.Request(url, headers={
-        'User-Agent': 'ICT-Belaraby-PWA-Calendar/6.8.36',
+        'User-Agent': 'ICT-Belaraby-PWA-Calendar/6.8.37',
         'Accept': 'application/json',
     })
     with urllib.request.urlopen(req, timeout=25) as res:
@@ -134,42 +136,45 @@ def run():
         status['thisWeek'] = {'ok': False, 'error': str(exc)[:240]}
 
     next_monday = monday + timedelta(days=7)
+    # First choice: Forex Factory's week-specific HTML page (not its 404 JSON URL).
     try:
-        events = normalize_ff(request_json(FF.format('nextweek')), next_monday)
+        events, url = fetch_week(next_monday)
         snapshot('calendar-next.json', next_monday, events, source='Forex Factory',
-                 coverage='full', source_url='https://www.forexfactory.com/calendar')
-        status['nextWeek'] = {'ok': True, 'count': len(events), 'coverage': 'full'}
+                 coverage='full', source_url=url)
+        status['nextWeek'] = {'ok': True, 'count': len(events), 'coverage': 'full',
+                              'via': 'forexfactory-week-page', 'sourceUrl': url}
     except Exception as ff_error:
         status['nextWeek']['primaryError'] = str(ff_error)[:240]
         try:
-            # When FF's current-week feed rolls forward on Sunday, reuse it.
+            # On Sunday FF may have already advanced the thisweek feed.
             rolled = normalize_ff(ff_thisweek_raw, next_monday) if ff_thisweek_raw is not None else []
             if not rolled:
-                raise ValueError('Forex Factory weekly feed has not rolled ahead')
+                raise ValueError('Current-week Forex Factory feed has not rolled forward')
             snapshot('calendar-next.json', next_monday, rolled, source='Forex Factory',
                      coverage='full', source_url='https://www.forexfactory.com/calendar')
             status['nextWeek'] = {'ok': True, 'count': len(rolled), 'coverage': 'full',
                                   'via': 'current-week rollover'}
         except Exception:
+            # Never overwrite a previously saved full FF week with a partial excerpt.
+            previous_path = ROOT / 'calendar-next.json'
             try:
-                events = fallback_us_high(next_monday)
-                # Avoid replacing a full same-week snapshot with a partial backup.
-                previous_path = ROOT / 'calendar-next.json'
+                previous = json.loads(previous_path.read_text(encoding='utf-8'))
+            except (FileNotFoundError, json.JSONDecodeError):
+                previous = {}
+            if previous.get('weekStart') == next_monday.isoformat() and previous.get('coverage') == 'full' and previous.get('source') == 'Forex Factory' and previous.get('events'):
+                status['nextWeek'] = {'ok': True, 'count': len(previous['events']),
+                                      'coverage': 'full', 'retained': True,
+                                      'primaryError': str(ff_error)[:240]}
+            else:
                 try:
-                    previous = json.loads(previous_path.read_text(encoding='utf-8'))
-                except (FileNotFoundError, json.JSONDecodeError):
-                    previous = {}
-                if previous.get('weekStart') == next_monday.isoformat() and previous.get('coverage') == 'full' and previous.get('events'):
-                    status['nextWeek'] = {'ok': True, 'count': len(previous['events']),
-                                          'coverage': 'full', 'retained': True}
-                else:
+                    events = fallback_us_high(next_monday)
                     snapshot('calendar-next.json', next_monday, events, source='XOOMAR (US high-impact excerpt)',
                              coverage='partial', source_url='https://xoomar.com/economic-calendar-api')
                     status['nextWeek'] = {'ok': True, 'count': len(events), 'coverage': 'partial',
                                           'primaryError': str(ff_error)[:240]}
-            except Exception as backup_error:
-                status['nextWeek'] = {'ok': False, 'primaryError': str(ff_error)[:240],
-                                      'fallbackError': str(backup_error)[:240]}
+                except Exception as backup_error:
+                    status['nextWeek'] = {'ok': False, 'primaryError': str(ff_error)[:240],
+                                          'fallbackError': str(backup_error)[:240]}
     atomic_json(ROOT / 'calendar-sync-status.json', status)
     for week in ('thisWeek', 'nextWeek'):
         print(f'{week}: {json.dumps(status[week], ensure_ascii=False)}')
