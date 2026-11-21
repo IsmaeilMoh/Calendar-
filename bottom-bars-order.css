@@ -1,0 +1,49 @@
+/* ICT بالعربي v6.8.26 — mobile bottom bars reorder.
+   Intentionally limited to small screens; all existing colors and components are kept.
+   This stylesheet loads after ui-icons.css and the rest of the current CSS stack. */
+
+/* On desktop the wrapper does not interfere with the pre-existing placement. */
+.ict-bottom-stack{display:contents}
+
+@media (max-width:760px){
+  /* A single fixed stack: Market Watch above the primary navigation. */
+  .ict-bottom-stack{
+    display:flex!important;
+    flex-direction:column!important;
+    position:fixed!important;
+    inset:auto 0 0 0!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    transform:none!important;
+    z-index:9999;
+    isolation:isolate;
+  }
+  .ict-bottom-stack > .tape,
+  .ict-bottom-stack > .mobile-bottom{
+    position:relative!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    transform:none!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    float:none!important;
+    flex-shrink:0;
+  }
+  .ict-bottom-stack > .tape{order:0;z-index:1}
+  .ict-bottom-stack > .mobile-bottom{
+    order:1;
+    z-index:2;
+    /* Respect bottom system gesture area in installed PWA mode. */
+    box-sizing:border-box;
+    padding-bottom:env(safe-area-inset-bottom,0px)!important;
+  }
+  /* Keep page/footer accessible when two bars occupy the bottom of the screen. */
+  body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))!important}
+  html{scroll-padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
+}
