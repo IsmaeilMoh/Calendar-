@@ -854,3 +854,51 @@ body > .topbar > a.brand > span {
   .ws-header .ws-header-content > a.ws-brand img,
   body > .topbar > a.brand img { width: 36px !important; height: 36px !important; }
 }
+
+
+/* ICT بالعربي 6.8.23 — compact two-line brand, no redundant top strip. */
+html[data-ict-page="home"] .header .header-inner > a.brand > span{
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:3px!important;
+  min-width:0!important;
+  width:max-content!important;
+  text-align:right!important;
+  white-space:nowrap!important;
+}
+html[data-ict-page="home"] .header .header-inner > a.brand .brand-name{
+  font-size:15px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+}
+html[data-ict-page="home"] .header .header-inner > a.brand .brand-sub{
+  display:block!important;
+  font-family:'Almarai',Tahoma,Arial,sans-serif!important;
+  color:var(--uii-brand-sub)!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  line-height:1.35!important;
+  white-space:nowrap!important;
+  margin:0!important;
+}
+html[data-ict-page="home"] .header .header-inner > a.brand{
+  width:max-content!important;
+  flex:0 0 auto!important;
+  max-width:100%!important;
+  padding:7px 10px!important;
+  gap:8px!important;
+}
+html[data-ict-page="home"] .header .header-inner > a.brand img{
+  width:42px!important;
+  height:42px!important;
+  flex:none!important;
+}
+@media(max-width:480px){
+  html[data-ict-page="home"] .header .header-inner > a.brand{padding:6px 8px!important;gap:7px!important;}
+  html[data-ict-page="home"] .header .header-inner > a.brand img{width:36px!important;height:36px!important;}
+  html[data-ict-page="home"] .header .header-inner > a.brand .brand-name{font-size:13px!important;}
+  html[data-ict-page="home"] .header .header-inner > a.brand .brand-sub{font-size:9px!important;}
+}
