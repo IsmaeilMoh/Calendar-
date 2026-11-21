@@ -1,0 +1,124 @@
+/* ICT بالعربي | Unified Themes 6.8.3
+   Adds palette to original 6.8, without modifying layout, logic, brand, or content.
+   All visual constants are scoped to two shared themes. */
+:root,html[data-theme="light"]{
+  --ict-bg:#f4eee2;--ict-bg2:#faf5eb;--ict-card:#fffaf1;--ict-card2:#f5ecdd;
+  --ict-card3:#ebe0ce;--ict-text:#263b3d;--ict-muted:#708182;--ict-border:#e0d4c1;
+  --ict-accent:#1d796d;--ict-accent-contrast:#ffffff;--ict-hover:#e8f2ea;
+  --ict-highlight:#116b60;--ict-amber:#aa7a37;--ict-red:#b65a62;
+  --ict-green:#167d67;--ict-shadow:0 8px 26px rgba(84,67,43,.07);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --ict-bg:#0c141b;--ict-bg2:#14242d;--ict-card:#15252e;--ict-card2:#1d3139;
+  --ict-card3:#243b43;--ict-text:#eef5f2;--ict-muted:#9bb5b1;--ict-border:#314850;
+  --ict-accent:#81c6ae;--ict-accent-contrast:#0d2824;--ict-hover:#253f42;
+  --ict-highlight:#b1e9d3;--ict-amber:#e6bd7b;--ict-red:#f29ca8;
+  --ict-green:#81c6ae;--ict-shadow:0 12px 32px rgba(0,0,0,.14);
+  color-scheme:dark;
+}
+/* Homepage shares existing app theme switch; map its tokens to the common palette. */
+html[data-ict-page="home"]{
+  --bg:var(--ict-bg);--surface:var(--ict-card);--ink:var(--ict-text);
+  --muted:var(--ict-muted);--line:var(--ict-border);--accent:var(--ict-accent);
+  --accent-soft:var(--ict-hover);--green:var(--ict-green);--red:var(--ict-red);
+  --amber:var(--ict-amber);--shadow:var(--ict-shadow);
+}
+html[data-ict-page="home"] body{
+  background:linear-gradient(155deg,var(--ict-bg2),var(--ict-bg) 54%,var(--ict-bg));
+  color:var(--ict-text);
+}
+html[data-ict-page="home"] :is(.header,.topline,.mobile-bottom,.tape){border-color:var(--ict-border)}
+html[data-ict-page="home"] :is(.header,.topline){background:var(--ict-card)}
+html[data-ict-page="home"] :is(.mobile-bottom,.tape){background:var(--ict-card2)}
+html[data-ict-page="home"] :is(.ict54-hub,.ict54-hub.ict54-hub-in-center),
+html[data-ict-page="home"] #app .ict54-hub.ict54-hub-in-center{
+  background:linear-gradient(128deg,var(--ict-card),var(--ict-card2));
+  color:var(--ict-text);border-color:var(--ict-border);
+}
+html[data-ict-page="home"] .ict54-hub :is(a,.ict54-hub-title,.ict54-current){color:var(--ict-text);border-color:var(--ict-border)}
+html[data-ict-page="home"] .ict54-hub a:hover,
+html[data-ict-page="home"] .ict54-hub a[aria-current="page"]{background:var(--ict-hover);color:var(--ict-highlight)}
+/* Preserve existing notification component arrangement, recolor its surfaces only. */
+html[data-ict-page="home"] :is(.ict-notify-card,.notify-luxury-card,.ict-notify-panel){border-color:var(--ict-border)}
+/* Shared laboratory and trading-desk palettes. Existing page-local tokens are mapped to the same values. */
+html[data-ict-page="workspace"]{
+  --bg:var(--ict-bg);--panel:var(--ict-card);--panel2:var(--ict-card2);
+  --line:var(--ict-border);--txt:var(--ict-text);--text:var(--ict-text);
+  --muted:var(--ict-muted);--green:var(--ict-green);--red:var(--ict-red);--amber:var(--ict-amber);
+}
+html[data-ict-page="intelligence"],html[data-ict-page="research"],html[data-ict-page="smart-desk"]{
+  --bg:var(--ict-bg);--panel:var(--ict-card);--panel2:var(--ict-card2);
+  --line:var(--ict-border);--text:var(--ict-text);--txt:var(--ict-text);
+  --muted:var(--ict-muted);--green:var(--ict-green);--red:var(--ict-red);
+  --gold:var(--ict-amber);--amber:var(--ict-amber);
+}
+html[data-ict-page]:not([data-ict-page="home"]) body{
+  background:radial-gradient(circle at 85% -8%,color-mix(in srgb,var(--ict-accent) 12%,transparent),transparent 35%),linear-gradient(160deg,var(--ict-bg2),var(--ict-bg) 62%);
+  color:var(--ict-text);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.topbar,.ws-header){
+  background:color-mix(in srgb,var(--ict-card) 91%,transparent);
+  border-color:var(--ict-border);color:var(--ict-text);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.topbar,.ws-header) :is(nav a,.go-home,.back,.ws-back,.ws-nav a,.brand,.ws-brand){color:var(--ict-text)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.card,.panel,.ws-card,.ws-module,.ws-personal-bar,.ws-stat,.hero-note,.ws-hero-side,.snapshot,.source-status,.status,.metrics>*,.feed>*,.data-status){
+  background:linear-gradient(148deg,var(--ict-card),var(--ict-card2))!important;
+  border-color:var(--ict-border)!important;
+  color:var(--ict-text);
+  box-shadow:var(--ict-shadow);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.tabs,.ws-tabs,.notice,.ws-alert,.ws-check-item,.ws-history-row,.ws-risk-note,.ws-module-toggles label,.hero-pills span,.stat,.metric,.result,.item,.feed-item){
+  background:var(--ict-card2);border-color:var(--ict-border);color:var(--ict-text);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.tabs button,.tab,.ws-tab){color:var(--ict-text);border-color:transparent}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.tabs button.active,.tab.active,.ws-tab.active){
+  color:var(--ict-accent-contrast)!important;background:var(--ict-accent)!important;
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.primary,.ws-primary,button.primary){
+  background:var(--ict-accent);color:var(--ict-accent-contrast);border-color:var(--ict-accent);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.outline,.ghost,.ws-secondary,.go-home,.ws-back,.back,.upload){
+  background:var(--ict-card2);color:var(--ict-text);border-color:var(--ict-border);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
+  background:var(--ict-card);border-color:var(--ict-border);color:var(--ict-text);caret-color:var(--ict-accent);
+}
+html[data-ict-page]:not([data-ict-page="home"]) :is(input,select,textarea)::placeholder{color:var(--ict-muted);opacity:.85}
+html[data-ict-page]:not([data-ict-page="home"]) :is(label,.field,.ws-field,.ws-fields label,.ws-mini,.ws-check-status,.ws-risk-note){color:var(--ict-text)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.eyebrow,.ws-eyebrow,.ws-tag,.card-head a,.panel-title a){color:var(--ict-highlight)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(h1,h2,h3,h4,.ws-card-head h3,.panel-title h3){color:var(--ict-text)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(p,small,.micro,.micro-note,.ws-footnote,.ws-hero p,.ws-section-head p){color:var(--ict-muted)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(a:not(.brand):not(.ws-brand),.ws-module>a){color:var(--ict-highlight)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(.tab.active,.tabs button.active,.ws-tab.active){color:var(--ict-accent-contrast)!important}
+html[data-ict-page]:not([data-ict-page="home"]) input[type="checkbox"]{accent-color:var(--ict-accent)}
+html[data-ict-page]:not([data-ict-page="home"]) :is(table,thead,tbody,tr,th,td){border-color:var(--ict-border)}
+html[data-ict-page]:not([data-ict-page="home"]) th{background:var(--ict-card2);color:var(--ict-text)}
+html[data-ict-page]:not([data-ict-page="home"]) td{color:var(--ict-text)}
+/* Light theme needs explicit neutral text in originally hard-coded dark-only lab components. */
+html[data-theme="light"][data-ict-page]:not([data-ict-page="home"]) :is(.ws-card,.ws-module,.ws-stat,.panel,.card,.tabs,.ws-tabs,.topbar,.ws-header,.ws-module-settings,.notice,.ws-alert,.hero,.ws-hero,.data-status) :is(strong,b,label,span):not(.signal-dot):not(.ws-local-dot){color:inherit}
+html[data-theme="light"][data-ict-page]:not([data-ict-page="home"]) :is(.ws-tab,.tab,.tabs button,.ws-secondary,.outline,.ghost,.ws-check-item,.ws-module-toggles label){color:var(--ict-text)}
+html[data-theme="light"][data-ict-page]:not([data-ict-page="home"]) :is(.micro-note,.ws-footnote,.ws-section-head p,.ws-hero p){color:var(--ict-muted)}
+/* Theme button is added only on standalone tool pages. */
+.ict68-theme-control{
+  position:fixed;left:16px;bottom:18px;z-index:60;display:flex;align-items:center;gap:7px;
+  border:1px solid var(--ict-border);background:var(--ict-card);color:var(--ict-text);
+  box-shadow:var(--ict-shadow);border-radius:999px;padding:9px 14px;
+  font:700 12px/1.4 'Almarai',Tahoma,Arial,sans-serif;cursor:pointer;
+}
+.ict68-theme-control:hover{background:var(--ict-card2)}
+.ict68-theme-control:focus-visible{outline:2px solid var(--ict-accent);outline-offset:3px}
+@media(max-width:650px){.ict68-theme-control{left:12px;bottom:16px;font-size:11px;padding:9px 12px}}
+@media(prefers-reduced-motion:reduce){.ict68-theme-control{transition:none}}
+/* Consistent shared navigator on every page and both themes. */
+html[data-ict-page] .ict54-hub,
+html[data-ict-page] #app .ict54-hub.ict54-hub-in-center{
+ background:linear-gradient(120deg,var(--ict-card),var(--ict-card2));
+ color:var(--ict-text);border-color:var(--ict-border);
+ box-shadow:var(--ict-shadow);
+}
+html[data-ict-page] .ict54-hub :is(a,.ict54-hub-title,.ict54-current){color:var(--ict-text);border-color:var(--ict-border)}
+html[data-ict-page] .ict54-hub a:hover,
+html[data-ict-page] .ict54-hub a[aria-current=page]{background:var(--ict-hover);color:var(--ict-highlight)}
+html[data-theme=light] .ict54-hub .ict54-dot{background:var(--ict-green)}
+html[data-ict-page] :is(a,button,input,textarea,select):focus-visible{outline:2px solid var(--ict-accent);outline-offset:3px}

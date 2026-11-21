@@ -1,0 +1,89 @@
+/* ICT بالعربي 6.8.4 — Bento × Glass refinement
+ * Visual-only layer. Retains the 6.8.3 approved dark charcoal / light ivory tokens.
+ * Does not alter grid structure, content logic, fonts, or logo. */
+html[data-ict-page]{
+ --ict-glass-stroke:color-mix(in srgb,var(--ict-border) 76%,var(--ict-card) 24%);
+ --ict-glass-highlight:color-mix(in srgb,var(--ict-text) 5%,transparent);
+ --ict-glass-top:color-mix(in srgb,var(--ict-card) 94%,var(--ict-text) 6%);
+ --ict-glass-bottom:color-mix(in srgb,var(--ict-card2) 76%,var(--ict-card) 24%);
+ --ict-glass-shadow:var(--ict-shadow),inset 0 1px 0 var(--ict-glass-highlight);
+ --ict-bento-radius:19px;
+}
+/* Background hues remain the approved palette; soft spots add dimensionality. */
+html[data-ict-page] body{
+ background:
+  radial-gradient(ellipse 48% 34% at 93% 0%,color-mix(in srgb,var(--ict-accent) 7%,transparent),transparent 76%),
+  radial-gradient(ellipse 38% 31% at -8% 55%,color-mix(in srgb,var(--ict-amber) 4%,transparent),transparent 78%),
+  linear-gradient(155deg,var(--ict-bg2),var(--ict-bg) 58%,var(--ict-bg))!important;
+ background-attachment:fixed;
+}
+/* Bento glass treatment: rounded layered tiles with fine inner light. No reordering or spanning. */
+html[data-ict-page="home"] :is(
+ .card,.panel,.tile,.section-card,.metric-card,.stat-card,.market-card,
+ .market-pulse,.market-pulse-card,.ict54-hub,.ict54-hub.ict54-hub-in-center,
+ .notify-luxury-card,.ict-notify-card,.ict-notify-panel
+),
+html[data-ict-page]:not([data-ict-page="home"]) :is(
+ .card,.panel,.ws-card,.ws-module,.ws-personal-bar,.ws-stat,
+ .hero-note,.ws-hero-side,.snapshot,.source-status,.status,.data-status,
+ .metrics>*,.feed>*,.ict54-hub
+){
+ border:1px solid var(--ict-glass-stroke)!important;
+ border-radius:var(--ict-bento-radius);
+ background:linear-gradient(151deg,var(--ict-glass-top),var(--ict-glass-bottom))!important;
+ box-shadow:var(--ict-glass-shadow)!important;
+ position:relative;
+}
+/* A subtle highlight is created by the inset shadow, avoiding overlays on charts/buttons. */
+html[data-ict-page] :is(.card,.panel,.ws-card,.ws-module,.market-card,.ict54-hub) {
+ transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+@media(hover:hover) and (pointer:fine){
+ html[data-ict-page] :is(.card,.panel,.ws-card,.ws-module,.market-card):hover{
+  border-color:color-mix(in srgb,var(--ict-accent) 34%,var(--ict-border))!important;
+  box-shadow:var(--ict-shadow),inset 0 1px 0 var(--ict-glass-highlight),0 0 0 1px color-mix(in srgb,var(--ict-accent) 7%,transparent)!important;
+ }
+}
+/* Crisp compact chips: Bento accents, same text/background roles in both themes. */
+html[data-ict-page] :is(
+ .hero-pills span,.ws-tag,.ws-eyebrow,.eyebrow,.tag,.chip,.badge,.pill,
+ .ws-check-item,.ws-module-toggles label,.stat,.metric
+){border-color:var(--ict-glass-stroke)}
+html[data-ict-page] :is(.tabs,.ws-tabs,.ws-personal-bar,.ws-header,.topbar){
+ border-color:var(--ict-glass-stroke)!important;
+}
+/* Glass only on small stationary navigation surfaces, not on entire chart areas. */
+html[data-ict-page] :is(.topbar,.ws-header,.header,.mobile-bottom){
+ background:color-mix(in srgb,var(--ict-card) 94%,transparent)!important;
+ border-color:var(--ict-glass-stroke)!important;
+ box-shadow:0 3px 19px color-mix(in srgb,var(--ict-bg) 24%,transparent);
+}
+@supports ((-webkit-backdrop-filter:blur(8px)) or (backdrop-filter:blur(8px))){
+ @media(min-width:701px){
+  html[data-ict-page] :is(.topbar,.ws-header,.header){
+   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+ }
+}
+/* Distinct fields, quiet focus ring, and gentle active controls. */
+html[data-ict-page] :is(input:not([type=checkbox]):not([type=radio]),select,textarea){
+ border:1px solid var(--ict-border);border-radius:11px;
+ background:var(--ict-card)!important;color:var(--ict-text);
+}
+html[data-ict-page] :is(button,.btn,.ws-tab,.tab,.ict54-hub a){
+ transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;
+}
+html[data-ict-page] :is(input,select,textarea,button,a):focus-visible{
+ outline:2px solid var(--ict-accent);outline-offset:3px;
+}
+/* Gentle progress and separators consistent in both themes. */
+html[data-ict-page] :is(hr,.divider,.separator){border-color:var(--ict-border)}
+/* Avoid native filter on data-heavy surfaces and mobile GPUs. */
+@media(max-width:700px){
+ html[data-ict-page] body{background-attachment:scroll}
+ html[data-ict-page] :is(.card,.panel,.ws-card,.ws-module,.ict54-hub){border-radius:16px}
+ html[data-ict-page] :is(.header,.mobile-bottom,.topbar,.ws-header){-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-ict-page] :is(.card,.panel,.ws-card,.ws-module,.market-card,button,.btn){transition:none!important}
+}
