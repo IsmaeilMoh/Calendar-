@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T05:24:39.367272Z",
+  "updatedAt": "2026-11-21T06:24:22.980292Z",
   "source": "Yahoo Finance public chart feed (unofficial)",
   "changeBasis": "Yahoo chart previous close; not uniform 24h",
   "items": [
@@ -49,7 +49,7 @@
       "category": "forex",
       "change": 0.4976,
       "price": 1.434,
-      "quotedAt": "2026-11-21T05:21:11Z",
+      "quotedAt": "2026-11-21T05:31:30Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/USDCAD/"
     },
@@ -59,7 +59,7 @@
       "category": "forex",
       "change": -2.3602,
       "price": 0.6619,
-      "quotedAt": "2026-11-21T05:23:43Z",
+      "quotedAt": "2026-11-21T05:59:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/AUDUSD/"
     },
@@ -69,7 +69,7 @@
       "category": "forex",
       "change": -1.0492,
       "price": 0.547,
-      "quotedAt": "2026-11-21T05:21:43Z",
+      "quotedAt": "2026-11-21T05:59:44Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/NZDUSD/"
     },
@@ -109,7 +109,7 @@
       "category": "index",
       "change": -8.6129,
       "price": 6910.39,
-      "quotedAt": "2026-11-20T21:00:00Z",
+      "quotedAt": "2026-11-20T21:35:54Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/SPX/"
     },
@@ -127,8 +127,8 @@
       "symbol": "WTI",
       "label": "خام WTI — عقد آجل",
       "category": "energy",
-      "change": -2.4498,
-      "price": 83.62,
+      "change": -2.6948,
+      "price": 83.41,
       "quotedAt": "2026-11-20T21:59:59Z",
       "proxy": true,
       "url": "https://www.tradingview.com/symbols/USOIL/"
@@ -137,9 +137,9 @@
       "symbol": "BTCUSD",
       "label": "Bitcoin",
       "category": "crypto",
-      "change": -13.55,
-      "price": 56100.82,
-      "quotedAt": "2026-11-21T05:24:33Z",
+      "change": -14.0404,
+      "price": 55782.55,
+      "quotedAt": "2026-11-21T06:24:20Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/BTCUSD/"
     },
@@ -147,9 +147,9 @@
       "symbol": "ETHUSD",
       "label": "Ethereum",
       "category": "crypto",
-      "change": -14.1381,
-      "price": 1565.23,
-      "quotedAt": "2026-11-21T05:24:35Z",
+      "change": -14.3065,
+      "price": 1562.16,
+      "quotedAt": "2026-11-21T06:24:15Z",
       "proxy": false,
       "url": "https://www.tradingview.com/symbols/ETHUSD/"
     }
