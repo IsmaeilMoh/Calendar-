@@ -1087,3 +1087,25 @@ html[data-ict-page]:not([data-ict-page="home"]) :is(.ws-header-content,.topbar .
 @media(prefers-reduced-motion:reduce){
   html[data-ict-page="home"] .header .navigation a{transition:none!important;}
 }
+
+/* 6.8.28: render the notification bell as a shared-style SVG instead of
+   an emoji suppressed by the icon-system text reset above. */
+.public-notify-icon .public-notify-bell {
+  display:block; width:55%; height:55%; flex:none;
+  stroke:currentColor; fill:none; overflow:visible;
+}
+
+/* v6.8.30 — notification bell, resistant to earlier text-icon resets */
+#app .notification-public .public-notify-icon {
+  display:grid; place-items:center; line-height:1;
+}
+#app .notification-public .public-notify-icon svg.public-notify-bell {
+  display:block !important; width:58% !important; height:58% !important;
+  min-width:20px; min-height:20px; stroke:currentColor !important;
+  fill:none !important; opacity:1 !important; visibility:visible !important;
+  flex:none; overflow:visible;
+}
+#app .notification-public .public-notify-icon > span { font-size:7px !important; }
+@media (max-width:420px) {
+  #app .notification-public .public-notify-icon svg.public-notify-bell {min-width:19px;min-height:19px;}
+}
