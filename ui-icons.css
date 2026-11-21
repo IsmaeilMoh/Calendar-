@@ -1,0 +1,133 @@
+
+:root{
+  --uii-nav-size: 1.05rem;
+  --uii-box: 1.95rem;
+  --uii-box-sm: 1.7rem;
+  --uii-radius: 14px;
+  --uii-shadow: 0 10px 22px rgba(0,0,0,.08);
+}
+:root[data-theme="dark"]{
+  --uii-ink: #dff5eb;
+  --uii-muted: #b8d5ca;
+  --uii-accent: #91e1b8;
+  --uii-bg: linear-gradient(135deg, rgba(92,176,145,.18), rgba(30,58,54,.12));
+  --uii-bg-strong: linear-gradient(135deg, rgba(93,178,146,.23), rgba(34,66,61,.15));
+  --uii-border: rgba(171,225,198,.18);
+  --uii-glow: 0 1px 0 rgba(255,255,255,.07) inset, 0 16px 30px rgba(0,0,0,.16);
+}
+:root[data-theme="light"]{
+  --uii-ink: #274244;
+  --uii-muted: #566b6b;
+  --uii-accent: #1b7d6f;
+  --uii-bg: linear-gradient(135deg, rgba(255,255,255,.72), rgba(246,237,220,.95));
+  --uii-bg-strong: linear-gradient(135deg, rgba(255,255,255,.9), rgba(244,233,211,.98));
+  --uii-border: rgba(164,146,123,.18);
+  --uii-glow: 0 1px 0 rgba(255,255,255,.76) inset, 0 14px 24px rgba(80,63,40,.08);
+}
+
+.uii-iconbox,
+.uii-inlinebox,
+.uii-tabbox,
+.ict54-link-icon,
+.ict-center-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  color:var(--uii-accent);
+}
+.uii-iconbox,
+.ict54-link-icon,
+.ict-center-icon{
+  width:var(--uii-box);
+  height:var(--uii-box);
+  border-radius:var(--uii-radius);
+  background:var(--uii-bg);
+  border:1px solid var(--uii-border);
+  box-shadow:var(--uii-glow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.uii-tabbox{
+  width:1.75rem;
+  height:1.75rem;
+  border-radius:12px;
+  background:var(--uii-bg);
+  border:1px solid var(--uii-border);
+  box-shadow:var(--uii-glow);
+  margin-inline-end:.5rem;
+}
+.uii-inlinebox{width:1.2rem;height:1.2rem}
+.uii-svg{width:1.1rem;height:1.1rem;display:block}
+.uii-tabbox .uii-svg{width:1rem;height:1rem}
+.uii-iconbox .uii-svg,
+.ict54-link-icon .uii-svg,
+.ict-center-icon .uii-svg{width:1.02rem;height:1.02rem}
+
+/* Main header nav */
+.header .navigation a,
+.topbar nav a,
+.ws-nav a{
+  display:inline-flex;
+  align-items:center;
+  gap:.48rem;
+}
+.header .navigation a .uii-inlinebox,
+.topbar nav a .uii-inlinebox,
+.ws-nav a .uii-inlinebox{
+  width:1rem;height:1rem;color:var(--uii-accent);
+}
+.header .navigation a .uii-svg,
+.topbar nav a .uii-svg,
+.ws-nav a .uii-svg{width:.95rem;height:.95rem}
+
+/* Mobile bottom navigation */
+.mobile-bottom a{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.32rem;
+}
+.mobile-bottom .nav-icon{display:none!important}
+.mobile-bottom .uii-iconbox{width:2rem;height:2rem;border-radius:16px}
+.mobile-bottom a span:last-child{line-height:1.1}
+
+/* Theme/install buttons */
+.theme-btn,.install{display:inline-flex;align-items:center;gap:.5rem}
+.theme-btn .uii-inlinebox,.install .uii-inlinebox{color:var(--uii-accent)}
+
+/* Shared hub bar */
+.ict54-hub a{display:inline-flex;align-items:center;gap:.45rem}
+.ict54-link-icon{width:1.6rem;height:1.6rem;border-radius:11px}
+.ict54-link-icon .uii-svg{width:.88rem;height:.88rem}
+
+/* Trading center compact groups */
+html[data-ict-page="home"] #app .ict-center-group summary{display:flex;align-items:center;gap:.65rem}
+html[data-ict-page="home"] #app .ict-center-icon{font-size:0!important;line-height:0}
+html[data-ict-page="home"] #app .ict-center-icon .uii-svg{width:1rem;height:1rem}
+
+/* Tab buttons / segmented controls */
+.ws-tab,.tab,.tabs button{display:inline-flex;align-items:center;justify-content:center}
+.ws-tab .uii-tabbox,.tab .uii-tabbox,.tabs button .uii-tabbox{order:-1}
+
+/* Smart desk panels and cards that still have text icons */
+.tool-card .tool-glyph,
+.ws-module-icon,
+.public-notify-icon{
+  font-size:0!important;
+}
+
+/* Page chrome links */
+.go-home,.ws-back,.back{display:inline-flex;align-items:center;gap:.42rem}
+.go-home .uii-inlinebox,.ws-back .uii-inlinebox,.back .uii-inlinebox{color:var(--uii-accent)}
+
+/* Light mode better contrast on icon surfaces */
+:root[data-theme="light"] .mobile-bottom .uii-iconbox,
+:root[data-theme="light"] .ict54-link-icon,
+:root[data-theme="light"] .ict-center-icon,
+:root[data-theme="light"] .uii-tabbox{
+  background:var(--uii-bg-strong);
+}
+
+@media (max-width:700px){
+  .header .navigation a .uii-inlinebox,
+  .topbar nav a .uii-inlinebox,
+  .ws-nav a .uii-inlinebox{display:none}
+}
