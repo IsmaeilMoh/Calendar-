@@ -163,7 +163,7 @@ async function fetchMovers(){
  S.movers=rows;S.moversUpdated=when;
  S.moversStatus=rows.length&&Number.isFinite(age)&&age>=-300000&&age<moverFreshMs?'fresh':rows.length&&Number.isFinite(age)&&age<72*3600000?'stale':'unavailable';refreshPulse();ticker();
 }
-function compactCountdown(ms){const secs=Math.max(0,Math.floor(ms/1000));const days=Math.floor(secs/86400),hh=Math.floor(secs%86400/3600),mm=Math.floor(secs%3600/60),ss=secs%60;return days?`${days}ي ${String(hh).padStart(2,'0')}س ${String(mm).padStart(2,'0')}د`:`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`}
+function compactCountdown(ms){const secs=Math.max(0,Math.floor(ms/1000));const days=Math.floor(secs/86400),hh=Math.floor(secs%86400/3600),mm=Math.floor(secs%3600/60),ss=secs%60;return days?`${days}d ${String(hh).padStart(2,'0')}h ${String(mm).padStart(2,'0')}m`:`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`}
 function currentIctWindow(){
  const now=new Date(),today=nyToday();
  const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).filter(p=>p.type!=='literal').map(p=>[p.type,Number(p.value)]));
