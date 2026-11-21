@@ -1,19 +1,10 @@
-/* ICT بالعربي 6.8.27 — common navigation, theme and icon system (public static pages). */
+/* ICT بالعربي 6.8.31 — unified header/navigation; theme delegated to ICTTheme. */
 (()=>{'use strict';
-const root=document.documentElement;
-const storageKey='ict-theme-mode';
 const page=location.pathname.split('/').pop()||'index.html';
 const nested=location.pathname.split('/').includes('assets');
 const base=nested?'../':'./';
-const modes=['auto','light','dark'];
-const mq=matchMedia('(prefers-color-scheme: dark)');
-function chosen(){try{const v=localStorage.getItem(storageKey);return modes.includes(v)?v:'auto'}catch(_){return 'auto'}}
-function resolved(){const m=chosen();return m==='auto'?(mq.matches?'dark':'light'):m}
-function apply(){const v=resolved();root.dataset.theme=v;root.style.colorScheme=v;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=v==='dark'?'#0c141b':'#f4eee2';document.querySelectorAll('.ict-unity-theme-text').forEach(e=>e.textContent=({auto:'تلقائي',light:'فاتح',dark:'داكن'})[chosen()]);document.querySelectorAll('.ict-unity-theme').forEach(e=>e.setAttribute('aria-label','تغيير المظهر، الوضع الحالي: '+chosen()));}
-window.ICTTheme={apply,chosen,resolved};
-apply();
-try{mq.addEventListener('change',()=>{if(chosen()==='auto')apply()})}catch(_){}
-addEventListener('storage',e=>{if(e.key===storageKey)apply()});
+const theme=window.ICTTheme;
+function syncTheme(){if(theme)theme.apply()}
 function icon(name,box=false){const inner=(window.ICTSharedIcons&&window.ICTSharedIcons.makeIcon(name))||document.createElement('span');if(box){const outer=document.createElement('span');outer.className='uii-iconbox';outer.append(inner);return outer}return inner;}
 const nav=[['home','الرئيسية','#home'],['markets','الأسواق','#markets'],['news','الأخبار','#news'],['recs','التوصيات','#recs'],['agenda','الأجندة','#agenda'],['ict','أدوات ICT','#ict'],['links','تابعنا','#links']];
 function link(key,label,path,cls){const a=document.createElement('a');a.href=path;a.dataset.page=key;if(cls)a.className=cls;a.append(icon(key),document.createTextNode(label));return a;}
@@ -27,12 +18,11 @@ function makeHeader(){const existing=document.querySelector('body > header');if(
  nav.forEach(([key,label,path])=>menu.append(link(key,label,base+path)));
  const actions=document.createElement('div');actions.className='ict-unity-actions';
  const btn=document.createElement('button');btn.type='button';btn.className='ict-unity-theme';btn.title='تغيير المظهر';btn.append(icon('theme'));const txt=document.createElement('span');txt.className='ict-unity-theme-text';btn.append(txt);
- btn.addEventListener('click',()=>{try{localStorage.setItem(storageKey,modes[(modes.indexOf(chosen())+1)%modes.length])}catch(_){}apply();});actions.append(btn);
+ btn.addEventListener('click',()=>{if(theme)theme.cycle();});actions.append(btn);
  w.append(logo,menu,actions);h.append(w);existing.replaceWith(h);
  // Legacy standalone theme control would otherwise appear as a second switch.
  const legacy=document.getElementById('ict68-theme-control');if(legacy)legacy.remove();
- const observer=new MutationObserver(()=>{const old=document.getElementById('ict68-theme-control');if(old)old.remove();});observer.observe(document.body,{childList:true});
- apply();
+ syncTheme();
 }
 const quick=[['home','الرئيسية','#home'],['markets','الأسواق','#markets'],['agenda','الأجندة','#agenda'],['recs','التوصيات','#recs']];
 function makeDock(){if(page==='index.html'||page==='admin.html')return;document.querySelectorAll('.ict65-dock,.ict65-sheet,.ict65-dim').forEach(node=>node.remove());document.body.classList.remove('ict65-has-dock');
@@ -48,10 +38,9 @@ function makeDock(){if(page==='index.html'||page==='admin.html')return;document.
  function show(v){sheet.hidden=!v;overlay.hidden=!v;more.setAttribute('aria-expanded',String(v));if(v)close.focus();else more.focus()}
  more.addEventListener('click',()=>show(!sheet.hidden));close.addEventListener('click',()=>show(false));overlay.addEventListener('click',()=>show(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden)show(false)});
  document.body.append(overlay,sheet,dock);
- // Avoid a second legacy dock even if an older script creates it later.
- const legacyObserver=new MutationObserver(()=>{if(!document.querySelector('.ict-unity-dock'))return;document.querySelectorAll('.ict65-dock,.ict65-sheet,.ict65-dim').forEach(node=>node.remove());document.body.classList.remove('ict65-has-dock');});
- legacyObserver.observe(document.body,{childList:true});
+ // A single dock is owned by this module; legacy creators are disabled at source.
+ document.body.dataset.ictNavOwner='unity';
 }
-function init(){if(page==='index.html')return;makeHeader();makeDock();apply()}
+function init(){if(page==='index.html'||page==='admin.html')return;document.body.dataset.ictNavOwner='unity';makeHeader();makeDock();syncTheme()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

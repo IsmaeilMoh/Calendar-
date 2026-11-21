@@ -1,12 +1,5 @@
 /* ICT بالعربي 6.8.29: single bottom dock & Almarai site-wide typography */
-/* Restore exactly one mobile navigation stack in standalone Trading Center pages. */
-html[lang="ar"] body:has(.ict-unity-dock) .ict65-dock,
-html[lang="ar"] body:has(.ict-unity-dock) .ict65-sheet,
-html[lang="ar"] body:has(.ict-unity-dock) .ict65-dim {display:none!important;visibility:hidden!important}
-@media(max-width:760px){
- html[lang="ar"] body:has(.ict-unity-dock){padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
- html[lang="ar"] body:has(.ict-unity-dock) .ict-unity-dock{display:grid!important}
-}
+/* Dock ownership is controlled by site-unity.js and site-unity.css. */
 /* All Trading Center content uses the same font as the main site, even when
    original page styles specify Tajawal/Tahoma/Arial with !important. */
 html[lang="ar"] body :is(h1,h2,h3,h4,h5,h6,p,div,span,small,b,strong,em,li,a,button,label,input,textarea,select,option,th,td,caption,summary,nav,header,footer,section,article,aside,time,output,fieldset,legend){
