@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install Forex Factory HTML parser
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
       - name: Download and validate calendar
         run: |
           python scripts/update_calendar.py || echo "calendar update reported an issue; diagnostics will still be published"
