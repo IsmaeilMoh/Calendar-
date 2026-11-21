@@ -1,11 +1,19 @@
 name: Probe Forex Factory economic results (private preview)
 on:
+  # Scheduled refresh is private: no generated result data enters the public branch.
+  schedule:
+    - cron: '41 */6 * * *'
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
+concurrency:
+  group: private-economic-results-archive
+  cancel-in-progress: false
 jobs:
   probe:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,33 +25,84 @@ jobs:
         run: |
           python -m unittest discover -s scripts -p 'test_economic_results.py' -v
           python -m unittest discover -s scripts -p 'test_ff_web_calendar.py' -v
-      - name: Probe actual published results
+      - name: Restore prior private results artifact, when available
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p tmp-previous
+          # Only completed runs of this same workflow; never download from another workflow.
+          # A missing artifact (initial run/retention expiry) is expected and non-fatal.
+          ids=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow probe-economic-results.yml --status completed --limit 15 --json databaseId --jq '.[].databaseId' 2>/dev/null) || ids=''
+          found=0
+          for run_id in $ids; do
+            mkdir -p "tmp-restore/$run_id"
+            if gh run download "$run_id" --repo "$GITHUB_REPOSITORY" -n ff-economic-results-preview -D "tmp-restore/$run_id" >/dev/null 2>&1; then
+              candidate="tmp-restore/$run_id/economic-results-preview.json"
+              if python - "$candidate" <<'PYVALID'
+          import json,sys
+          try:
+              d=json.load(open(sys.argv[1],encoding='utf-8'))
+              assert d.get('source')=='Forex Factory' and isinstance(d.get('events'),list)
+              assert all(isinstance(r,dict) and r.get('id') for r in d['events'])
+          except Exception:
+              sys.exit(1)
+          PYVALID
+              then
+                cp "$candidate" tmp-previous/economic-results-preview.json
+                found=1
+                echo "Restored prior private archive from run $run_id"
+                break
+              fi
+            fi
+          done
+          if [ "$found" -eq 0 ]; then echo 'No usable prior archive found; starting with newly fetched results.'; fi
+      - name: Refresh released results and merge historic archive
         id: probe
         continue-on-error: true
-        run: python scripts/update_economic_results.py --output tmp-results/economic-results-preview.json --report tmp-results/economic-results-status.json
-      - name: Upload private results preview and status
+        shell: bash
+        run: |
+          set -e
+          prior=()
+          if [ -s tmp-previous/economic-results-preview.json ]; then
+            prior=(--previous tmp-previous/economic-results-preview.json)
+          fi
+          python scripts/update_economic_results.py \
+            --output tmp-results/economic-results-preview.json \
+            --report tmp-results/economic-results-status.json "${prior[@]}"
+      - name: Upload private archive and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ff-economic-results-preview
           path: tmp-results/*.json
-          retention-days: 3
+          retention-days: 7
           if-no-files-found: warn
-      - name: Summarize live probe
+      - name: Summarize archive refresh
         if: always()
         run: |
           python - <<'PYCODE'
-          import json, os, pathlib
+          import json,os,pathlib
           p=pathlib.Path('tmp-results/economic-results-status.json')
+          lines=['## Private economic results archive', '']
           if not p.exists():
-              summary='## Forex Factory results probe\nNo status file was generated. Check workflow logs.\n'
+              lines.append('No status file generated. Inspect job logs.')
           else:
-              d=json.loads(p.read_text())
-              summary='## Forex Factory results probe\n'
-              summary+=f"Parsed: {d['parsedTotal']} events; published actuals: {d['releasedWithActual']}\n"
-              for w in d['weeks']:
-                  summary+=f"- {w['weekStart']}: {'OK' if w['ok'] else 'FAILED'}"
-                  if not w['ok']: summary+=f" — {w.get('error','unknown')}"
-                  summary+='\n'
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write(summary)
+              d=json.loads(p.read_text(encoding='utf-8'))
+              lines += [f"Archive records: {d.get('archiveTotal',0)}",
+                        f"Comparable records: {d.get('comparableTotal',0)}",
+                        f"Previously restored: {d.get('previousLoaded',0)}",
+                        f"New/revised this run: {d.get('newOrRevised',0)}",
+                        f"Published actuals detected this run: {d.get('releasedWithActual',0)}",'']
+              for week in d['weeks']:
+                  lines.append(f"- {week['weekStart']}: {'OK' if week['ok'] else 'FAILED'}" + (f" — {week.get('error')}" if not week['ok'] else ''))
+          lines.extend(['','**Private artifact only. Nothing published to the website.**'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('\n'.join(lines)+'\n')
           PYCODE
+      - name: Report failure if probe did not succeed
+        if: always()
+        env:
+          PROBE_OUTCOME: ${{ steps.probe.outcome }}
+        run: test "$PROBE_OUTCOME" = success
