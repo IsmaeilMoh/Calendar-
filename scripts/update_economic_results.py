@@ -65,9 +65,11 @@ def main(argv=None):
         except (ValueError, TypeError) as exc:
             cli.error(f'bad --previous snapshot: {exc}')
     rows, summary = ingest(all_events, old=prior_rows, now=now)
+    comparable_total = sum(1 for row in rows if row.get('comparison', {}).get('comparable'))
     status = {'checkedAt': now.isoformat(), 'source': 'Forex Factory',
               'mode': 'proof-of-concept-private-artifact', 'weeks': checks,
-              'parsedTotal': len(all_events), **summary,
+              'parsedTotal': len(all_events), 'archiveTotal': len(rows),
+              'comparableTotal': comparable_total, 'previousLoaded': len(prior_rows), **summary,
               'warning': 'No live results verified' if not rows else None}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.report.parent.mkdir(parents=True, exist_ok=True)
