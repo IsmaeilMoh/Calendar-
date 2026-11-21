@@ -34,14 +34,111 @@ function renderRadarEvents(){const currency=selected==='XAUUSD'||selected==='XAG
 function renderXray(){const name=$('xray-set').value,group=sets[name]||sets.gold,all=[...group.symbols.map(s=>({symbol:s,tv:tv[s]})),...group.extras];const picker=$('xray-symbol'),previous=picker.value;picker.innerHTML=all.map(x=>`<option value="${esc(x.tv)}">${esc(x.symbol)} · ${esc(x.tv)}</option>`).join('');if(all.some(x=>x.tv===previous))picker.value=previous;renderChart();}
 function renderChart(){const name=$('xray-set').value,group=sets[name]||sets.gold,all=[...group.symbols.map(s=>({symbol:s,tv:tv[s]})),...group.extras],v=$('xray-symbol').value;if(!all.some(x=>x.tv===v))return;$('xray-code').textContent=v;$('xray-open').href=chart(v);$('xray-context').textContent=group.note;$('xray-peers').innerHTML=all.map(x=>`<button class="peer ${x.tv===v?'active':''}" type="button" data-tv="${esc(x.tv)}"><strong dir="ltr">${esc(x.symbol)}</strong><small dir="ltr">${esc(x.tv)}</small></button>`).join('');$('xray-peers').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{$('xray-symbol').value=b.dataset.tv;renderChart()}));$('xray-questions').innerHTML=group.questions.map(q=>`<p>◈ ${esc(q)}</p>`).join('');const widget=$('xray-widget');widget.innerHTML='<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div>';const script=document.createElement('script');script.type='text/javascript';script.async=true;script.src='https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';script.textContent=JSON.stringify({symbols:[[v,v+'|1D']],chartOnly:false,width:'100%',height:'100%',locale:'en',colorTheme:'dark',autosize:true,showVolume:false,showMA:false,hideDateRanges:false,hideMarketStatus:false,hideSymbolLogo:false,scalePosition:'right',scaleMode:'Normal',fontFamily:'Arial',fontSize:'11',noTimeScale:false,valuesTracking:'1',changeMode:'price-and-percent',chartType:'area',lineWidth:2,lineType:0,dateRanges:['1d|1','1m|30','3m|60','12m|1D']});widget.querySelector('.tradingview-widget-container').appendChild(script);}
 function numeric(x){let s=String(x??'').trim().replace(/[,\s]/g,'');const isPercent=s.endsWith('%');s=s.replace(/[%KMB]$/i,'');let multiplier=1;if(/[KMB]$/i.test(String(x).trim())){const z=String(x).trim().slice(-1).toUpperCase();multiplier={K:1e3,M:1e6,B:1e9}[z]||1;}if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s))return null;const n=Number(s)*multiplier;return Number.isFinite(n)?{value:n,unit:isPercent?'percent':'number'}:null;}
-function newsOptions(){const pick=$('news-select');const prev=pick.value;const options=events.filter(e=>Date.parse(e.date)<=Date.now()+3600000).slice(0,90);pick.innerHTML='<option value="">اختر خبرًا من الأجندة…</option>'+options.map(e=>`<option value="${esc(e.id)}">${esc(e.currency)} · ${esc(e.title)} · ${when(e.date)}</option>`).join('');if(options.some(e=>e.id===prev))pick.value=prev;$('news-feed-status').textContent=events.length?`آخر مزامنة ${when(calendarAt)} · ${events.length} حدث`:'الأجندة غير متاحة';$('news-feed-status').classList.toggle('bad',!events.length||elapsed(calendarAt)>12*3600000);renderNewsReview();}
-function currentEvent(){return events.find(e=>e.id===$('news-select').value)||null;}
-function renderNewsReview(){const e=currentEvent();$('event-review').innerHTML=e?`<h3>${esc(e.title)}</h3><p>${esc(e.currency)} · ${when(e.date)} · ${e.impact==='high'?'تأثير مرتفع':e.impact==='medium'?'تأثير متوسط':'تأثير آخر'}</p><div class="metrics"><div><small>السابق</small><strong dir="ltr">${esc(e.previous)}</strong></div><div><small>المتوقع</small><strong dir="ltr">${esc(e.forecast)}</strong></div><div><small>الفعلي</small><strong dir="ltr">${esc(e.actual)}</strong></div></div>`:'<p class="empty">اختر حدثًا لعرض السابق والمتوقع والفعلي.</p>';
- const f=e?numeric(e.forecast):null,a=e?numeric(e.actual):null;let explanation='لا تتوفر قيم فعلية ومتوقعة قابلة للمقارنة لهذا الحدث.';if(f&&a&&f.unit===a.unit){const delta=a.value-f.value;explanation=`${Math.abs(delta)<1e-10?'النتيجة مطابقة للتوقعات':delta>0?'النتيجة أعلى من المتوقع':'النتيجة أقل من المتوقع'} · الفرق الحسابي ${delta>0?'+':''}${fmt(delta)}${f.unit==='percent'?' نقطة مئوية':''}.`;}$('surprise').textContent=explanation;}
+// Economic Results Engine 6.8.42 — local, user-imported Forex Factory results.
+// No private probe artifact is fetched or published to the public website.
+const economicResultsKey='ict-economic-results-private-v1';
+let economicResults=[],resultsUpdatedAt=null,newsFilter='all';
+const validResultsRow=r=>r&&typeof r==='object'&&typeof r.id==='string'&&r.id.length<160&&typeof r.title==='string'&&r.title.length<260&&typeof r.date==='string'&&Number.isFinite(Date.parse(r.date))&&r.values&&typeof r.values==='object'&&String(r.source||'')==='Forex Factory';
+function resultRows(input){
+ const raw=Array.isArray(input?.events)?input.events:[];
+ if(raw.length>15000)throw Error('الملف كبير بصورة غير متوقعة.');
+ return raw.filter(validResultsRow).map(r=>({
+ id:r.id,date:r.date,title:r.title,currency:String(r.country||'').toUpperCase().slice(0,8),
+ impact:String(r.impact||'unknown').toLowerCase(),actual:String(r.values.actual??'—'),
+ forecast:String(r.values.forecast??'—'),previous:String(r.values.previous??'—'),
+ source:'Forex Factory',comparison:r.comparison&&typeof r.comparison==='object'?r.comparison:null,
+ firstSeenAt:r.firstSeenAt||null,lastSeenAt:r.lastSeenAt||null,
+ revisions:Array.isArray(r.revisions)?r.revisions.slice(-25):[]
+ })).filter(r=>r.actual!=='—'&&r.actual!=='null'&&r.actual!==''&&r.currency);
+}
+function readResults(){
+ try{const s=localStorage.getItem(economicResultsKey);if(!s)return [];
+ const parsed=JSON.parse(s);return resultRows(parsed)}catch{return []}
+}
+function compareEvent(e){
+ if(!e)return {comparable:false};
+ const c=e.comparison;
+ if(c&&c.comparable===true&&typeof c.difference==='string'&&/^[+-]?\d+(?:\.\d+)?$/.test(c.difference)&&['absolute','percentage-points'].includes(c.unit))
+  return {comparable:true,difference:Number(c.difference),unit:c.unit};
+ // For calendar-only events, use arithmetic fallback without pretending units are compatible.
+ const f=numeric(e.forecast),a=numeric(e.actual);
+ return f&&a&&f.unit===a.unit?{comparable:true,difference:a.value-f.value,unit:f.unit==='percent'?'percentage-points':'absolute'}:{comparable:false};
+}
+function resultsStatus(message,isError=false){
+ const node=$('results-local-status');if(node){node.textContent=message;node.classList.toggle('bad',isError)}
+}
+function refreshResultsStatus(){
+ const comparable=economicResults.filter(e=>compareEvent(e).comparable).length;
+ resultsStatus(economicResults.length?`النتائج المحفوظة على هذا الجهاز: ${economicResults.length} | قابلة للمقارنة: ${comparable} | آخر استيراد: ${when(resultsUpdatedAt)}`:'لم تُستورد نتائج بعد. اختر ملف economic-results-preview.json من GitHub Artifacts.');
+}
+function eventPool(){return economicResults.length?economicResults:events}
+function filteredNews(){
+ const pool=eventPool(),q=String($('news-query')?.value||'').trim().toLowerCase(),currency=$('news-currency')?.value||'';
+ return pool.filter(e=>(!q||(e.title+' '+e.currency).toLowerCase().includes(q))&&(!currency||e.currency===currency)&&(newsFilter!=='high'||e.impact==='high')&&(newsFilter!=='comparable'||compareEvent(e).comparable)).slice(0,500)
+}
+function newsOptions(){
+ const pick=$('news-select'),prev=pick.value;
+ const pool=eventPool(); const currencies=[...new Set(pool.map(e=>e.currency).filter(Boolean))].sort();
+ const cc=$('news-currency'),last=cc.value;
+ cc.innerHTML='<option value="">كل العملات</option>'+currencies.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(currencies.includes(last))cc.value=last;
+ const options=filteredNews().sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+ pick.innerHTML='<option value="">اختر خبرًا…</option>'+options.map(e=>`<option value="${esc(e.id)}">${esc(e.currency)} · ${esc(e.title)} · ${when(e.date)}</option>`).join('');
+ if(options.some(e=>e.id===prev))pick.value=prev;
+ $('news-feed-status').textContent=economicResults.length?`أرشيف خاص · ${economicResults.length} نتيجة`:(events.length?`أجندة عامة · ${events.length} حدث · بدون نتائج مؤرشفة`:'الأجندة غير متاحة');
+ $('news-feed-status').classList.toggle('bad',!economicResults.length);
+ refreshResultsStatus();renderNewsReview();
+}
+function currentEvent(){return eventPool().find(e=>e.id===$('news-select').value)||null}
+function renderNewsReview(){
+ const e=currentEvent();
+ $('event-review').innerHTML=e?`<h3>${esc(e.title)}</h3><p>${esc(e.currency)} · ${when(e.date)} · ${e.impact==='high'?'تأثير مرتفع':e.impact==='medium'?'تأثير متوسط':'تأثير آخر'}</p><div class="metrics"><div><small>السابق</small><strong dir="ltr">${esc(e.previous)}</strong></div><div><small>المتوقع</small><strong dir="ltr">${esc(e.forecast)}</strong></div><div><small>الفعلي</small><strong dir="ltr">${esc(e.actual)}</strong></div></div>${e.source?`<p class="micro-note">المصدر: ${esc(e.source)}${e.lastSeenAt?' · رُصدت النتيجة: '+when(e.lastSeenAt):''}${e.revisions?.length?' · تعديلات محفوظة: '+e.revisions.length:''}</p>`:''}`:'<p class="empty">اختر حدثًا لعرض السابق والمتوقع والفعلي.</p>';
+ const c=compareEvent(e);
+ const output=!e?'اختر حدثًا لعرض المقارنة.':!c.comparable?'لا يوجد توقع قابل للمقارنة مع القيمة الفعلية لهذا الخبر.':`${Math.abs(c.difference)<1e-10?'مطابق للتوقعات':c.difference>0?'أعلى من المتوقع':'أقل من المتوقع'} · الفرق الحسابي ${c.difference>0?'+':''}${fmt(c.difference)}${c.unit==='percentage-points'?' نقطة مئوية':''}. لا يدل ذلك وحده على اتجاه السوق.`;
+ $('surprise').textContent=output;
+}
+async function importEconomicResults(ev){
+ const file=ev.target.files?.[0];if(!file)return;
+ try{
+  if(file.size>8*1024*1024)throw Error('الملف أكبر من الحد المسموح (8MB).');
+  const payload=JSON.parse(await file.text());
+  if(payload?.source!=='Forex Factory'||!Array.isArray(payload.events))throw Error('الملف ليس تصدير نتائج Forex Factory المتوقع.');
+  const fresh=resultRows(payload);if(!fresh.length)throw Error('لا يحتوي الملف على نتائج فعلية صالحة.');
+  const map=new Map(economicResults.map(e=>[e.id,e]));
+  for(const r of fresh){const old=map.get(r.id);if(!old||String(r.lastSeenAt||'')>=String(old.lastSeenAt||''))map.set(r.id,r)}
+  const combined=[...map.values()].sort((a,b)=>Date.parse(b.date)-Date.parse(a.date)).slice(0,3000);
+  try{localStorage.setItem(economicResultsKey,JSON.stringify({source:'Forex Factory',events:combined.map(r=>({...r,country:r.currency,values:{actual:r.actual,forecast:r.forecast,previous:r.previous}}))}));}
+  catch{throw Error('تعذر تخزين الأرشيف على الهاتف؛ قد تكون مساحة المتصفح ممتلئة.');}
+  economicResults=combined;resultsUpdatedAt=new Date().toISOString();
+  try{localStorage.setItem(economicResultsKey+'-date',resultsUpdatedAt)}catch{}
+  $('news-query').value='';newsFilter='all';$('news-impact').value='all';$('news-currency').value='';newsOptions();
+  resultsStatus(`تم استيراد ${fresh.length} نتيجة فعلية. الأرشيف المحلي يحتوي الآن على ${combined.length} نتيجة.`);
+ }catch(e){resultsStatus(`لم ينجح الاستيراد: ${e.message}`,true)}
+ ev.target.value='';
+}
+function exportEconomicResults(){
+ if(!economicResults.length){resultsStatus('لا توجد نتائج محفوظة لتصديرها.',true);return}
+ const content=JSON.stringify({source:'Forex Factory',updatedAt:new Date().toISOString(),events:economicResults.map(r=>({...r,country:r.currency,values:{actual:r.actual,forecast:r.forecast,previous:r.previous}}))},null,2);
+ const url=URL.createObjectURL(new Blob([content],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ICT_Economic_Results_Backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function clearEconomicResults(){
+ if(!economicResults.length)return;
+ if(!confirm('هل تريد حذف أرشيف النتائج من هذا الجهاز فقط؟'))return;
+ try{localStorage.removeItem(economicResultsKey);localStorage.removeItem(economicResultsKey+'-date')}catch{}
+ economicResults=[];resultsUpdatedAt=null;newsOptions();
+}
+function initEconomicResults(){
+ economicResults=readResults();try{resultsUpdatedAt=localStorage.getItem(economicResultsKey+'-date')}catch{}
+ $('results-file').addEventListener('change',importEconomicResults);
+ $('results-export').addEventListener('click',exportEconomicResults);
+ $('results-clear').addEventListener('click',clearEconomicResults);
+ $('news-query').addEventListener('input',newsOptions);
+ $('news-currency').addEventListener('change',newsOptions);
+ $('news-impact').addEventListener('change',e=>{newsFilter=e.target.value;newsOptions()});
+}
 function reactionHistory(){const list=stored(historyKey,[]);return Array.isArray(list)?list.filter(x=>x&&typeof x==='object').slice(0,80):[];}
 function renderReactionHistory(){const rows=reactionHistory();$('reaction-history').innerHTML=rows.length?rows.slice(0,12).map(r=>`<div class="history-row"><div><b>${esc(r.title)}</b><small>${esc(r.asset)} · ${esc(r.window)} دقيقة · ${when(r.saved)}</small></div><strong class="${r.percent>=0?'up':'down'}" dir="ltr">${r.percent>0?'+':''}${Number(r.percent).toFixed(3)}%</strong></div>`).join(''):'<p class="empty">لم تُحفظ قياسات بعد. اختر خبرًا وأدخل السعرين من الشارت.</p>';}
 function saveReaction(ev){ev.preventDefault();const e=currentEvent();if(!e){$('reaction-result').textContent='اختر خبرًا أولًا.';return;}const form=ev.target;const a=Number(form.elements.before.value),b=Number(form.elements.after.value),windowMin=Number(form.elements.window.value);if(!Number.isFinite(a)||a<=0||!Number.isFinite(b)||b<=0||![1,5,15,30,60].includes(windowMin)){ $('reaction-result').textContent='أدخل سعرين موجبين وفترة صحيحة.';return;}const item={id:e.id,title:e.title,date:e.date,asset:form.elements.asset.value,window:windowMin,before:a,after:b,percent:(b/a-1)*100,notes:String(form.elements.notes.value||'').slice(0,180),saved:new Date().toISOString()};const result=[item,...reactionHistory()].slice(0,80);$('reaction-result').textContent=setStored(historyKey,result)?`حُفظت الحركة: ${item.percent>0?'+':''}${item.percent.toFixed(3)}% خلال ${windowMin} دقيقة — حسب الأسعار التي أدخلتها.`:'تعذر الحفظ المحلي.';renderReactionHistory();}
 function exportReactions(){const rows=reactionHistory();if(!rows.length){$('reaction-result').textContent='لا توجد قياسات لتصديرها.';return;}const fields=['date','title','asset','window','before','after','percent','notes','saved'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';const csv='\uFEFF'+[fields.join(','),...rows.map(r=>fields.map(k=>cell(r[k])).join(','))].join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='ICT_News_Reactions.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
-async function boot(){initTabs();$('radar-asset').innerHTML=allowed.map(s=>`<option value="${s}">${s}</option>`).join('');$('radar-asset').value=selected;$('radar-asset').addEventListener('change',e=>selectRadar(e.target.value));$('save-radar').addEventListener('click',saveChecks);$('reset-radar').addEventListener('click',resetChecks);$('xray-set').addEventListener('change',renderXray);$('xray-symbol').addEventListener('change',renderChart);$('news-select').addEventListener('change',renderNewsReview);$('reaction-form').addEventListener('submit',saveReaction);$('export-reactions').addEventListener('click',exportReactions);
+async function boot(){initTabs();$('radar-asset').innerHTML=allowed.map(s=>`<option value="${s}">${s}</option>`).join('');$('radar-asset').value=selected;$('radar-asset').addEventListener('change',e=>selectRadar(e.target.value));$('save-radar').addEventListener('click',saveChecks);$('reset-radar').addEventListener('click',resetChecks);$('xray-set').addEventListener('change',renderXray);$('xray-symbol').addEventListener('change',renderChart);$('news-select').addEventListener('change',renderNewsReview);initEconomicResults();$('reaction-form').addEventListener('submit',saveReaction);$('export-reactions').addEventListener('click',exportReactions);
  const [m,c]=await Promise.all([json('market-movers.json'),json('calendar-live.json')]);moversAt=m?.updatedAt||null;movers=Array.isArray(m?.items)?m.items.filter(x=>allowed.includes(x.symbol)&&Number.isFinite(Number(x.change))).map(x=>({symbol:x.symbol,label:x.label,change:Number(x.change),price:(x.price!=null&&Number.isFinite(Number(x.price))&&Number(x.price)>0)?Number(x.price):null,proxy:Boolean(x.proxy)})):[];calendarAt=c?.updated_at||c?.updatedAt||null;events=normalizeEvents(c);renderRadar();newsOptions();renderReactionHistory();renderXray();}
 boot();
