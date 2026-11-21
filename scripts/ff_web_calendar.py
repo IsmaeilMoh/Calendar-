@@ -103,6 +103,7 @@ def parse_html(html, monday):
             continue
         seen.add(key)
         record = {'id': f'{instant}-{currency}-{title}', 'date': instant,
+                  'ffEventId': row.get('data-event-id') or None,
                   'country': currency, 'title': title,
                   'impact': extract_impact(row.select_one('td.calendar__impact'))}
         for k in ('actual','forecast','previous'):
