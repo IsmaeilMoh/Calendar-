@@ -1,0 +1,85 @@
+/* ICT بالعربي 6.8.12 | Targeted featured-news + footer palette alignment.
+   Built on 6.8.11. Does not change ticker, scripts, layout, or interactions. */
+
+/* NEWS FEATURE: base charcoal-petrol or cream-ivory colors from approved tokens. */
+html[data-ict-page="home"] .hero-news-slider{
+  background:linear-gradient(142deg,var(--ict-card),var(--ict-card2) 68%,var(--ict-bg2))!important;
+  border:1px solid var(--ict-border)!important;
+  color:var(--ict-text)!important;
+  box-shadow:var(--ict-shadow)!important;
+}
+html[data-ict-page="home"] .hero-news-slider::before{
+  background:linear-gradient(132deg,color-mix(in srgb,var(--ict-accent) 9%,transparent),transparent 56%)!important;
+}
+html[data-ict-page="home"] .hero-news-slider::after{
+  border-color:color-mix(in srgb,var(--ict-border) 70%,transparent)!important;
+  box-shadow:0 0 0 45px color-mix(in srgb,var(--ict-border) 12%,transparent),
+             0 0 0 100px color-mix(in srgb,var(--ict-border) 7%,transparent)!important;
+}
+html[data-ict-page="home"] .hero-news-slider :is(.hero-news-title,.hero-news-empty h2){
+  color:var(--ict-text)!important;-webkit-text-fill-color:currentColor;
+}
+html[data-ict-page="home"] .hero-news-slider :is(.hero-news-label,.hero-news-counter,.hero-news-summary,.hero-news-meta,.hero-news-empty p){
+  color:var(--ict-muted)!important;-webkit-text-fill-color:currentColor;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-label{color:var(--ict-highlight)!important}
+html[data-ict-page="home"] .hero-news-slider .hero-news-tag{
+  color:var(--ict-highlight)!important;background:var(--ict-hover)!important;
+  border:1px solid var(--ict-border)!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-link{
+  color:var(--ict-highlight)!important;background:var(--ict-hover)!important;
+  border:1px solid var(--ict-border)!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-link:hover,
+html[data-ict-page="home"] .hero-news-slider .hero-news-link:focus-visible{
+  color:var(--ict-text)!important;background:var(--ict-card3)!important;
+  border-color:var(--ict-accent)!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-controls{border-top-color:var(--ict-border)!important}
+html[data-ict-page="home"] .hero-news-slider .hero-news-dot{background:var(--ict-border)!important}
+html[data-ict-page="home"] .hero-news-slider .hero-news-dot.is-active{background:var(--ict-accent)!important}
+html[data-ict-page="home"] .hero-news-slider .hero-news-arrows button{
+  background:var(--ict-card2)!important;border:1px solid var(--ict-border)!important;color:var(--ict-text)!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-arrows button:hover,
+html[data-ict-page="home"] .hero-news-slider .hero-news-arrows button:focus-visible{
+  background:var(--ict-hover)!important;border-color:var(--ict-accent)!important;
+}
+/* Image-present cards: preserve the photo but tint it to the theme (not fixed black). */
+html[data-ict-page="home"] .hero-news-slider:has(.hero-news-photo){
+  background:linear-gradient(142deg,var(--ict-card),var(--ict-card2))!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-photo img{
+  filter:saturate(.65)!important;opacity:.16!important;
+}
+html[data-ict-page="home"] .hero-news-slider .hero-news-photo::after{
+  background:linear-gradient(270deg,var(--ict-card) 0%,color-mix(in srgb,var(--ict-card) 82%,transparent) 50%,color-mix(in srgb,var(--ict-card2) 72%,transparent) 100%)!important;
+}
+/* Keep dark hero image gently visible, without the original near-black overlay. */
+html[data-theme="dark"][data-ict-page="home"] .hero-news-slider .hero-news-photo img{opacity:.24!important}
+html[data-theme="dark"][data-ict-page="home"] .hero-news-slider .hero-news-photo::after{
+  background:linear-gradient(270deg,var(--ict-card) 0%,color-mix(in srgb,var(--ict-card) 83%,transparent) 58%,color-mix(in srgb,var(--ict-card2) 60%,transparent) 100%)!important;
+}
+
+/* SITE FOOTER — distinct from fixed .tape market ticker, which stays dark in both modes. */
+html[data-ict-page="home"] body > footer,
+html[data-ict-page="home"] footer:not(.tape){
+  background:linear-gradient(150deg,var(--ict-card),var(--ict-card2))!important;
+  color:var(--ict-text)!important;
+  border-top:1px solid var(--ict-border)!important;
+}
+html[data-ict-page="home"] footer :is(.footer-row,.footer-end,.disclaimer,nav){
+  border-color:var(--ict-border)!important;
+}
+html[data-ict-page="home"] footer :is(.brand,.brand b,.footer-row nav a){
+  color:var(--ict-text)!important;
+}
+html[data-ict-page="home"] footer :is(.disclaimer,.footer-end){
+  color:var(--ict-muted)!important;
+}
+html[data-ict-page="home"] footer a:hover,
+html[data-ict-page="home"] footer a:focus-visible{
+  color:var(--ict-highlight)!important;
+}
+/* Do not apply footer/news color overrides to the fixed market tape or to mobile nav. */
