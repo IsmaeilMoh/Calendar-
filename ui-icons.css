@@ -424,3 +424,171 @@ html[data-theme="light"][data-ict-page]:not([data-ict-page=home]) .ict68-theme-c
   .header #theme .uii-themebox .uii-svg,
   html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control::before{transition:none!important}
 }
+
+
+/* 6.8.19 — glass brand badge for logo + title + subtitle */
+:root[data-theme="dark"]{
+  --uii-brand-surface: linear-gradient(135deg, rgba(18,30,28,.80), rgba(36,64,58,.56));
+  --uii-brand-border: rgba(176,232,205,.24);
+  --uii-brand-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 16px 30px rgba(0,0,0,.18);
+  --uii-brand-title: #f3faf7;
+  --uii-brand-sub: rgba(217,240,232,.84);
+  --uii-brand-badge: rgba(255,255,255,.06);
+}
+:root[data-theme="light"]{
+  --uii-brand-surface: linear-gradient(135deg, rgba(255,255,255,.76), rgba(244,233,211,.92));
+  --uii-brand-border: rgba(165,142,115,.28);
+  --uii-brand-shadow: 0 1px 0 rgba(255,255,255,.78) inset, 0 16px 26px rgba(121,93,61,.10);
+  --uii-brand-title: #3f2d1f;
+  --uii-brand-sub: rgba(94,72,47,.84);
+  --uii-brand-badge: rgba(255,255,255,.18);
+}
+
+.header .brand,
+.topbar .brand,
+.ws-brand,
+body > .topbar > .brand{
+  position: relative;
+  display:inline-flex!important;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  border-radius:20px;
+  border:1px solid var(--uii-brand-border)!important;
+  background:var(--uii-brand-surface)!important;
+  box-shadow:var(--uii-brand-shadow)!important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .22s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.header .brand::before,
+.topbar .brand::before,
+.ws-brand::before,
+body > .topbar > .brand::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:1px;
+  border-radius:inherit;
+  background:linear-gradient(135deg, rgba(255,255,255,.48), transparent 30%, transparent 70%, rgba(255,255,255,.22));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  opacity:.9;
+  pointer-events:none;
+}
+.header .brand::after,
+.topbar .brand::after,
+.ws-brand::after,
+body > .topbar > .brand::after{
+  content:"";
+  position:absolute;
+  inset:-30% -55%;
+  background:linear-gradient(115deg, transparent 35%, rgba(255,255,255,.06) 44%, rgba(255,255,255,.35) 50%, rgba(255,255,255,.06) 56%, transparent 65%);
+  transform:translateX(-120%) skewX(-18deg);
+  pointer-events:none;
+  opacity:0;
+}
+.header .brand:hover,
+.topbar .brand:hover,
+.ws-brand:hover,
+body > .topbar > .brand:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--uii-brand-shadow), 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 24px rgba(127,197,173,.12);
+}
+.header .brand:hover::after,
+.topbar .brand:hover::after,
+.ws-brand:hover::after,
+body > .topbar > .brand:hover::after{
+  opacity:1;
+  animation: uii-brand-shine 1.1s ease forwards;
+}
+@keyframes uii-brand-shine {
+  0% { transform:translateX(-120%) skewX(-18deg); }
+  100% { transform:translateX(120%) skewX(-18deg); }
+}
+
+.header .brand img,
+.topbar .brand img,
+.ws-brand img,
+body > .topbar > .brand img{
+  position:relative;
+  z-index:1;
+  width:46px;
+  height:46px;
+  flex:none;
+  border-radius:14px;
+  object-fit:cover;
+  background:var(--uii-brand-badge);
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset, 0 8px 18px rgba(0,0,0,.08);
+}
+.header .brand span,
+.topbar .brand span,
+.ws-brand span,
+body > .topbar > .brand span{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.header .brand .brand-name,
+.header .brand b,
+.topbar .brand strong,
+.ws-brand strong,
+body > .topbar > .brand span{
+  color:var(--uii-brand-title)!important;
+}
+.header .brand .brand-name,
+.topbar .brand strong,
+.ws-brand strong{
+  font-size:1.02rem;
+  line-height:1.05;
+}
+.header .brand .brand-sub,
+.topbar .brand small,
+.ws-brand small,
+body > .topbar > .brand small{
+  color:var(--uii-brand-sub)!important;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  line-height:1.1;
+}
+body > .topbar > .brand span{font-size:1rem;line-height:1.05;}
+body > .topbar > .brand small{display:block;margin-top:2px;}
+
+@media (max-width: 760px){
+  .header .brand,
+  .topbar .brand,
+  .ws-brand,
+  body > .topbar > .brand{
+    gap:10px;
+    padding:8px 11px;
+    border-radius:18px;
+  }
+  .header .brand img,
+  .topbar .brand img,
+  .ws-brand img,
+  body > .topbar > .brand img{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+  }
+  .header .brand .brand-name,
+  .topbar .brand strong,
+  .ws-brand strong,
+  body > .topbar > .brand span{
+    font-size:.95rem;
+  }
+  .header .brand .brand-sub,
+  .topbar .brand small,
+  .ws-brand small,
+  body > .topbar > .brand small{
+    font-size:.64rem;
+    letter-spacing:.09em;
+  }
+}
