@@ -35,7 +35,7 @@ function makeHeader(){const existing=document.querySelector('body > header');if(
  apply();
 }
 const quick=[['home','الرئيسية','#home'],['markets','الأسواق','#markets'],['agenda','الأجندة','#agenda'],['recs','التوصيات','#recs']];
-function makeDock(){if(page==='index.html'||page==='admin.html')return;const old=document.querySelector('.ict65-dock');if(old)old.remove();
+function makeDock(){if(page==='index.html'||page==='admin.html')return;document.querySelectorAll('.ict65-dock,.ict65-sheet,.ict65-dim').forEach(node=>node.remove());document.body.classList.remove('ict65-has-dock');
  const dock=document.createElement('nav');dock.className='ict-unity-dock';dock.setAttribute('aria-label','التنقل السريع');
  quick.forEach(([key,label,path])=>{const a=document.createElement('a');a.href=base+path;a.append(icon(key,true));const sp=document.createElement('span');sp.textContent=label;a.append(sp);dock.append(a)});
  const more=document.createElement('button');more.type='button';more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls','ict-unity-sheet');more.append(icon('more',true));const t=document.createElement('span');t.textContent='المزيد';more.append(t);dock.append(more);
@@ -48,6 +48,9 @@ function makeDock(){if(page==='index.html'||page==='admin.html')return;const old
  function show(v){sheet.hidden=!v;overlay.hidden=!v;more.setAttribute('aria-expanded',String(v));if(v)close.focus();else more.focus()}
  more.addEventListener('click',()=>show(!sheet.hidden));close.addEventListener('click',()=>show(false));overlay.addEventListener('click',()=>show(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden)show(false)});
  document.body.append(overlay,sheet,dock);
+ // Avoid a second legacy dock even if an older script creates it later.
+ const legacyObserver=new MutationObserver(()=>{if(!document.querySelector('.ict-unity-dock'))return;document.querySelectorAll('.ict65-dock,.ict65-sheet,.ict65-dim').forEach(node=>node.remove());document.body.classList.remove('ict65-has-dock');});
+ legacyObserver.observe(document.body,{childList:true});
 }
 function init(){if(page==='index.html')return;makeHeader();makeDock();apply()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();

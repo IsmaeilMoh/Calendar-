@@ -6,7 +6,7 @@
 'use strict';
 const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 if(page==='index.html'||page==='admin.html'||page==='')return;
-if(document.getElementById('ict65-sheet')||document.querySelector('.ict65-dock'))return;
+if(document.querySelector('.ict-unity-dock')||document.getElementById('ict65-sheet')||document.querySelector('.ict65-dock'))return;
 const assetPage=location.pathname.split('/').includes('assets');
 const root=assetPage?'../':'./';
 
