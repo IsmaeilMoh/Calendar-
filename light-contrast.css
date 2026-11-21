@@ -1,0 +1,175 @@
+/* ICT بالعربي 6.8.11 — Light Mode Contrast / Readability Audit
+ * Loaded LAST after 6.8.10. All overrides intentionally light-only.
+ * No change to trading functions, content, ticker dimensions or themes.
+ */
+html[data-theme="light"][data-ict-page]{
+  --ict-readable:#263b3d;
+  --ict-readable-strong:#1d3436;
+  --ict-readable-muted:#566b6a;
+  --ict-readable-link:#116b60;
+  --ict-readable-soft:#e8f2ea;
+}
+/* Global page copy: fix legacy pale text on approved ivory backgrounds. */
+html[data-theme="light"][data-ict-page] body{
+  color:var(--ict-readable)!important;
+  -webkit-text-fill-color:initial;
+}
+html[data-theme="light"][data-ict-page] :is(.topline,.topline-inner,.topline-inner>span,
+  .topline-inner #today,.topline #today,.divider-dot,.brand-name,.brand-sub,
+  .header .navigation,.header .navigation a,.footer-row,.footer-end,.disclaimer){
+  color:var(--ict-readable)!important;
+  -webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page] :is(.topline #today,.brand-sub,.divider-dot,
+ .footer-end,.disclaimer){color:var(--ict-readable-muted)!important}
+html[data-theme="light"][data-ict-page] :is(.topline,.header){
+  background:var(--ict-card)!important;border-color:var(--ict-border)!important;
+}
+/* Heading / date labels and dynamic content hosted in cream glass panels. */
+html[data-theme="light"][data-ict-page=home] #app :is(
+  .page-title,.section-title,.section-title h2,.section-heading,.section-heading h2,
+  .welcome h1,.welcome h2,.welcome h3,.welcome strong,.welcome-aside strong,
+  .panel-top,.panel-top h2,.pulse-heading,.pulse-heading b,
+  .pulse-market,.pulse-market h3,.pulse-movers-board,.pulse-movers-head b,
+  .movers-heading-name b,.pulse-mover-copy b,.pulse-mover-price,
+  .pulse-countdown,.pulse-countdown strong,.pulse-news-head strong,
+  .pulse-zone-name strong,.pulse-zone-timer b,.pulse-zone-next strong,
+  .event-name,.event-name strong,.rec-head,.news-line h3,
+  .ops-room h2,.ops-card strong,.tool-card strong,
+  .clock-banner strong,.calendar-stats strong,.metric strong){
+  color:var(--ict-readable-strong)!important;-webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page=home] #app :is(
+  .welcome p,.welcome small,.welcome-aside p,.welcome-aside small,
+  .subtle,.lead,.section-title .subtle,.card p,.panel p,.metric small,
+  .pulse-foot,.pulse-key,.pulse-key span,.pulse-movers-meta,
+  .pulse-mover-source,.movers-head-en,.pulse-news-info,.pulse-zone-desc,
+  .pulse-zone-details,.pulse-countdown-caption,.pulse-unavailable,
+  .pulse-mover-source,.pulse-zone-next,.pulse-zone-timer,.pulse-extra,
+  .news-meta,.news-line p,.card-meta,.small-meta,
+  .event-name small,.zone-row p,.clock-banner small,.ops-card p){
+  color:var(--ict-readable-muted)!important;-webkit-text-fill-color:currentColor;
+}
+/* Market Pulse: former dark background had white headings/quotes hard-coded in style.css.
+ * Borders and surfaces use existing ivory tokens, no charcoal underlays. */
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+  .pulse-movers-board,.pulse-movers-col,.pulse-brief-grid>.pulse-block,
+  .pulse-mover-row,.pulse-key,.pulse-quiet-badge){
+  border-color:var(--ict-border)!important;color:var(--ict-readable)!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+  .pulse-movers-board,.pulse-movers-col){
+  background:linear-gradient(145deg,var(--ict-card),var(--ict-card2))!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+ .pulse-movers-meta,.pulse-movers-meta b,.movers-fresh-state,
+ .movers-heading-name b,.pulse-movers-head b,.pulse-mover-copy b,
+ .pulse-mover-price,.pulse-heading b,.pulse-zone-name strong,
+ .pulse-news-head strong,.pulse-zone-details strong){
+  color:var(--ict-readable-strong)!important;-webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+ .movers-head-en,.pulse-mover-source,.pulse-foot,.pulse-key span,
+ .pulse-countdown-caption,.pulse-zone-next,.pulse-zone-timer,
+ .pulse-movers-empty,.pulse-news-info,.pulse-unavailable,
+ .pulse-zone-desc,.pulse-mover-source){
+  color:var(--ict-readable-muted)!important;-webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .movers-fresh-state{
+  background:var(--ict-readable-soft)!important;border-color:#b6d9c8!important;
+  color:var(--ict-readable-link)!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .movers-fresh-state.is-stale{
+  background:#f6e9cd!important;border-color:#d9bb7a!important;color:#81571b!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(.pulse-movers-col,.pulse-mover-row){
+  box-shadow:none!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .pulse-mover-row{
+  border-top-color:var(--ict-border)!important;
+}
+/* Price semantics: deeper green/red on cream, including text inside status badges. */
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+ .pulse-mover-change.up,.movers-trend-symbol.up,.pulse-mover-row.up .pulse-mover-change){
+  color:#126b52!important;background:#e0f3e9!important;border-color:#b0dec7!important;
+  -webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse :is(
+ .pulse-mover-change.down,.movers-trend-symbol.down,.pulse-mover-row.down .pulse-mover-change){
+  color:#a83b4a!important;background:#fbe6e9!important;border-color:#efbcc4!important;
+  -webkit-text-fill-color:currentColor;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .pulse-mover-change.flat{
+  color:var(--ict-readable-muted)!important;background:var(--ict-card3)!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .is-up .movers-trend-symbol{
+  color:#126b52!important;background:#e0f3e9!important;
+}
+html[data-theme="light"][data-ict-page=home] #market-pulse .is-down .movers-trend-symbol{
+  color:#a83b4a!important;background:#fbe6e9!important;
+}
+/* Brief details / recommendations / agenda: explicit legible text on cream cards. */
+html[data-theme="light"][data-ict-page=home] #app :is(
+ .pulse-brief-grid,.event-table,.event-row,.event-head,.news-card,
+ .rec-card,.rec-status,.analysis-card,.calendar-day,.trader-desk,
+ .ops-room,.ops-card,.tool-card,.ict-center-group,.card,.panel,.cta,
+ .zone-row,.session-pro-item,.clock-banner,.market-pills){
+  border-color:var(--ict-border);color:var(--ict-readable);
+}
+html[data-theme="light"][data-ict-page=home] #app :is(
+  .news-card,.rec-card,.rec-status,.event-row,.event-head,
+  .ops-card,.trade-card,.tool-card,.panel,.card,
+  .zone-row,.session-pro-item,.ict-center-group)
+  :is(h2,h3,h4,b,strong,.title,.name,.value,.event-name,.metric-value){
+  color:var(--ict-readable-strong)!important;
+}
+html[data-theme="light"][data-ict-page=home] #app :is(
+  .news-card,.rec-card,.rec-status,.event-row,.event-head,
+  .ops-card,.trade-card,.tool-card,.panel,.card,
+  .zone-row,.session-pro-item,.ict-center-group)
+  :is(p,small,.subtle,.muted,.description,.note,.meta,.source,time){
+  color:var(--ict-readable-muted)!important;
+}
+/* Standalone tool pages: readable neutral text, but do not recolor semantic
+   up/down, selected control states, canvas charts, SVG, or vendor iframes. */
+html[data-theme="light"][data-ict-page]:not([data-ict-page=home]) :is(
+  .topbar,.ws-header,.ws-hero,.ws-hero-side,.hero,.hero-note,
+  .card,.panel,.ws-card,.ws-module,.ws-personal-bar,.ws-stat,
+  .metric,.stat,.feed-item,.result,.insight,.status,.search-result,
+  .ws-check-item,.ws-history-row,.ws-risk-note,.ws-module-settings){
+  color:var(--ict-readable)!important;border-color:var(--ict-border)!important;
+}
+html[data-theme="light"][data-ict-page]:not([data-ict-page=home]) :is(
+  .topbar,.ws-header,.ws-hero,.ws-hero-side,.hero,.hero-note,
+  .card,.panel,.ws-card,.ws-module,.ws-stat,.metric,.stat,.feed-item,
+  .search-result,.ws-check-item,.ws-history-row,.ws-risk-note)
+  :is(h1,h2,h3,h4,strong,b,.title,.value,.name){
+  color:var(--ict-readable-strong)!important;
+}
+html[data-theme="light"][data-ict-page]:not([data-ict-page=home]) :is(
+  .topbar,.ws-header,.ws-hero,.ws-hero-side,.hero,.hero-note,
+  .card,.panel,.ws-card,.ws-module,.ws-stat,.metric,.stat,.feed-item,
+  .search-result,.ws-check-item,.ws-history-row,.ws-risk-note)
+  :is(p,small,.subtle,.muted,.desc,.micro,.micro-note,.ws-footnote,time){
+  color:var(--ict-readable-muted)!important;
+}
+html[data-theme="light"][data-ict-page] :is(input,select,textarea){
+  color:var(--ict-readable)!important;caret-color:var(--ict-readable-link);
+}
+html[data-theme="light"][data-ict-page] :is(input,textarea)::placeholder{
+  color:var(--ict-readable-muted)!important;opacity:1!important;
+}
+/* Restore semantics with specificity above generic panels, retaining green/red status colors. */
+html[data-theme="light"][data-ict-page] :is(.up,.positive,.success,.ws-safe):not(.tape *){
+ color:#126b52!important;
+}
+html[data-theme="light"][data-ict-page] :is(.down,.negative,.error,.danger,.ws-danger):not(.tape *){
+ color:#a83b4a!important;
+}
+/* CRITICAL: bottom MARKET WATCH ticker stays fixed dark, unchanged from 6.8.9.
+ * Exception for any descendant typography selectors above. */
+html[data-theme="light"][data-ict-page] .tape,
+html[data-theme="light"][data-ict-page] .tape :is(.bottom-ticker-label,.bottom-ticker-status,
+  .market-ticker-symbol,.ticker-last,.market-ticker-item){
+ color:#edf7f2!important;
+}
