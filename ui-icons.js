@@ -90,6 +90,36 @@
     [...themeBtn.childNodes].forEach(n=>{ if(n.nodeType===3) n.nodeValue=''; });
     prependOnce(themeBtn,'uii-themebox',boxed('theme','uii-inlinebox'));
   }
+
+  // Keep main header switch synchronized with the effective theme, not the
+  // stored auto setting. This decorates the existing button; it does not
+  // replace its original click listener or change localStorage.
+  function syncThemeVisual(){
+    if(!themeBtn)return;
+    const mode=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
+    const label=themeBtn.querySelector('#theme-label');
+    const box=themeBtn.querySelector('.uii-themebox .uii-svg');
+    const display=mode==='dark'?'داكن':'فاتح';
+    if(label && label.textContent!==display)label.textContent=display;
+    if(box && box.dataset.iconMode!==mode){
+      box.dataset.iconMode=mode;
+      const svg=box.querySelector('svg');
+      if(svg)svg.innerHTML=mode==='light'
+        ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>'
+        : ICONS.theme;
+    }
+    themeBtn.setAttribute('title','المظهر الحالي: '+display+' — اضغط للتغيير');
+    themeBtn.setAttribute('aria-label','المظهر الحالي: '+display+'، اضغط للتغيير');
+  }
+  if(themeBtn){
+    const mo=new MutationObserver(syncThemeVisual);
+    mo.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+    // Native app code can update the label after the theme switch; maintain
+    // the actual light/dark label without retriggering if no change is needed.
+    const stateLabel=themeBtn.querySelector('#theme-label');
+    if(stateLabel)mo.observe(stateLabel,{childList:true,characterData:true,subtree:true});
+    syncThemeVisual();
+  }
   const installBtn=document.getElementById('install');
   if(installBtn) prependOnce(installBtn,'uii-installbox',boxed('install','uii-inlinebox'));
 
