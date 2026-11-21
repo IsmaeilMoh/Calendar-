@@ -164,3 +164,55 @@ html[data-ict-page=home] .tape .bottom-ticker-window .market-ticker-item{
 html[data-ict-page=home] .tape :is(.market-ticker-symbol,.ticker-last,.bottom-ticker-label,.bottom-ticker-status){color:#f0f7f3!important}
 /* Don't darken mobile nav, header, or other page elements when the light theme is selected. */
 @media(prefers-reduced-motion:reduce){html[data-ict-page=home] #app .tool-card{transition:none!important}}
+
+
+/* 6.8.7 | Bottom ticker polish: keep fixed side pills clipped inside the shell,
+   add glass highlight border, and prevent label/status ends from leaking outside. */
+html[data-ict-page=home] .tape{
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:transparent!important;border:none!important;box-shadow:none!important;overflow:visible!important;
+}
+html[data-ict-page=home] .tape > *{min-width:0}
+html[data-ict-page=home] .tape :is(.bottom-ticker-shell,.bottom-ticker-fallback,.tv-market-bottom){
+  width:min(100%,1280px);max-width:100%;min-width:0;display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:22px!important;overflow:hidden!important;position:relative;
+  background:linear-gradient(125deg,rgba(17,27,34,.96),rgba(25,43,50,.95) 58%,rgba(20,36,42,.96))!important;
+  border:1px solid rgba(176,212,220,.18)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.09)!important;
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-shell,.bottom-ticker-fallback,.tv-market-bottom)::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03), inset 0 10px 22px rgba(255,255,255,.035);
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-shell,.bottom-ticker-fallback,.tv-market-bottom)::after{
+  content:"";position:absolute;left:10px;right:10px;top:1px;height:46%;pointer-events:none;
+  border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0));opacity:.55;
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-label,.bottom-ticker-status){
+  flex:0 0 auto;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:42px;padding:0 14px;border-radius:14px!important;overflow:hidden!important;position:relative;z-index:2;
+  white-space:nowrap;box-shadow:inset 0 1px rgba(255,255,255,.08);
+  background:linear-gradient(135deg,#20363b,#16292f)!important;
+  border:1px solid rgba(107,141,148,.55)!important;color:#edf8f0!important;
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-window,.bottom-ticker-tv){
+  flex:1 1 auto;min-width:0;align-self:stretch;border-radius:16px!important;overflow:hidden!important;position:relative;z-index:1;
+  background:linear-gradient(135deg,#132329,#102028)!important;
+  border:1px solid rgba(79,109,116,.55)!important;
+}
+html[data-ict-page=home] .tape .bottom-ticker-window .market-ticker-item{
+  min-height:40px;border-radius:12px!important;overflow:hidden!important;
+}
+html[data-ict-page=home] .tape .bottom-ticker-dot{
+  width:8px;height:8px;border-radius:999px;background:#86ffb6;box-shadow:0 0 0 4px rgba(134,255,182,.10),0 0 10px rgba(134,255,182,.34);
+}
+html[data-ict-page=home] .tape :is(.bottom-ticker-label,.bottom-ticker-status) span:last-child{overflow:hidden;text-overflow:ellipsis}
+@media(max-width:700px){
+  html[data-ict-page=home] .tape{padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))!important}
+  html[data-ict-page=home] .tape :is(.bottom-ticker-shell,.bottom-ticker-fallback,.tv-market-bottom){gap:8px;padding:7px 8px;border-radius:18px!important}
+  html[data-ict-page=home] .tape :is(.bottom-ticker-label,.bottom-ticker-status){min-height:38px;padding:0 11px;font-size:11px}
+  html[data-ict-page=home] .tape :is(.bottom-ticker-window,.bottom-ticker-tv){border-radius:13px!important}
+}
