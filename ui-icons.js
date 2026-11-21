@@ -114,14 +114,78 @@
     prependOnce(btn,'uii-tabmark',boxed(key,'uii-tabbox'));
   });
 
-  document.querySelectorAll('.ict-center-group').forEach(group=>{
-    const title=(group.querySelector('strong')?.textContent||'').trim();
-    let key='more';
-    if(title.includes('الأسواق')) key='markets';
-    else if(title.includes('المختبرات')) key='research';
-    else if(title.includes('إدارة')) key='workspace';
-    else if(title.includes('التعليم')) key='ict';
-    const holder=group.querySelector('.ict-center-icon');
-    if(holder){ holder.textContent=''; if(!holder.querySelector('.uii-svg')) holder.append(makeIcon(key)); }
-  });
+
+  // Extra icons are hydrated after app.js renders and whenever the SPA changes sections.
+  const hrefIcon = (href)=>{
+    const h=String(href||'').toLowerCase();
+    if(h.includes('research'))return 'research';
+    if(h.includes('intelligence'))return 'intelligence';
+    if(h.includes('smart-desk'))return 'smartdesk';
+    if(h.includes('workspace'))return 'workspace';
+    if(h.includes('workflow'))return 'strategy';
+    if(h.includes('assets'))return 'markets';
+    if(h.includes('#agenda'))return 'agenda';
+    if(h.includes('#recs'))return 'recs';
+    if(h.includes('#academy'))return 'ict';
+    if(h.includes('#ict'))return 'ict';
+    if(h.includes('#markets'))return 'markets';
+    if(h.includes('#calculators'))return 'guardian';
+    return 'dashboard';
+  };
+  const app=document.getElementById('app');
+  function hydrateApp(){
+    if(!app)return;
+    app.querySelectorAll('.ict-center-group').forEach(group=>{
+      const title=(group.querySelector('summary strong')?.textContent||'').trim();
+      let key='more';
+      if(title.includes('الأسواق'))key='markets';
+      else if(title.includes('المختبرات'))key='research';
+      else if(title.includes('إدارة'))key='workspace';
+      else if(title.includes('التعليم'))key='ict';
+      const holder=group.querySelector('.ict-center-icon');
+      if(holder&&!holder.classList.contains('uii-ready')){
+        holder.replaceChildren(makeIcon(key));holder.classList.add('uii-ready');
+      }
+    });
+    app.querySelectorAll('.tool-card[href]').forEach(a=>{
+      let g=a.querySelector('.tool-glyph');
+      if(!g){g=document.createElement('span');g.className='tool-glyph';a.prepend(g);}
+      if(g.classList.contains('uii-ready'))return;
+      g.replaceChildren(makeIcon(hrefIcon(a.getAttribute('href'))));
+      g.classList.add('uii-ready');
+    });
+    // Restrict icon embellishments to headings, never the live TradingView/price text.
+    app.querySelectorAll('.section-title h2,.section-heading h2,.news-line h3,.rec-card h3').forEach(h=>{
+      if(h.querySelector('.uii-headingmark'))return;
+      const text=(h.textContent||'').trim();
+      const name=/أبرز الأخبار|أخبار اقتصادية|الأخبار/.test(text)?'news':
+        /التوصيات|تحليلات فنية/.test(text)?'recs':
+        /الأجندة|التقويم/.test(text)?'agenda':null;
+      if(name)prependOnce(h,'uii-headingmark',boxed(name,'uii-headingmark'));
+    });
+  }
+  // The shared 6.8.3 theme script injects a bottom button on standalone pages;
+  // relocate the *same button* into the header, preserving its click handler/storage.
+  function relocateTheme(){
+    const c=document.getElementById('ict68-theme-control');
+    if(!c)return;
+    const header=document.querySelector('.ws-header-content')||
+      document.querySelector('.topbar .header-inner')||
+      document.querySelector('.topbar');
+    if(header&&!header.contains(c)){
+      header.append(c);
+      c.classList.add('uii-header-theme');
+      c.setAttribute('title','تغيير المظهر');
+    }
+  }
+  let queued=false;
+  function schedule(){if(queued)return;queued=true;queueMicrotask(()=>{queued=false;hydrateApp();relocateTheme();});}
+  // app.js generates pages asynchronously; run again for newly inserted cards.
+  const obs=new MutationObserver(schedule);
+  if(app)obs.observe(app,{childList:true,subtree:true});
+  // Standalone button is appended to body at DOMContentLoaded.
+  obs.observe(document.body,{childList:true});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});
+  schedule();
+
 })();

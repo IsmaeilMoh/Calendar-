@@ -131,3 +131,56 @@ html[data-ict-page="home"] #app .ict-center-icon .uii-svg{width:1rem;height:1rem
   .topbar nav a .uii-inlinebox,
   .ws-nav a .uii-inlinebox{display:none}
 }
+
+
+/* 6.8.16 - consistent SVG sizing, chrome/theme toggle, accessible mobile target */
+.uii-svg {display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex:none;line-height:0;}
+.uii-svg>svg {display:block;width:100%;height:100%;overflow:visible;flex:none;}
+.uii-svg svg *{vector-effect:non-scaling-stroke;}
+.uii-inlinebox .uii-svg{width:1.15rem;height:1.15rem;}
+.uii-iconbox .uii-svg{width:1.17rem;height:1.17rem;}
+.ict54-link-icon .uii-svg{width:1.05rem;height:1.05rem;}
+
+/* 6.8.16 - legacy icon text is replaced when dynamic cards render */
+html[data-ict-page=home] #app .tool-card .tool-glyph.uii-ready{display:inline-flex!important;align-items:center!important;justify-content:center!important;color:var(--uii-accent)!important;font-size:0!important;line-height:0!important;}
+html[data-ict-page=home] #app .tool-card .tool-glyph.uii-ready .uii-svg{width:1.06rem;height:1.06rem;}
+html[data-ict-page=home] #app .ict-center-icon.uii-ready{font-size:0!important;line-height:0!important;}
+html[data-ict-page=home] #app .ict-center-icon.uii-ready .uii-svg{width:1.04rem;height:1.04rem;}
+html[data-ict-page=home] #app .uii-headingmark{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.2em;margin-inline-end:8px;color:var(--uii-accent);width:25px;height:25px;border-radius:8px;border:1px solid var(--uii-border);background:var(--uii-bg);}
+html[data-ict-page=home] #app .uii-headingmark .uii-svg{width:16px;height:16px;}
+html[data-theme=light] #app .uii-headingmark{color:#167466;}
+
+/* Main theme switch always visible in the top bar on phones. */
+.header .header-actions{display:flex;align-items:center;gap:7px;min-width:0;}
+.header #theme.theme-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px;min-width:44px;min-height:44px;padding:7px 12px!important;border-radius:13px!important;flex:none;line-height:1!important;}
+.header #theme .uii-inlinebox{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 23px;width:23px;height:23px;color:var(--uii-accent)!important;}
+.header #theme .uii-svg{width:22px;height:22px;}
+.header #theme .uii-svg>svg{width:22px;height:22px;stroke-width:1.9;}
+@media(max-width:670px){
+  .header #theme.theme-btn{width:44px!important;height:44px!important;min-width:44px;min-height:44px;padding:0!important;border-radius:13px!important;font-size:0!important;}
+  .header #theme #theme-label{display:none!important;}
+  .header .header-actions{flex-shrink:0;}
+}
+
+/* Existing standalone-page floating theme button moves into the header. */
+html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control{
+  position:static!important;inset:auto!important;bottom:auto!important;left:auto!important;right:auto!important;
+  transform:none!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:none;min-width:44px;min-height:42px;padding:8px 12px!important;margin:0!important;
+  border-radius:13px!important;font-weight:800;z-index:auto!important;
+  background:var(--ict-card)!important;color:var(--ict-text)!important;border:1px solid var(--ict-border)!important;
+  box-shadow:var(--ict-shadow)!important;
+}
+html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control:before{
+  content:'◐';display:inline-grid;place-items:center;margin-inline-end:8px;width:22px;height:22px;font-size:21px;color:var(--uii-accent);line-height:1;
+}
+html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control:hover{background:var(--ict-hover)!important;}
+@media(max-width:760px){
+  html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control{width:44px;max-width:44px;height:44px;min-width:44px;min-height:44px;padding:0!important;overflow:hidden;font-size:0!important;color:transparent!important;}
+  html[data-ict-page]:not([data-ict-page=home]) .ict68-theme-control:before{margin:0;flex:0 0 22px;font-size:22px;color:var(--uii-accent);}
+}
+@media(max-width:480px){
+  .ws-header-content,.topbar .header-inner,.topbar{gap:8px;}
+  .ws-header .ws-brand img,.topbar .brand img{max-width:38px;max-height:38px;}
+}
+@media(prefers-reduced-motion:reduce){.uii-iconbox,.uii-headingmark{transition:none!important}}
