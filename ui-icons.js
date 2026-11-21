@@ -45,6 +45,7 @@
     wrap.append(svg);
     return wrap;
   }
+  window.ICTSharedIcons=Object.freeze({makeIcon});
   function boxed(name, kind='uii-inlinebox'){
     const b=document.createElement('span');
     b.className=kind;
