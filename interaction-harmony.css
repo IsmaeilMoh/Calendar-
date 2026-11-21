@@ -1,0 +1,104 @@
+/* ICT بالعربي 6.8.8 — Interaction Harmony
+   Additive CSS loaded AFTER design-consistency.css; zero JS or market logic changes.
+   Light = ivory+teal, dark = charcoal+mint. Tape stays permanently dark.
+*/
+html[data-ict-page]{
+ --ict-hov-bg:var(--ict-hover);
+ --ict-hov-text:var(--ict-highlight);
+ --ict-hov-border:color-mix(in srgb,var(--ict-accent) 44%,var(--ict-border));
+ --ict-active-bg:color-mix(in srgb,var(--ict-accent) 15%,var(--ict-card));
+ --ict-active-border:color-mix(in srgb,var(--ict-accent) 56%,var(--ict-border));
+ --ict-primary-hover:color-mix(in srgb,var(--ict-accent) 83%,var(--ict-text) 17%);
+ --ict-primary-text:var(--ict-accent-contrast);
+ --ict-focus-ring:color-mix(in srgb,var(--ict-accent) 27%,transparent);
+}
+html[data-ict-page] :is(.navigation,.topbar nav,.ws-nav,.ict54-hub-links){color:var(--ict-text)}
+/* Main navigation: NO inherited legacy charcoal (#294839) on ivory theme. */
+html[data-ict-page=home] .header .navigation a{
+ background:transparent!important;color:var(--ict-text)!important;
+ border:1px solid transparent!important;border-radius:10px;
+}
+html[data-ict-page=home] .header .navigation a.active,
+html[data-ict-page=home] .header .navigation a[aria-current=page]{
+ background:var(--ict-active-bg)!important;color:var(--ict-hov-text)!important;
+ border-color:var(--ict-active-border)!important;
+}
+html[data-ict-page] :is(.topbar nav a,.ws-nav a,.ict54-hub-links a){
+ border-radius:10px;color:var(--ict-text)!important;
+}
+html[data-ict-page] :is(.topbar nav a.active,.ws-nav a.active,.ict54-hub-links a[aria-current=page]){
+ color:var(--ict-hov-text)!important;background:var(--ict-active-bg)!important;
+ border-color:var(--ict-active-border)!important;
+}
+/* Button states: themed colors, no legacy hardcoded dark fills. */
+html[data-ict-page] :is(.btn,.primary,.ws-primary,.install,button.primary):not(:disabled){
+ background:var(--ict-accent)!important;color:var(--ict-primary-text)!important;
+ border-color:var(--ict-accent)!important;
+}
+html[data-ict-page] :is(.btn-outline,.outline,.ghost,.ws-secondary,.ws-back,.back,.go-home,.upload,
+ .icon-btn,.theme-btn,.ict68-theme-control):not(:disabled){
+ background:var(--ict-card2)!important;color:var(--ict-text)!important;
+ border-color:var(--ict-border)!important;
+}
+/* Tabs: selected states stay distinct across theme switching. */
+html[data-ict-page] :is(.tabs .active,.tabs button.active,.ws-tabs .active,.tab.active,.ws-tab.active,
+ .chip.active,.session-tabs .active){
+ background:var(--ict-active-bg)!important;color:var(--ict-hov-text)!important;
+ border-color:var(--ict-active-border)!important;
+ box-shadow:inset 0 1px color-mix(in srgb,var(--ict-text) 5%,transparent);
+}
+/* Hover ONLY on devices with a real pointer; no stuck hover on touch screens. */
+@media(hover:hover) and (pointer:fine){
+ html[data-ict-page=home] .header .navigation a:hover{
+   background:var(--ict-hov-bg)!important;color:var(--ict-hov-text)!important;
+   border-color:var(--ict-hov-border)!important;
+   box-shadow:inset 0 1px color-mix(in srgb,var(--ict-text) 5%,transparent);
+ }
+ html[data-ict-page] :is(.topbar nav a,.ws-nav a,.ict54-hub-links a):hover{
+   background:var(--ict-hov-bg)!important;color:var(--ict-hov-text)!important;
+   border-color:var(--ict-hov-border)!important;
+ }
+ html[data-ict-page] :is(.btn,.primary,.ws-primary,.install,button.primary):hover:not(:disabled){
+   background:var(--ict-primary-hover)!important;color:var(--ict-primary-text)!important;
+   border-color:var(--ict-primary-hover)!important;
+   box-shadow:0 5px 15px var(--ict-focus-ring);
+ }
+ html[data-ict-page] :is(.btn-outline,.outline,.ghost,.ws-secondary,.ws-back,.back,.go-home,.upload,
+  .icon-btn,.theme-btn,.ict68-theme-control):hover:not(:disabled){
+   background:var(--ict-hov-bg)!important;color:var(--ict-hov-text)!important;
+   border-color:var(--ict-hov-border)!important;
+ }
+ html[data-ict-page] :is(.tabs button,.tab,.ws-tab,.session-tabs button,.chip,.market-pills a,
+  .tool-card,.news-line,.news-card,.rec-card,.event-row,.feed-item,.search-result,
+  .ws-module,.ws-card,.card,.panel,.ict54-hub a):hover:not(:disabled){
+   border-color:var(--ict-hov-border)!important;
+ }
+ html[data-ict-page] :is(.tabs button,.tab,.ws-tab,.session-tabs button,.chip,.market-pills a,
+  .ict54-hub a):hover:not(.active):not([aria-current=page]){
+   background:var(--ict-hov-bg)!important;color:var(--ict-hov-text)!important;
+ }
+ html[data-ict-page=home] :is(.event-row,.news-line,.feed-item):hover{
+   background:var(--ict-hov-bg)!important;
+ }
+ html[data-ict-page=home] .tool-grid>.tool-card:hover{
+   background:linear-gradient(145deg,var(--ict-card),var(--ict-hov-bg))!important;
+   box-shadow:var(--ict-shadow),inset 0 1px color-mix(in srgb,var(--ict-text) 6%,transparent)!important;
+ }
+}
+/* Keyboard and accessible focus: consistent in every theme. */
+html[data-ict-page] :is(a,button,input,select,textarea,[tabindex]):focus-visible{
+ outline:2px solid var(--ict-accent)!important;outline-offset:3px!important;
+ box-shadow:0 0 0 5px var(--ict-focus-ring)!important;
+}
+html[data-ict-page] :is(input:not([type=checkbox]):not([type=radio]),select,textarea):focus{
+ border-color:var(--ict-hov-border)!important;
+}
+html[data-ict-page] :is(button,a,[role=button]):disabled,
+html[data-ict-page] :is(button,a,[role=button])[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+/* Preserve state semantics: red/green success/danger are NOT recolored as normal interactive controls. */
+html[data-ict-page] :is(.up,.ws-safe,.positive,.success){color:var(--ict-green)}
+html[data-ict-page] :is(.down,.ws-danger,.negative,.error,.danger){color:var(--ict-red)}
+/* Market WATCH bottom tape is intentionally untouched: always dark in both themes. */
+@media(prefers-reduced-motion:reduce){
+ html[data-ict-page] :is(a,button,.tool-card,.card,.panel){transition:none!important;transform:none!important}
+}
