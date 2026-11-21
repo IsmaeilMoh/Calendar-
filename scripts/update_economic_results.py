@@ -23,6 +23,14 @@ def monday_for(day):
     return day - timedelta(days=day.weekday())
 
 
+def select_weeks(today, lookback=2):
+    """Return complete weeks through the current Gaza-local week (never future)."""
+    if not 0 <= lookback <= 4:
+        raise ValueError('lookback must be between 0 and 4 weeks')
+    current = monday_for(today)
+    return [current - timedelta(days=7 * n) for n in range(lookback, -1, -1)]
+
+
 def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument('--fixture-html', type=Path,
@@ -32,15 +40,20 @@ def main(argv=None):
     cli.add_argument('--output', type=Path, default=Path('economic-results-preview.json'))
     cli.add_argument('--report', type=Path, default=Path('economic-results-status.json'))
     cli.add_argument('--previous', type=Path, help='Optional prior preview JSON to preserve corrections')
+    cli.add_argument('--lookback-weeks', type=int, default=2,
+                     help='Completed weeks to revisit, before current Gaza week (default: 2; max: 4)')
     args = cli.parse_args(argv)
     if args.fixture_html and args.week_start is None:
         cli.error('--week-start is required with --fixture-html')
     if args.week_start and args.week_start.weekday() != 0:
         cli.error('--week-start must be a Monday')
 
+    if not 0 <= args.lookback_weeks <= 4:
+        cli.error('--lookback-weeks must be between 0 and 4')
     now = datetime.now(timezone.utc)
-    week = monday_for(now.astimezone(GAZA).date())
-    weeks = [args.week_start] if args.fixture_html else [week - timedelta(days=7), week]
+    local_today = now.astimezone(GAZA).date()
+    week = monday_for(local_today)
+    weeks = [args.week_start] if args.fixture_html else select_weeks(local_today, args.lookback_weeks)
     all_events, checks = [], []
     for requested in weeks:
         try:
@@ -67,7 +80,9 @@ def main(argv=None):
     rows, summary = ingest(all_events, old=prior_rows, now=now)
     comparable_total = sum(1 for row in rows if row.get('comparison', {}).get('comparable'))
     status = {'checkedAt': now.isoformat(), 'source': 'Forex Factory',
-              'mode': 'proof-of-concept-private-artifact', 'weeks': checks,
+              'mode': 'proof-of-concept-private-artifact', 'currentWeekStart': week.isoformat(),
+              'requestedWeekStarts': [d.isoformat() for d in weeks],
+              'successfulWeeks': sum(1 for c in checks if c['ok']), 'weeks': checks,
               'parsedTotal': len(all_events), 'archiveTotal': len(rows),
               'comparableTotal': comparable_total, 'previousLoaded': len(prior_rows), **summary,
               'warning': 'No live results verified' if not rows else None}

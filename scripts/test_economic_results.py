@@ -1,8 +1,8 @@
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 from economic_results_core import parse_numeric, surprise, ingest, stable_id
 from ff_web_calendar import parse_html
-from datetime import date
+from update_economic_results import select_weeks
 
 NOW = datetime(2026, 11, 24, 15, tzinfo=timezone.utc)
 HTML = '''<table class="calendar__table"><tbody>
@@ -11,6 +11,18 @@ HTML = '''<table class="calendar__table"><tbody>
 </tbody></table>'''
 
 class TestResults(unittest.TestCase):
+    def test_rolling_window_saturday_gaza(self):
+        self.assertEqual(select_weeks(date(2026, 11, 21)),
+                         [date(2026, 11, 2), date(2026, 11, 9), date(2026, 11, 16)])
+    def test_rolling_window_monday_transition(self):
+        self.assertEqual(select_weeks(date(2026, 11, 23)),
+                         [date(2026, 11, 9), date(2026, 11, 16), date(2026, 11, 23)])
+    def test_rolling_window_new_year(self):
+        self.assertEqual(select_weeks(date(2027, 1, 4)),
+                         [date(2026, 12, 21), date(2026, 12, 28), date(2027, 1, 4)])
+    def test_rolling_window_invalid(self):
+        with self.assertRaises(ValueError):
+            select_weeks(date(2026, 11, 23), 6)
     def test_numeric_units(self):
         self.assertEqual(parse_numeric('1.2M')[0], 1200000)
         self.assertEqual(parse_numeric('-12K')[0], -12000)
