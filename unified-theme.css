@@ -122,3 +122,21 @@ html[data-ict-page] .ict54-hub a:hover,
 html[data-ict-page] .ict54-hub a[aria-current=page]{background:var(--ict-hover);color:var(--ict-highlight)}
 html[data-theme=light] .ict54-hub .ict54-dot{background:var(--ict-green)}
 html[data-ict-page] :is(a,button,input,textarea,select):focus-visible{outline:2px solid var(--ict-accent);outline-offset:3px}
+
+/* ICT بالعربي 6.8.34 | Theme-matched document canvas and iOS/Android overscroll.
+   Both root and scrolling document must paint the same solid surface.
+   Cards, gradients inside cards, market ticker and headers are intentionally unchanged. */
+html[data-theme="light"],html[data-theme="dark"]{
+  background-color:var(--ict-bg)!important;
+  background-image:none!important;
+  min-height:100%;
+}
+html[data-theme="light"] body,html[data-theme="dark"] body{
+  background:var(--ict-bg)!important;
+  color:var(--ict-text);
+  min-height:100vh;
+}
+/* The page app shell should not paint its own contrasting background. */
+html[data-ict-page="home"] #app{
+  background-color:transparent;
+}

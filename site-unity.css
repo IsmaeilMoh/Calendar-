@@ -46,3 +46,15 @@
 /* 6.8.31: owner-based navigation invariant; never display both dock systems. */
 body[data-ict-nav-owner="unity"] :is(.ict65-dock,.ict65-sheet,.ict65-dim){display:none!important}
 .ict-unity-header :is(a,button):focus-visible,.ict-unity-dock :is(a,button):focus-visible{outline:2px solid var(--unity-accent);outline-offset:2px}
+
+/* ICT بالعربي 6.8.34 | Keep overscroll and spaces between cards on the same palette.
+   Standalone pages (including asset pages) load this sheet without unified-theme.css. */
+html[data-theme="light"],html[data-theme="dark"]{
+  background-color:var(--unity-bg)!important;
+  background-image:none!important;
+  min-height:100%;
+}
+html[data-theme="light"] body,html[data-theme="dark"] body{
+  background:var(--unity-bg)!important;
+  min-height:100vh;
+}
