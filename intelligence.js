@@ -18,7 +18,7 @@ const elapsed=x=>{const t=Date.parse(x);return Number.isFinite(t)?Date.now()-t:I
 const fmt=n=>new Intl.NumberFormat('en-US',{maximumFractionDigits:5}).format(n);
 const chart=s=>`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(s)}`;
 async function json(file){try{const r=await fetch(file+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(r.status);return await r.json()}catch{return null}}
-function initTabs(){document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{for(const t of document.querySelectorAll('[data-tab]')){const on=t===b;t.classList.toggle('active',on);t.setAttribute('aria-selected',String(on))}for(const p of document.querySelectorAll('.panel'))p.hidden=p.id!=='panel-'+b.dataset.tab;if(b.dataset.tab==='xray')renderXray()}));}
+function initTabs(){document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{for(const t of document.querySelectorAll('[data-tab]')){const on=t===b;t.classList.toggle('active',on);t.setAttribute('aria-selected',String(on))}for(const p of document.querySelectorAll('.panel'))p.hidden=p.id!=='panel-'+b.dataset.tab;if(b.dataset.tab==='xray')renderXray()}));if(location.hash==='#news'){document.querySelector('[data-tab="news"]')?.click();}}
 function readCheck(asset){const all=stored(reviewKey,{});return all[asset]&&typeof all[asset]==='object'?all[asset]:{}};
 function renderChecks(){const current=readCheck(selected);$('radar-checks').innerHTML=checks.map(([key,label])=>`<label class="check-row"><input type="checkbox" data-check="${key}" ${current[key]?'checked':''}><span>${esc(label)}</span></label>`).join('');$('radar-checks').querySelectorAll('input').forEach(box=>box.addEventListener('change',()=>{updateScore()}));updateScore();}
 function updateScore(){const count=Array.from(document.querySelectorAll('[data-check]')).filter(x=>x.checked).length;$('radar-score').textContent=`${count} / ${checks.length}`;$('radar-progress').style.width=(count/checks.length*100)+'%';$('radar-verdict').textContent=count===checks.length?'اكتملت مراجعتك اليدوية؛ القرار يتطلب تقييم السياق والمخاطرة.':count===0?'لم تُؤكَّد أي شروط بعد.':`راجعت ${count} شروط. ${checks.length-count} متبقية، وليست هذه إشارة دخول.`;}
@@ -95,6 +95,11 @@ function renderNewsReview(){
  const c=compareEvent(e);
  const output=!e?'اختر حدثًا لعرض المقارنة.':!c.comparable?'لا يوجد توقع قابل للمقارنة مع القيمة الفعلية لهذا الخبر.':`${Math.abs(c.difference)<1e-10?'مطابق للتوقعات':c.difference>0?'أعلى من المتوقع':'أقل من المتوقع'} · الفرق الحسابي ${c.difference>0?'+':''}${fmt(c.difference)}${c.unit==='percentage-points'?' نقطة مئوية':''}. لا يدل ذلك وحده على اتجاه السوق.`;
  $('surprise').textContent=output;
+ const extra=$('economic-interpretation');
+ if(extra){
+  const interpretation=e&&window.ICTEconomicResults?window.ICTEconomicResults.explain(e):null;
+  extra.textContent=interpretation?`${interpretation.category} — ${interpretation.description}`:'اختر خبرًا لعرض القراءة الاقتصادية.';
+ }
 }
 async function importEconomicResults(ev){
  const file=ev.target.files?.[0];if(!file)return;
@@ -141,4 +146,5 @@ function saveReaction(ev){ev.preventDefault();const e=currentEvent();if(!e){$('r
 function exportReactions(){const rows=reactionHistory();if(!rows.length){$('reaction-result').textContent='لا توجد قياسات لتصديرها.';return;}const fields=['date','title','asset','window','before','after','percent','notes','saved'];const cell=x=>'"'+String(x??'').replace(/"/g,'""')+'"';const csv='\uFEFF'+[fields.join(','),...rows.map(r=>fields.map(k=>cell(r[k])).join(','))].join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='ICT_News_Reactions.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
 async function boot(){initTabs();$('radar-asset').innerHTML=allowed.map(s=>`<option value="${s}">${s}</option>`).join('');$('radar-asset').value=selected;$('radar-asset').addEventListener('change',e=>selectRadar(e.target.value));$('save-radar').addEventListener('click',saveChecks);$('reset-radar').addEventListener('click',resetChecks);$('xray-set').addEventListener('change',renderXray);$('xray-symbol').addEventListener('change',renderChart);$('news-select').addEventListener('change',renderNewsReview);initEconomicResults();$('reaction-form').addEventListener('submit',saveReaction);$('export-reactions').addEventListener('click',exportReactions);
  const [m,c]=await Promise.all([json('market-movers.json'),json('calendar-live.json')]);moversAt=m?.updatedAt||null;movers=Array.isArray(m?.items)?m.items.filter(x=>allowed.includes(x.symbol)&&Number.isFinite(Number(x.change))).map(x=>({symbol:x.symbol,label:x.label,change:Number(x.change),price:(x.price!=null&&Number.isFinite(Number(x.price))&&Number(x.price)>0)?Number(x.price):null,proxy:Boolean(x.proxy)})):[];calendarAt=c?.updated_at||c?.updatedAt||null;events=normalizeEvents(c);renderRadar();newsOptions();renderReactionHistory();renderXray();}
+window.addEventListener('storage',event=>{if(event.key===economicResultsKey){economicResults=readResults();newsOptions()}});
 boot();
