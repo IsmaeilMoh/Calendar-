@@ -1,7 +1,18 @@
 {
-  "updated_at": "2026-11-21T06:34:39Z",
+  "updated_at": "2026-11-21T07:50:56Z",
   "mode": "rss-attributed",
   "items": [
+    {
+      "id": "b310ba4f4b93500704c9",
+      "title": "الاتحاد الأوروبي يدرس فرض ضريبة على عمالقة التكنولوجيا لتمويل ميزانيته",
+      "tag": "اقتصاد",
+      "src": "CNN Business Arabic",
+      "date": "2026-11-21T07:36:00Z",
+      "url": "https://cnnbusinessarabic.com/sectors/1153103/%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF-%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D9%8A-%D9%8A%D8%AF%D8%B1%D8%B3-%D9%81%D8%B1%D8%B6-%D8%B6%D8%B1%D9%8A%D8%A8%D8%A9-%D8%B9%D9%84%D9%89-%D8%B9%D9%85%D8%A7%D9%84%D9%82%D8%A9-%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D9%84%D8%AA%D9%85%D9%88%D9%8A%D9%84-%D9%85%D9%8A%D8%B2%D8%A7%D9%86%D9%8A%D8%AA%D9%87",
+      "priority": 2,
+      "language": "ar",
+      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/21/1712452.webp"
+    },
     {
       "id": "7cd0ee3910366f8c2168",
       "title": "ترامب يهدد بفرض «ضريبة هائلة» على الشركات الأميركية التي تبني مراكز بيانات بالخارج",
@@ -375,17 +386,6 @@
       "priority": 2,
       "language": "ar",
       "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712044.webp"
-    },
-    {
-      "id": "7d21846be152dba99e88",
-      "title": "تعثر محادثات «إنرجين» و«بي بي» بشأن أصول في مصر لغياب الدعم الحكومي",
-      "tag": "اقتصاد",
-      "src": "CNN Business Arabic",
-      "date": "2026-11-17T18:18:00Z",
-      "url": "https://cnnbusinessarabic.com/sectors/1152821/%D8%B9%D8%A7%D8%AC%D9%84-%D8%AA%D8%B9%D8%AB%D8%B1-%D9%85%D8%AD%D8%A7%D8%AF%D8%AB%D8%A7%D8%AA-%D8%A5%D9%86%D8%B1%D8%AC%D9%8A%D9%86-%D9%88%D8%A8%D9%8A-%D8%A8%D9%8A-%D8%A8%D8%B4%D8%A3%D9%86-%D8%A3%D8%B5%D9%88%D9%84-%D9%81%D9%8A-%D9%85%D8%B5%D8%B1-%D9%84%D8%BA%D9%8A%D8%A7%D8%A8-%D8%A7%D9%84%D8%AF%D8%B9%D9%85-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D9%8A",
-      "priority": 2,
-      "language": "ar",
-      "image": "https://cnnbusinessarabic.com/businesscnn/uploads/images/2026/11/17/1712039.webp"
     }
   ],
   "source_count": 1,
