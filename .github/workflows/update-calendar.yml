@@ -17,10 +17,25 @@ jobs:
         with:
           python-version: '3.12'
       - name: Download and validate calendar
-        run: python scripts/update_calendar.py
+        run: |
+          python scripts/update_calendar.py || echo "calendar update reported an issue; diagnostics will still be published"
       - name: Commit updated events if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add calendar-live.json calendar-next.json
+          git add calendar-live.json calendar-next.json calendar-sync-status.json
           git diff --cached --quiet || (git commit -m "chore: refresh economic calendar" && git push)
+      - name: Report incomplete calendar updates
+        run: |
+          python - <<'PYCODE'
+          import json, os, sys
+          data=json.load(open('calendar-sync-status.json',encoding='utf-8'))
+          summary=['## Economic calendar sync', '']
+          for key in ('thisWeek','nextWeek'):
+              info=data[key]
+              summary.append(f"- {key}: {'OK' if info['ok'] else 'FAILED'} — {info.get('coverage','none')} ({info.get('count',0)} events)")
+              for problem in ('primaryError','fallbackError','error'):
+                  if info.get(problem): summary.append(f"  - {problem}: {info[problem]}")
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write('\n'.join(summary)+'\n')
+          if not data['thisWeek']['ok'] or not data['nextWeek']['ok']: sys.exit(1)
+          PYCODE
