@@ -70,7 +70,8 @@ jobs:
           fi
           python scripts/update_economic_results.py \
             --output tmp-results/economic-results-preview.json \
-            --report tmp-results/economic-results-status.json "${prior[@]}"
+            --report tmp-results/economic-results-status.json \
+            --lookback-weeks 2 "${prior[@]}"
       - name: Upload private archive and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -90,7 +91,10 @@ jobs:
               lines.append('No status file generated. Inspect job logs.')
           else:
               d=json.loads(p.read_text(encoding='utf-8'))
-              lines += [f"Archive records: {d.get('archiveTotal',0)}",
+              lines += [f"Current Gaza week begins: {d.get('currentWeekStart','unknown')}",
+                        f"Rolling weeks requested: {', '.join(d.get('requestedWeekStarts', []))}",
+                        f"Successful weeks: {d.get('successfulWeeks', 0)} / {len(d.get('weeks', []))}",
+                        f"Archive records: {d.get('archiveTotal',0)}",
                         f"Comparable records: {d.get('comparableTotal',0)}",
                         f"Previously restored: {d.get('previousLoaded',0)}",
                         f"New/revised this run: {d.get('newOrRevised',0)}",
