@@ -1,0 +1,49 @@
+name: Probe Forex Factory economic results (private preview)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser requirements
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Run offline unit tests
+        run: |
+          python -m unittest discover -s scripts -p 'test_economic_results.py' -v
+          python -m unittest discover -s scripts -p 'test_ff_web_calendar.py' -v
+      - name: Probe actual published results
+        id: probe
+        continue-on-error: true
+        run: python scripts/update_economic_results.py --output tmp-results/economic-results-preview.json --report tmp-results/economic-results-status.json
+      - name: Upload private results preview and status
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ff-economic-results-preview
+          path: tmp-results/*.json
+          retention-days: 3
+          if-no-files-found: warn
+      - name: Summarize live probe
+        if: always()
+        run: |
+          python - <<'PYCODE'
+          import json, os, pathlib
+          p=pathlib.Path('tmp-results/economic-results-status.json')
+          if not p.exists():
+              summary='## Forex Factory results probe\nNo status file was generated. Check workflow logs.\n'
+          else:
+              d=json.loads(p.read_text())
+              summary='## Forex Factory results probe\n'
+              summary+=f"Parsed: {d['parsedTotal']} events; published actuals: {d['releasedWithActual']}\n"
+              for w in d['weeks']:
+                  summary+=f"- {w['weekStart']}: {'OK' if w['ok'] else 'FAILED'}"
+                  if not w['ok']: summary+=f" — {w.get('error','unknown')}"
+                  summary+='\n'
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write(summary)
+          PYCODE
