@@ -1,0 +1,17 @@
+/* ICT بالعربي 6.8.32 — ONE Arabic font for the entire site.
+   Last stylesheet on every public page, including recommendations rendered by JS.
+   A single Latin font exception previously affected Arabic labels in .numeric/.pair/.en.
+   Icon glyph families and actual SVG shapes are deliberately excluded. */
+:root { --ict-site-font: 'Almarai', Tahoma, Arial, sans-serif; }
+html[lang="ar"], html[lang="ar"] body { font-family: var(--ict-site-font) !important; }
+html[lang="ar"] body :is(
+ h1,h2,h3,h4,h5,h6,p,div,span,small,b,strong,em,blockquote,
+ li,ul,ol,a,button,label,input,textarea,select,option,th,td,caption,
+ summary,nav,header,footer,section,article,aside,time,output,fieldset,
+ legend,details,dl,dt,dd,figcaption,table,form,mark,sup,sub
+):not(.material-icons):not(.material-symbols-outlined):not(.material-symbols-rounded):not(.material-symbols-sharp):not([class*="icon-font"]):not([class*="fa-"]):not([class*="glyphicon"]):not([class*="codicon"]) {
+ font-family: var(--ict-site-font) !important;
+}
+/* Keep code technical, not mixed-label containers. */
+html[lang="ar"] body :is(code,pre,kbd,samp){font-family:monospace!important}
+/* Don't change icon SVG, graph canvases, sizes, spacing, or typography weights. */
